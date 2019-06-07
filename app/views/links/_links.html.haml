@@ -1,7 +1,7 @@
 - links.each do |link|
   .link
-    = link_to link.name, link.url, class: 'name', target: '_blank'
-    = link_to URI.parse(link.url).host, link.url, target: '_blank', class: 'url'
+    = link_to link.name, link.url.chomp, class: 'name', target: '_blank'
+    = link_to URI.parse(link.url.chomp).host, link.url.chomp, target: '_blank', class: 'url'
     .tags
       - link.tags.split(' ').select(&:present?).each do |tag|
         = link_to tag, search_links_path(q: tag), class: 'tag pull-left', remote: true
