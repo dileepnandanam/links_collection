@@ -1,0 +1,101 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require jquery-ui
+ */
+@import "bootstrap";
+
+a:hover {
+    cursor: pointer;
+}
+body {
+	min-height: 100vh;
+    background-color: #3232a0;
+}
+.nav-bar {
+	padding: 10px;
+	background-color: black;
+	color: white;
+	border-bottom: 1px solid #3d3d40;
+}
+.nav-bar div {
+	margin-right: 20px;
+}
+.nav-bar h2 {
+	display: inline;
+}
+.search {
+	display: inline;
+	margin-left: 30px;
+}
+.search input {
+	border-radius: 15px;
+	width: 60%;
+	padding: 6px;
+	font-weight: bold;
+}
+.search input:focus {
+    outline: none;
+}
+.common-bg {
+	padding: 2%;
+	overflow: auto;
+}
+.common-bg.home-show {
+	padding-right: 0px;
+}
+@media (min-width: 576px) {
+	.common-bg {
+		padding: 1.5% 1.5% 0 1.5%;
+	}
+}
+.btn-primary {
+	border-radius: 5px;
+}
+.flash {
+	color: white;
+	padding: 15px;
+	border: 1px solid white;
+	margin: 10px;
+	border-radius: 10px;
+}
+.my-space {
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+	padding-bottom: 10px;
+}
+.user-details img {
+	width: 30px;
+}
+h3 {
+	font-size: 22px;
+	font-weight: 200;
+}
+h4 {
+	font-size: 16px;
+}
+.view-more {
+	margin-bottom: 10px;
+}
+.question, .group-post {
+	background-color: black;
+	color: white;
+	border: 1px solid #3d3d40;
+}
+body {
+	background-color: black;
+}
+input[type='radio'] {
+	margin: 0px 10px 0px 10px; 
+}

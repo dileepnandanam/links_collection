@@ -1,0 +1,10 @@
+.response-form {
+	max-width: 500px;
+	margin: auto;
+}
+.responses-container .question {
+	margin-right: 0px;
+}
+.new_response {
+	margin-top: 10px;
+}

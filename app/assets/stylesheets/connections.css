@@ -1,0 +1,59 @@
+.connections {
+	max-height: 500px;
+    overflow: scroll;
+    margin-bottom: 15px;
+}
+.chat-thread {
+	background-color: #343534;
+	padding: 20px;
+	border-radius: 10px;
+	margin-bottom: 16px;
+	max-height: 380px;
+	overflow: scroll;
+}
+.chats {
+	padding: 0px !important;
+}
+@media (min-width: 576px) {
+	.chats-container {
+		margin-right: 2%;
+	}
+}
+.chat {
+	background-color: #f1f1f1;
+	color: black;
+	border-radius: 8px;
+	padding: 15px;
+	width: fit-content;
+	margin-bottom: 10px;
+	max-width: 70%;
+	border: 1px solid #ddf;
+}
+.chat:last-child {
+	margin-bottom: none;
+}
+.unseen-count {
+	padding: 6px;
+    background-color: #082259;
+    border-radius: 50%;
+    margin: 5px 0px 0px 10px;
+    color: white;
+    min-width: 34px;
+    text-align: center;
+}
+.full-width {
+	width: 100%;
+}
+.question.have-new-chat {
+	background-color: red;
+}
+.unseen-mark {
+	display: inline-block;
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.open-image-upload {
+	margin-bottom: 10px;
+}

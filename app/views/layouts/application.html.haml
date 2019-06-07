@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{ :name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
+    %meta{ :name=>"google-site-verification", :content=>"RTn56zwPNTl1Q8QG8ENW3Ipd9aQd7znmDNaCRgcxVtc"}
+    %meta{ :name=>"Description", :content=> "porn site links, sex links, hot video links"}
+    %title Friends chat
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    .nav-bar
+      %h2.pull-left
+        X-links
+      .search.white.pull-left
+        = text_field_tag 'search', nil, data: {url: search_links_path(page: 1)}
+    .common-bg.white
+      - if flash[:notice].present?
+        .flash
+          = flash[:notice]
+      = yield

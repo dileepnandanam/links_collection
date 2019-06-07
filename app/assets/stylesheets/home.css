@@ -1,0 +1,58 @@
+.fb-sign-in {
+	color: white;
+	background: blue;
+	padding: 4px;
+	border-radius: 3px;
+}
+.question-wraper {
+	padding: 0px 0px 6px 0px !important;
+}
+.questions {
+	margin-bottom: 10px;
+	overflow: auto;
+}
+.pagination-links {
+	padding: 20px 20px 20px 20px;
+}
+.pagination .current, .disabled {
+	color: grey;
+}
+.answer-action {
+	width: 100%;
+	text-align: right;
+}
+.question-preview .question-text {
+	margin-top: 10px;
+}
+.question-preview {
+	margin: 15px 15px 0px 0px;
+}
+.more-questions {
+	margin-top: 10px;
+}
+.question-preview img {
+	width: 30px;
+}
+.message {
+	padding: 10px;
+}
+.new-question {
+	margin: 0px 15px 0px 0px;
+}
+@media (max-width: 576px) {
+    .question, .new-question {
+	    margin: 15px 2% 0px 0px;
+    }
+}
+.search input {
+	border-radius: 5px;
+}
+.view-more-questions-container {
+	width: 100%;
+}
+.gender_form span {
+	display: block;
+}
+.gender_form input {
+	margin-right: 10px;
+}

@@ -1,0 +1,10 @@
+- links.each do |link|
+  .link
+    = link_to link.name, link.url, class: 'name', target: '_blank'
+    = link_to URI.parse(link.url).host, link.url, target: '_blank', class: 'url'
+    .tags
+      - link.tags.split(' ').select(&:present?).each do |tag|
+        = link_to tag, search_links_path(q: tag), class: 'tag pull-left', remote: true
+- if links.next_page
+  .more-links
+    = link_to 'View more', search_links_path(q: params[:q], page: params[:page].present? ? params[:page].to_i + 1 : 2), remote: true, class: 'view-more'

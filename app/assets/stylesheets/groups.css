@@ -1,0 +1,67 @@
+.new-question {
+	color: white
+}
+.group-post {
+	border-radius: 5px;
+	margin-bottom: 12px;
+	padding: 10px 10px 0px 10px;
+	background-color: white;
+}
+.post {
+  padding-bottom: 0px;
+}
+.group-post:first-child {
+	margin-top: 12px;
+}
+.post-body {
+	margin-left: 20px;
+	margin-top: 10px;
+}
+.cast-vote {
+	border-radius: 5px;
+	display: block;
+}
+.cast-vote:hover {
+	text-decoration: none;
+}
+.comments {
+	margin-top: 10px;
+}
+.comment {
+	margin-bottom: 12px;
+}
+.latest-comment {
+	background-color: #a7b6c5;
+}
+.comment .comment {
+	margin-left: 12px;
+}
+.new-comment-link, .expand-comment, .vote, .share {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.upvote {
+	padding-left: 0px;
+}
+.post_text {
+	margin-bottom: 0px !important;
+}
+.post-image {
+	width: 100%;
+	margin-bottom: 12px;
+}
+.vote, .comment-action:not(:last-child) {
+	border-right: 1px solid #007bff;
+}
+.image-upload {
+	background-color: white;
+	border-radius: 8px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+.image-upload .form-group {
+	margin-bottom: 0px;
+}
+.comment-form {
+	margin-bottom: 10px;
+}
