@@ -15,7 +15,7 @@
       %h2.pull-left
         X-links
       .search.white.pull-left
-        = text_field_tag 'search', nil, data: {url: search_links_path(page: 1)}
+        = text_field_tag 'search', nil, placeholder: 'Search', data: {url: search_links_path(page: 1)}
     .common-bg.white
       - if flash[:notice].present?
         .flash
