@@ -23,7 +23,9 @@ $(document).on('turbolinks:load', function() {
 	})
 
 	$(document).on('ajax:success', '.form', function(e) {
-		$(this).find('input').val('')
+		$('#link_name').val('')
+		$('#link_url').val('')
+		$('#link_tags').val('')
 		$(this).closest('.form-container').addClass('d-none')
 	}).on('ajax:error', '.form', function(e) {
 		$(this).closest('.form-container').html(e.detail[2].responseText)
