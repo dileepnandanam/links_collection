@@ -34,4 +34,10 @@ $(document).on('turbolinks:load', function() {
 	$('.new-link').on('click', function() {
 		$('.form-container').removeClass('d-none')
 	})
+
+	window.onscroll = function() {
+		if($(window).height() + 100 + document.documentElement.scrollTop > $('body').height()) {
+			Rails.fire($('.view-more')[0], 'click')
+		}
+	}
 })

@@ -4,7 +4,7 @@ class LinksController < ApplicationController
   end
 
   def search
-    @links = Link.where('name ~* ? or tags ~* ? or url ~* ?', params[:q], params[:q], params[:q]).paginate(page: params[:page], per_page: 20)
+    @links = Link.where('name ~* ? or tags ~* ? or url ~* ?', params[:q], params[:q], params[:q]).paginate(page: params[:page], per_page: 8)
     render 'search', layout: false
   end
 
