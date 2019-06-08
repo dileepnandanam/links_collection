@@ -8,6 +8,9 @@ $(document).on('turbolinks:load', function() {
 			},
 			success: function(data) {
 				$('.links').html(data)
+				$('.watch-now').click(function() {
+					$(this).siblings('.preview').removeClass('d-none')
+				})
 			}
 		})
 	}

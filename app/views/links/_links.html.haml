@@ -1,10 +1,19 @@
 - links.each do |link|
   .link
     = link_to link.name, link.url.chomp, class: 'name', target: '_blank'
-    = link_to URI.parse(link.url.chomp).host, link.url.chomp, target: '_blank', class: 'url'
+    = link_to URI.parse(link.url.chomp).host, link.url.chomp, target: '_blank', class: 'url pull-left'
+    - if link.source_url.present?
+      = link_to 'watch now', '#', remote: true, class: 'watch-now'
+      .preview.d-none
+        -if link.url.include? 'xnxx.com'
+          = video_tag(link.source_url, name: 'media', controls: '')
+        - elsif link.url.include? 'youtube.com'
+          = video_tag(link.source_url, name: 'media', controls: '')
     .tags
       - link.tags.split(' ').select(&:present?).each do |tag|
         = link_to tag, search_links_path(q: tag), class: 'tag pull-left', remote: true
+    .preview
+      
 - if links.next_page
   .more-links
     = link_to 'View more', search_links_path(q: params[:q], page: params[:page].present? ? params[:page].to_i + 1 : 2), remote: true, class: 'view-more'

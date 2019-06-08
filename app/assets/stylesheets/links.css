@@ -25,3 +25,10 @@
 .view-more {
 	display: none;
 }
+.url {
+	display: inline;
+	margin-right: 10px;
+}
+.preview {
+	margin-top: 10px;
+}
