@@ -43,4 +43,5 @@ $(document).on('turbolinks:load', function() {
 			Rails.fire($('.view-more')[0], 'click')
 		}
 	}
+	$(document).on('click', '.url', function(){alert('p')})
 })
