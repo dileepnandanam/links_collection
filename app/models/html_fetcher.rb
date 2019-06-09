@@ -1,5 +1,4 @@
 class HtmlFetcher
-
   def initialize(url)
   	@url = url
   end
