@@ -14,6 +14,14 @@
  *= require_self
  *= require jquery-ui
  */
+
+@font-face {
+  font-family: 'Ampersand';
+  src: local('Times New Roman');
+  unicode-range: U+7F;
+  font-family: 'Roboto', sans-serif;
+}
+
 @import "bootstrap";
 
 a:hover {

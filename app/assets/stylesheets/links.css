@@ -20,6 +20,8 @@
 	border: 1px solid blue;
 	border-radius: 3px;
 	margin-right: 5px;
+	margin-bottom: 10px;
+    display: inline-block;
 }
 .link {
 	margin-bottom: 20px;
