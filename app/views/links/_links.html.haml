@@ -9,7 +9,7 @@
           = video_tag(link.source_url, name: 'media', controls: '')
         - elsif link.url.include? 'youtube.com'
           .youtube-container
-            = youtube_embed_code(link.source_url)
+            = youtube_embed_code(link.source_url.split('&').first)
     .tags
       - link.tags.split(' ').select(&:present?).each do |tag|
         = link_to tag, search_links_path(q: tag), class: 'tag pull-left', remote: true
