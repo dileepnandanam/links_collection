@@ -5,7 +5,7 @@
     - if link.source_url.present?
       .preview
         -if link.url.include? 'xnxx.com'
-          = xnxx_embed_code(link.url)
+          = video_tag(link.source_url, name: 'media', controls: '')
         - elsif link.url.include? 'youtube.com'
           .youtube-container
             = youtube_embed_code(link.source_url.split('&').first)
