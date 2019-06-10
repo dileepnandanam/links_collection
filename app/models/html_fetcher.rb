@@ -4,6 +4,6 @@ class HtmlFetcher
   end
 
   def fetch_video_url
-    Net::HTTP.get_response(URI.parse(@url)).response.body.match(/setVideoUrlLow\('(.*)'\)/)[1]
+    Nokogiri::HTML(Net::HTTP.get_response(URI.parse(@url)).response.body).css('input')[2].attributes['value'].value.match(/src="(.*)"/)[1]
   end
 end

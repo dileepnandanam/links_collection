@@ -1,3 +1,13 @@
+.link {
+	display: inline-block;
+	margin:10px;
+}
+@media (min-width: 992px) {
+	.col-lg-6 {
+    	flex: 0 0 50%;
+    	max-width: 48% !important;
+	}
+}
 .link-input {
 	height: 20px;
 }
