@@ -17,6 +17,12 @@ class LinksController < ApplicationController
     end
   end
 
+  def tag
+    link = Link.find(params[:id])
+    new_tagset = link.tags + ' ' + params[:value]
+    link.update(tags: new_tagset)
+  end
+
   protected
 
   def link_params

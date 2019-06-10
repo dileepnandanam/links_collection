@@ -43,5 +43,17 @@ $(document).on('turbolinks:load', function() {
 			Rails.fire($('.view-more')[0], 'click')
 		}
 	}
-	$(document).on('click', '.url', function(){alert('p')})
+	$(document).on('keypress', 'input.tag', function(e){
+		if(e.which == 13) {
+			$.ajax({
+				url: $(this).data('url'),
+				method: 'PUT',
+				data: {value: $(this).val()},
+				beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+				success: function(e) {
+					$('input').val('')
+				}
+			})
+		}
+	})
 })

@@ -13,6 +13,7 @@
     .tags
       - link.tags.split(' ').select(&:present?).each do |tag|
         = link_to tag, search_links_path(q: tag), class: 'tag pull-left', remote: true
+      %input.tag.pull-left{data: {url: tag_link_path(link)}}
     .preview
       
 - if links.next_page
