@@ -4,6 +4,12 @@ class HtmlFetcher
   end
 
   def fetch_video_url
-    Net::HTTP.get_response(URI.parse(@url)).response.body.match(/setVideoUrlLow\('(.*)'\)/)[1]
+    html = Net::HTTP.get_response(URI.parse(@url)).response.body
+    if html.include?('Sorry, this URL is outdated')
+    	@url = 'https://www.xnxx.com' + html.match(/Url : (.*) /)[1].split(' ').first
+    	fetch_video_url
+    else
+      html.match(/setVideoUrlLow\('(.*)'\)/)[1]
+    end
   end
 end
