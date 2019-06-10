@@ -56,4 +56,8 @@ $(document).on('turbolinks:load', function() {
 			})
 		}
 	})
+
+	$(document).on('click', '.watch-now', function() {
+		$(this).siblings('.preview').removeClass('d-none')
+	})
 })
