@@ -2,6 +2,7 @@
   .link.col-lg-6.col-md-12.col-12.pull-left
     = link_to raw(link.name), link.url.chomp, class: 'name', target: '_blank'
     = link_to URI.parse(link.url.chomp).host, link.url.chomp,  class: 'url pull-left'
+    = link_to 'reload', retry_link_path(link), class: 'retry pull-right', remote: true, onClick: '$(this).hide()', method: :put
     - if link.source_url.present?
       .preview
         -if link.url.include? 'xnxx.com'

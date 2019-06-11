@@ -60,4 +60,8 @@ $(document).on('turbolinks:load', function() {
 	$(document).on('click', '.watch-now', function() {
 		$(this).siblings('.preview').removeClass('d-none')
 	})
+
+	$(document).on('ajax:success', '.retry', function(e) {
+		$(this).siblings('.preview').find('video').prop('src', e.detail[2].responseText)
+	})
 })

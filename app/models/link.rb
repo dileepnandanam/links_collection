@@ -40,4 +40,11 @@ class Link < ApplicationRecord
     video_url = Nokogiri::HTML(html).css('meta[name="twitter:player"]').attr('content').value
     self.update_attributes(source_url: video_url)
   end
+
+  def generate_source_url
+    get_xnxx_data
+    get_pornhub_data
+    get_youtube_url
+    source_url
+  end
 end

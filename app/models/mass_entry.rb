@@ -1,6 +1,6 @@
 class MassEntry
   def self.process(urls)
-  	urls.map do |url|
+  	urls.map(&:strip).each do |url|
       if url.include? 'xnxx.com'
         name = Nokogiri::HTML(Net::HTTP.get_response(URI.parse(url)).response.body).css('strong')[0].text
         tags = Nokogiri::HTML(Net::HTTP.get_response(URI.parse(url)).response.body).css('div.video-tags').css('a').map(&:text).join(' ')

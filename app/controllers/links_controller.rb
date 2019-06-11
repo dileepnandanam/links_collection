@@ -10,7 +10,10 @@ class LinksController < ApplicationController
 
   def create
     @link = Link.new(link_params)
-    if @link.save
+    if @link.name.blank?
+      MassEntry.process(@link.url.split(','))
+      render plain: 'link(s) created'
+    elsif @link.save
       render plain: 'link created'
     else
       render 'new', layout: false, status: 422
@@ -21,6 +24,10 @@ class LinksController < ApplicationController
     link = Link.find(params[:id])
     new_tagset = link.tags + ' ' + params[:value]
     link.update(tags: new_tagset)
+  end
+
+  def retry
+    render plain: Link.find(params[:id]).generate_source_url
   end
 
   protected
