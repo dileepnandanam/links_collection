@@ -4,7 +4,11 @@ class LinksController < ApplicationController
   end
 
   def search
-    @links = Link.where('name ~* ? or tags ~* ? or url ~* ?', params[:q], params[:q], params[:q]).paginate(page: params[:page], per_page: 8)
+    if params[:q].present?
+      @links = Link.where('name ~* ? or tags ~* ? or url ~* ?', params[:q], params[:q], params[:q]).paginate(page: params[:page], per_page: 8)
+    else
+      @links = Link.order(Arel.sql('random()')).limit(20).paginate(per_page: 20, page: 1)
+    end
     render 'search', layout: false
   end
 

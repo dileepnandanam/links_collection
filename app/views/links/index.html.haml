@@ -2,3 +2,4 @@
 .form-container.d-none
   = render template: 'links/new'
 .links
+  = render partial: 'links', locals: {links: Link.order(Arel.sql('random()')).limit(20).paginate(per_page: 20, page: 1)}

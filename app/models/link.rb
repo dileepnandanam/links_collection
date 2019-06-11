@@ -1,10 +1,7 @@
 class Link < ApplicationRecord
   validates :url, presence: true
-  validates :name, presence: true
 
-  after_create :get_youtube_url
-  after_create :get_xnxx_data
-  after_create :get_pornhub_data
+  after_create :generate_source_url
 
   def get_youtube_url
     host = URI.parse(url.chomp).host

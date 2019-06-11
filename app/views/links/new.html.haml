@@ -1,5 +1,5 @@
 = simple_form_for @link, html: {class: 'form', remote: true} do |f|
-  = f.input :name, require: true, html: {class: 'link-input'}
+  = f.input :name, html: {class: 'link-input'}
   = f.input :url, require: true, html: {class: 'link-input'}, label: 'Url(seperate multiple links with coma)'
   = f.input :tags, label: 'Tags(seperat more than one tags with space)'
   = f.submit
