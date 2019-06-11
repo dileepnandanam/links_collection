@@ -2,20 +2,42 @@ class Link < ApplicationRecord
   validates :url, presence: true
   validates :name, presence: true
 
-  after_create :generate_youtube_url
-  after_create :generate_xnxx_url
+  after_create :get_youtube_url
+  after_create :get_xnxx_data
+  after_create :get_pornhub_data
 
-  def generate_youtube_url
+  def get_youtube_url
     host = URI.parse(url.chomp).host
     if host.include? 'youtube.com'
       self.update_attributes(source_url: 'https://youtube.com/embed/' + url.match(/v=(.*)/)[1])
     end
   end
 
-  def generate_xnxx_url
+  def get_xnxx_data
     host = URI.parse(url.chomp).host
     if host.include? 'xnxx.com'
-      self.update_attributes(source_url: HtmlFetcher.new(url).fetch_video_url)
+      html = Net::HTTP.get_response(URI.parse(url)).response.body
+    else
+      return
     end
+    if html.include?('Sorry, this URL is outdated')
+      url = 'https://www.xnxx.com' + html.match(/Url : (.*) /)[1].split(' ').first
+      get_xnxx_data
+      return
+    else
+      video_url = html.match(/setVideoUrlLow\('(.*)'\)/)[1]
+    end
+    self.update_attributes(source_url: video_url)
+  end
+
+  def get_pornhub_data
+    host = URI.parse(url.chomp).host
+    if host.include? 'pornhub.com'
+      html = Net::HTTP.get_response(URI.parse(url)).response.body
+    else
+      return
+    end
+    video_url = Nokogiri::HTML(html).css('meta[name="twitter:player"]').attr('content').value
+    self.update_attributes(source_url: video_url)
   end
 end
