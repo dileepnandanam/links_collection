@@ -4,6 +4,6 @@ class Uploader
 			File.open("/Users/Dileep/xlinks_folder/#{f}").read.strip
 		}.join(',')
 
-		Net::HTTP.post_form(URI.parse("http://localhost:3000/links"), {link: {url: urls}})
+		Net::HTTP.post_form(URI.parse("http://xlinks.herokuapp.com/links"), {'link[url]' => urls})
 	end
 end
