@@ -1,11 +1,12 @@
 class LinksController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def index
     @link = Link.new
   end
 
   def search
     if params[:q].present?
-      @links = Link.where('name ~* ? or tags ~* ? or url ~* ?', params[:q], params[:q], params[:q]).paginate(page: params[:page], per_page: 8)
+      @links = Link.search(params[:q]).paginate(page: params[:page], per_page: 8)
     else
       @links = Link.order(Arel.sql('random()')).limit(20).paginate(per_page: 20, page: 1)
     end
@@ -37,6 +38,7 @@ class LinksController < ApplicationController
   protected
 
   def link_params
+    binding.pry
     params.require(:link).permit(:name, :url, :tags)
   end
 end

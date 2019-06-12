@@ -39,7 +39,7 @@ $(document).on('turbolinks:load', function() {
 	})
 
 	window.onscroll = function() {
-		if($(window).height() + 100 + document.documentElement.scrollTop > $('body').height()) {
+		if($(window).height() + 600 + document.documentElement.scrollTop > $('body').height()) {
 			Rails.fire($('.view-more')[0], 'click')
 		}
 	}

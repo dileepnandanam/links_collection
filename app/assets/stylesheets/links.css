@@ -59,6 +59,7 @@
 }
 .youtube-container iframe, .youtube-container object, .youtube-container embed {
 	position: absolute;
+	border: none;
 	top: 0;
 	left: 0;
 	width: 100%;
