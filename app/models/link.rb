@@ -1,5 +1,6 @@
 class Link < ApplicationRecord
   validates :url, presence: true
+  validates :url, uniqueness: true
 
   after_create :generate_source_url
 
