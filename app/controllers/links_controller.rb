@@ -8,7 +8,7 @@ class LinksController < ApplicationController
     if params[:q].present?
       @links = Link.search(params[:q]).order('created_at DESC').paginate(page: params[:page], per_page: 8)
     else
-      @links = Link.not(where("tags ~* #{'dik'.reverse}")).order(Arel.sql('random()')).limit(20).paginate(per_page: 20, page: 1)
+      @links = Link.where("tags NOT LIKE '%#{'dik'.reverse}%'").order(Arel.sql('random()')).limit(20).paginate(per_page: 20, page: 1)
     end
     render 'search', layout: false
   end
