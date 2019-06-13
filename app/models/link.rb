@@ -7,7 +7,7 @@ class Link < ApplicationRecord
   scope :normal, -> {where("tags NOT LIKE '%#{'dik'.reverse}%'").order(Arel.sql('random()'))}
   def self.search(q)
     if match_stmt('name', q).blank?
-      Link.paginate(page: 1, per_page: 0)
+      Link.where('1 = 2')
     else
       where(match_stmt('name', q))
         .or where(match_stmt('url', q))
