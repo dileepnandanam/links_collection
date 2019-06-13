@@ -1,4 +1,19 @@
 $(document).on('turbolinks:load', function() {
+	initMasonry = function() {
+		$('.links').masonry({
+			itemSelector: '.link, .load-random'
+		})
+	}
+	reinitMasonry = function() {
+		$('.links').masonry('destroy')
+		initMasonry()
+	}
+	reloadMasonry = function() {
+		$('.links').masonry('reloadItems')
+		initMasonry()
+	}
+	initMasonry()
+
 	search = function() {
 		query = $('.search input').val()
 		$.ajax({
@@ -8,6 +23,7 @@ $(document).on('turbolinks:load', function() {
 			},
 			success: function(data) {
 				$('.links').html(data)
+				reinitMasonry()
 				host = document.location.host
 				window.history.pushState(null, 'search for: ' + query, '?q=' + query)
 			}
@@ -16,12 +32,14 @@ $(document).on('turbolinks:load', function() {
 
 	$(document).on('ajax:success', '.tag', function(e) {
 		$('.links').html(e.detail[2].responseText)
+		reinitMasonry()
 	})
 
 	$('.search input').keyup($.debounce(250, search))
 
 	$('.links').on('ajax:success', '.view-more', function(e) {
 		$(this).closest('.more-links').replaceWith(e.detail[2].responseText)
+		reloadMasonry()
 	})
 
 	$(document).on('ajax:success', '.form', function(e) {
@@ -67,12 +85,15 @@ $(document).on('turbolinks:load', function() {
 
 	$(document).on('ajax:success', '.load-random', function(e) {
 		$(this).replaceWith(e.detail[2].responseText)
+		reloadMasonry()
 	})
 
 	animate_loader = function(e) {
 		e.html(e.html() + '.')
-		setTimeout(function(){animate_loader(e)}, 100)
+		setTimeout(function(){animate_loader(e)}, 1000)
 	}
 
 	$('.links').scrollTop(0)
+
+
 })
