@@ -8,9 +8,8 @@ $(document).on('turbolinks:load', function() {
 			},
 			success: function(data) {
 				$('.links').html(data)
-				$('.watch-now').click(function() {
-					$(this).siblings('.preview').removeClass('d-none')
-				})
+				host = document.location.host
+				window.history.pushState(null, 'search for: ' + query, '?q=' + query)
 			}
 		})
 	}
@@ -40,6 +39,7 @@ $(document).on('turbolinks:load', function() {
 
 	window.onscroll = function() {
 		if($(window).height() + 600 + document.documentElement.scrollTop > $('body').height()) {
+			animate_loader($('.loader'))
 			Rails.fire($('.view-more')[0], 'click')
 		}
 	}
@@ -64,4 +64,15 @@ $(document).on('turbolinks:load', function() {
 	$(document).on('ajax:success', '.retry', function(e) {
 		$(this).siblings('.preview').find('video').prop('src', e.detail[2].responseText)
 	})
+
+	$(document).on('ajax:success', '.load-random', function(e) {
+		$(this).replaceWith(e.detail[2].responseText)
+	})
+
+	animate_loader = function(e) {
+		e.html(e.html() + '.')
+		setTimeout(function(){animate_loader(e)}, 100)
+	}
+
+	$('.links').scrollTop(0)
 })

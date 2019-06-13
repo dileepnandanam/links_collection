@@ -20,5 +20,7 @@
       %input.tag.pull-left{data: {url: tag_link_path(link)}}
       
 - if links.next_page
-  .more-links
+  .more-links.load-random
+    .loader
+      Loading
     = link_to 'View more', search_links_path(q: params[:q], page: params[:page].present? ? params[:page].to_i + 1 : 2), remote: true, class: 'view-more'

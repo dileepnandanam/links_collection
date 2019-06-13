@@ -2,13 +2,19 @@ class LinksController < ApplicationController
   skip_before_action :verify_authenticity_token
   def index
     @link = Link.new
+    if params[:q].present?
+      @links = Link.search(params[:q]).paginate(page: params[:page], per_page: 8)
+    else
+      @links = Link.normal.limit(8).paginate(per_page: 8, page: 1)
+    end
   end
 
   def search
     if params[:q].present?
-      @links = Link.search(params[:q]).order('created_at DESC').paginate(page: params[:page], per_page: 8)
+      @links = Link.search(params[:q])
+      @links = @links.length == 0 ? @links.paginate(per_page: 0, page: 1) : @links.order('created_at DESC').paginate(page: params[:page], per_page: 8)
     else
-      @links = Link.where("tags NOT LIKE '%#{'dik'.reverse}%'").order(Arel.sql('random()')).limit(20).paginate(per_page: 20, page: 1)
+      @links = Link.normal.limit(8).paginate(per_page: 20, page: 1)
     end
     render 'search', layout: false
   end

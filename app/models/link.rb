@@ -4,15 +4,20 @@ class Link < ApplicationRecord
 
   after_create :generate_source_url
 
+  scope :normal, -> {where("tags NOT LIKE '%#{'dik'.reverse}%'").order(Arel.sql('random()'))}
   def self.search(q)
-    where(match_stmt('name', q))
-    .or where(match_stmt('url', q))
-    .or where(match_stmt('tags', q))
+    if match_stmt('name', q).blank?
+      Link.paginate(page: 1, per_page: 0)
+    else
+      where(match_stmt('name', q))
+        .or where(match_stmt('url', q))
+        .or where(match_stmt('tags', q))
+    end
   end
 
   def self.match_stmt(attrib, q)
     stop_words.each{|sw| q.gsub!(Regexp.new("[$\s]#{sw}[\s^]", 'i'), '')}
-    q.split(/[\s,:;\-\(\)\.]/).select{|w| w.length > 1}.map{|w| "#{attrib} ~* '#{w}'"}.join(' or ')
+    q.split(/[\s,:;\-\(\)\.\/]/).select{|w| w.length > 1}.map{|w| "#{attrib} ~* '#{w}'"}.join(' or ')
   end
 
   def self.stop_words
