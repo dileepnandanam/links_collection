@@ -6,7 +6,7 @@
     - if link.source_url.present?
       .preview
         -if link.url.include? 'xnxx.com'
-          = video_tag(link.source_url, name: 'media', controls: '')
+          = video_tag(link.source_url, name: 'media', controls: '', id: link.id)
         - elsif link.url.include? 'pornhub.com'
           .youtube-container
             %iframe{src: link.source_url, height: 315, width: 560}
@@ -17,7 +17,7 @@
     .tags
       - link.tags.to_s.split(' ').select(&:present?).each do |tag|
         = link_to tag, search_links_path(q: tag), class: 'tag pull-left', remote: true
-      %input.tag.pull-left{data: {url: tag_link_path(link)}}
+      %input.tag.pull-left{data: {url: tag_link_path(link)}, placeholder: 'enter tag'}
       
 - if links.next_page
   .more-links.load-random
