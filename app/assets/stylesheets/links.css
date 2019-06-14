@@ -85,5 +85,14 @@ input.tag {
 	text-align: center;
 	font-size: 24px;
 	margin: 12px 0 12px 0;
+	color: blue;
 	background-image: linear-gradient(black, #0c0f2d);
+}
+.load-random:hover {
+	cursor: default;
+	text-decoration: none;
+	background-image: linear-gradient(black,#232371);
+}
+.form-container {
+	display: none;
 }
