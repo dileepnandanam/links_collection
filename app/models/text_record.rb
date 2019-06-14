@@ -1,0 +1,1 @@
+class TextRecord < ApplicationRecord;end

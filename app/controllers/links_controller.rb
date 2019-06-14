@@ -40,6 +40,11 @@ class LinksController < ApplicationController
     render plain: Link.find(params[:id]).generate_source_url
   end
 
+  def desc
+    TextRecord.where(name: 'meta_desc').first_or_create.update(value: params.permit(:value)[:value])
+    render plain: params[:value]
+  end
+
   protected
 
   def link_params
