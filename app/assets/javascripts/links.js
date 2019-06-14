@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function() {
 	initMasonry = function() {
 		$('.links').masonry({
-			itemSelector: '.llink, .lload-random',
+			itemSelector: '.link, .load-random',
 			gutter: 100
 		})
 	}
@@ -13,7 +13,7 @@ $(document).on('turbolinks:load', function() {
 		$('.links').masonry('reloadItems')
 		initMasonry()
 	}
-	initMasonry()
+	//initMasonry()
 
 	search = function() {
 		query = $('.search input').val()
@@ -24,7 +24,7 @@ $(document).on('turbolinks:load', function() {
 			},
 			success: function(data) {
 				$('.links').html(data)
-				reinitMasonry()
+				//reinitMasonry()
 				reloadVideo()
 				window.history.pushState(null, 'search for: ' + query, '?q=' + query)
 			}
@@ -34,7 +34,7 @@ $(document).on('turbolinks:load', function() {
 	$(document).on('ajax:success', '.tag', function(e) {
 		$('.links').html(e.detail[2].responseText)
 		window.history.pushState(null, 'search for: ' + $(this).html(), '?q=' + $(this).html())
-		reinitMasonry()
+		//reinitMasonry()
 		reloadVideo()
 	})
 
@@ -42,7 +42,7 @@ $(document).on('turbolinks:load', function() {
 
 	$('.links').on('ajax:success', '.view-more', function(e) {
 		$(this).closest('.more-links').replaceWith(e.detail[2].responseText)
-		reloadMasonry()
+		//reloadMasonry()
 		reloadVideo()
 	})
 
@@ -85,7 +85,7 @@ $(document).on('turbolinks:load', function() {
 
 	$(document).on('ajax:success', '.load-random', function(e) {
 		$(this).replaceWith(e.detail[2].responseText)
-		reloadMasonry()
+		//reloadMasonry()
 		reloadVideo()
 	})
 
