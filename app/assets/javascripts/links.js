@@ -1,7 +1,8 @@
 $(document).on('turbolinks:load', function() {
 	initMasonry = function() {
 		$('.links').masonry({
-			itemSelector: '.link, .load-random'
+			itemSelector: '.link, .load-random',
+			gutter: 100
 		})
 	}
 	reinitMasonry = function() {
