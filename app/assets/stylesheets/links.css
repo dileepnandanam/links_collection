@@ -96,3 +96,6 @@ input.tag {
 .form-container {
 	display: none;
 }
+iframe {
+	border: none !important;
+}
