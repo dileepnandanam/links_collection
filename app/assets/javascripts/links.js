@@ -61,7 +61,6 @@ $(document).on('turbolinks:load', function() {
 
 	window.onscroll = function() {
 		if($(window).height() + 600 + document.documentElement.scrollTop > $('body').height()) {
-			animate_loader($('.loader'))
 			Rails.fire($('.view-more')[0], 'click')
 		}
 	}

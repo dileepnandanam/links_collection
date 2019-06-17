@@ -22,5 +22,5 @@
 - if links.next_page
   .more-links.load-random
     .loader
-      Loading
+      = image_tag(asset_path 'loader.gif')
     = link_to 'View more', search_links_path(q: params[:q], page: params[:page].present? ? params[:page].to_i + 1 : 2), remote: true, class: 'view-more'
