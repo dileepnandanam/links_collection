@@ -15,19 +15,6 @@ ActiveRecord::Schema.define(version: 2019_06_14_121533) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "chats", force: :cascade do |t|
-    t.integer "sender_id"
-    t.integer "reciver_id"
-    t.text "text"
-    t.boolean "seen", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.bigint "image_file_size"
-    t.datetime "image_updated_at"
-  end
-
   create_table "links", force: :cascade do |t|
     t.text "url"
     t.text "name"
@@ -38,34 +25,9 @@ ActiveRecord::Schema.define(version: 2019_06_14_121533) do
     t.text "source_url"
   end
 
-  create_table "simple_captcha_data", force: :cascade do |t|
-    t.string "key"
-    t.string "value"
-    t.index ["key"], name: "idx_key"
-  end
-
   create_table "text_records", force: :cascade do |t|
     t.string "name"
     t.text "value"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "gender"
-    t.boolean "online"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.bigint "image_file_size"
-    t.datetime "image_updated_at"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

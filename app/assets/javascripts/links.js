@@ -31,6 +31,8 @@ $(document).on('turbolinks:load', function() {
 		})
 	}
 
+	$('.links').scrollTop(0)
+
 	$(document).on('ajax:success', '.tag', function(e) {
 		$('.links').html(e.detail[2].responseText)
 		window.history.pushState(null, 'search for: ' + $(this).html(), '?q=' + $(this).html())
@@ -38,7 +40,7 @@ $(document).on('turbolinks:load', function() {
 		reloadVideo()
 	})
 
-	$('.search input').keyup($.debounce(250, search))
+	$('.search input').keyup($.debounce(3000, search))
 
 	$('.links').on('ajax:success', '.view-more', function(e) {
 		$(this).closest('.more-links').replaceWith(e.detail[2].responseText)
@@ -59,9 +61,17 @@ $(document).on('turbolinks:load', function() {
 		$('.form-container').show('fast')
 	})
 
+	click_more_link = function() {
+		Rails.fire($('.view-more')[0], 'click')
+	}
+	sent = {}
 	window.onscroll = function() {
 		if($(window).height() + 600 + document.documentElement.scrollTop > $('body').height()) {
-			Rails.fire($('.view-more')[0], 'click')
+			height = $('body').height().toString()
+			if(!sent[height]) {
+				sent[height] = true
+				click_more_link()
+			}
 		}
 	}
 	$(document).on('keypress', 'input.tag', function(e){
@@ -92,8 +102,6 @@ $(document).on('turbolinks:load', function() {
 		e.html(e.html() + '.')
 		setTimeout(function(){animate_loader(e)}, 500)
 	}
-
-	$('.links').scrollTop(0)
 
 	reloadVideo = function() {
 		for(i = 0; i < $('video').length; i++) {

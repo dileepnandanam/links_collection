@@ -1,8 +1,5 @@
 - if @links.count > 0
   = render partial: 'links', locals: {links: @links}
-  - unless @links.next_page
+  - unless true || @links.next_page
     = link_to search_links_path, remote: true, class: 'load-random' do
       Show Random videos
-- else
-  = link_to search_links_path, remote: true, class: 'load-random' do
-    No results found, Show Random videos
