@@ -52,7 +52,7 @@ $(document).on('turbolinks:load', function() {
 		$('#link_name').val('')
 		$('#link_url').val('')
 		$('#link_tags').val('')
-		$(this).closest('.form-container').addClass('d-none')
+		$(this).closest('.form-container').hide()
 	}).on('ajax:error', '.form', function(e) {
 		$(this).closest('.form-container').html(e.detail[2].responseText)
 	})

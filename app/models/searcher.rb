@@ -9,7 +9,7 @@ class Searcher < ApplicationJob
   end
 
   def fetch_links(url)
-    urls = Nokogiri::HTML(Net::HTTP.get_response(url).response.body).html.css('a.linkVideoThumb').map{|link| link['href']} if URI.parse(url).host.include?('pornhub')
+    urls = Nokogiri::HTML(Net::HTTP.get_response(URI.parse(url)).response.body).css('a.linkVideoThumb').map{|link| link['href']} if URI.parse(url).host.include?('pornhub')
     urls = fetch_xnxx_urls(url) if URI.parse(url).host.include?('xnxx')
     urls.each do |u|
       uri = URI.parse(u)

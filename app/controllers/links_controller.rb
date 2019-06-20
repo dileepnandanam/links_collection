@@ -4,6 +4,9 @@ class LinksController < ApplicationController
     @link = Link.new
     if params[:q].present?
       @links = Link.search(params[:q]).paginate(page: params[:page], per_page: 8)
+      if params[:crawl].present?  
+        Searcher.perform_later params[:q] 
+      end
     else
       @links = Link.normal.limit(8).paginate(per_page: 8, page: 1)
     end

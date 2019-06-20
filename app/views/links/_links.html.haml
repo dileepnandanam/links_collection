@@ -19,7 +19,7 @@
         = link_to tag, search_links_path(q: tag), class: 'tag pull-left', remote: true
       %input.tag.pull-left{data: {url: tag_link_path(link)}, placeholder: 'enter tag'}
       
-- if true
+- if links.next_page
   .more-links.load-random
     .loader
       = image_tag(asset_path 'loader.gif')
