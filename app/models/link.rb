@@ -28,4 +28,8 @@ class Link < ApplicationRecord
   def generate_source_url
     EmbedUrlFetcher.perform_later(self.id)
   end
+
+  def generate_source_url_now
+    EmbedUrlFetcher.new.perform(self.id)
+  end
 end

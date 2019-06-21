@@ -44,7 +44,7 @@ class LinksController < ApplicationController
   end
 
   def retry
-    render plain: Link.find(params[:id]).generate_source_url
+    render plain: Link.find(params[:id]).generate_source_url_now
   end
 
   def desc
