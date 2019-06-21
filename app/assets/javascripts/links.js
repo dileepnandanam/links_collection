@@ -40,7 +40,7 @@ $(document).on('turbolinks:load', function() {
 		reloadVideo()
 	})
 
-	$('.search input').keyup($.debounce(3000, search))
+	$('.search input').keyup($.debounce(1000, search))
 
 	$('.links').on('ajax:success', '.view-more', function(e) {
 		$(this).closest('.more-links').replaceWith(e.detail[2].responseText)
