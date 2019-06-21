@@ -11,7 +11,7 @@ class EmbedUrlFetcher < ApplicationJob
     if host.include? 'youtube.com'
       html = Net::HTTP.get_response(URI.parse(@link.url)).response.body
       name, tags = MassEntry.with_info(@link.url, html) if [name, tags].any?(&:blank?)
-      @link.update_attributes(name: @link.name.present? ? @link.name : name, tags: (@link.tags + ' ' + tags).split(' ').uniq.join(' '), source_url: 'https://youtube.com/embed/' + @link.url.match(/v=(.*)/)[1])
+      @link.update_attributes(name: @link.name.present? ? @link.name : name, tags: (@link.tags.to_s + ' ' + tags).split(' ').uniq.join(' '), source_url: 'https://youtube.com/embed/' + @link.url.match(/v=(.*)/)[1])
     end
   end
 
