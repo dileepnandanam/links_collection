@@ -18,7 +18,7 @@ class Link < ApplicationRecord
 
   def self.match_stmt(attrib, q)
     stop_words.each{|sw| q.gsub!(Regexp.new("[$\s]#{sw}[\s^]", 'i'), '')}
-    q.split(/[\s,:;\-\(\)\.\/]/).select{|w| w.length > 1}.map{|w| "#{attrib} ~* '#{w}'"}.join(' or ')
+    q.split(/[\s,:;\-\(\)\.\/]/).select{|w| w.length > 1}.map{|w| "#{attrib} ~* '#{w}'"}.join(' and ')
   end
 
   def self.stop_words
