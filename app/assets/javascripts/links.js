@@ -25,7 +25,7 @@ $(document).on('turbolinks:load', function() {
 			success: function(data) {
 				$('.links').html(data)
 				//reinitMasonry()
-				reloadVideo()
+				//reloadVideo()
 				window.history.pushState(null, 'search for: ' + query, '?q=' + query)
 			}
 		})
@@ -37,7 +37,7 @@ $(document).on('turbolinks:load', function() {
 		$('.links').html(e.detail[2].responseText)
 		window.history.pushState(null, 'search for: ' + $(this).html(), '?q=' + $(this).html())
 		//reinitMasonry()
-		reloadVideo()
+		//reloadVideo()
 	})
 
 	$('.search input').keyup($.debounce(1000, search))
@@ -45,7 +45,7 @@ $(document).on('turbolinks:load', function() {
 	$('.links').on('ajax:success', '.view-more', function(e) {
 		$(this).closest('.more-links').replaceWith(e.detail[2].responseText)
 		//reloadMasonry()
-		reloadVideo()
+		//reloadVideo()
 	})
 
 	$(document).on('ajax:success', '.form', function(e) {
@@ -89,13 +89,13 @@ $(document).on('turbolinks:load', function() {
 	})
 
 	$(document).on('ajax:success', '.retry', function(e) {
-		$(this).siblings('.preview').find('video').prop('src', e.detail[2].responseText)
+		$(this).siblings('.preview').find('video, iframe').prop('src', e.detail[2].responseText)
 	})
 
 	$(document).on('ajax:success', '.load-random', function(e) {
 		$(this).replaceWith(e.detail[2].responseText)
 		//reloadMasonry()
-		reloadVideo()
+		//reloadVideo()
 	})
 
 	animate_loader = function(e) {
@@ -109,5 +109,5 @@ $(document).on('turbolinks:load', function() {
 				Rails.fire($($('video')[i]).closest('.link').find('.retry')[0], 'click')
 		}
 	}
-	setTimeout(reloadVideo, 1000)
+	//setTimeout(reloadVideo, 1000)
 })

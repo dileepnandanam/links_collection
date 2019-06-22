@@ -7,18 +7,18 @@ class Link < ApplicationRecord
 
   scope :normal, -> {where("tags NOT LIKE '%#{'dik'.reverse}%'").order(Arel.sql('random()'))}
   def self.search(q)
-    if match_stmt('name', q).blank?
+    if match_stmt(q).blank?
       Link.where('1 = 2')
     else
-      where(match_stmt('name', q))
-        .or where(match_stmt('url', q))
-        .or where(match_stmt('tags', q))
+      Link.select("#{Link.new.attributes.keys.join(', ')}, (#{match_stmt(q)}) as match_count")
+        .where("#{match_stmt(q)} > 0")
+        .order('match_count DESC')
     end
   end
 
-  def self.match_stmt(attrib, q)
+  def self.match_stmt(q)
     stop_words.each{|sw| q.gsub!(Regexp.new("[$\s]#{sw}[\s^]", 'i'), '')}
-    q.split(/[\s,:;\-\(\)\.\/]/).select{|w| w.length > 1}.map{|w| "#{attrib} ~* '#{w}'"}.join(' and ')
+    q.split(/[\s,:;\-\(\)\.\/]/).select{|w| w.length > 1}.map{|w| "(name ~* '#{w}')::int + (url ~* '#{w}')::int + (tags ~* '#{w}')::int"}.join(' + ')
   end
 
   def self.stop_words
