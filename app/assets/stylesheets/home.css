@@ -43,6 +43,19 @@
     .question, .new-question {
 	    margin: 15px 2% 0px 0px;
     }
+    .name {
+    	font-size: 20px !important;
+    }
+    .nav-bar h2 {
+    	display: none !important;
+    }
+
+    .search {
+    	margin-left: 8px !important;
+    }
+    .search input {
+    	width: 94% !important;
+    }
 }
 .search input {
 	border-radius: 5px;
@@ -55,4 +68,8 @@
 }
 .gender_form input {
 	margin-right: 10px;
+}
+.new-link {
+	margin-right: 12px;
+	float: right;
 }
