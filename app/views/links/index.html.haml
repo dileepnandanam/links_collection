@@ -1,5 +1,11 @@
+.ads
+  - Ad.all.each do |ad|
+    .ad.pull-left
+      = ad.body.html_safe
+  .clearfix
 = link_to 'add link', '#', remote: true, class: 'new-link pull-right'
 .form-container
   = render template: 'links/new'
+
 .links
   = render template: 'links/search'
