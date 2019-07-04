@@ -14,13 +14,13 @@ class LinksController < ApplicationController
 
   def search
     if params[:q].present?
-      @links = Link.search(params[:q]).order('created_at DESC').paginate(page: params[:page], per_page: 16)
+      @links = Link.search(params[:q]).order('created_at DESC').paginate(page: params[:page], per_page: 8)
       #if @links.blank? || @links.next_page.blank?
       if params[:crawl].present?  
         Searcher.perform_later params[:q] 
       end
     else
-      @links = Link.normal.limit(16).paginate(per_page: 20, page: 1)
+      @links = Link.normal.limit(8).paginate(per_page: 8, page: 1)
     end
     render 'search', layout: false
   end
