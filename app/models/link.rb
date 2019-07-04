@@ -12,7 +12,7 @@ class Link < ApplicationRecord
     else
       Link.select("#{Link.new.attributes.keys.join(', ')}, (#{match_stmt(q)}) as match_count")
         .where("#{match_stmt(q)} > 0")
-        .order('match_count DESC')
+        .order('match_count, created_at DESC')
     end
   end
 
