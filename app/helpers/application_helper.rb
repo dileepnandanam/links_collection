@@ -10,4 +10,9 @@ module ApplicationHelper
   		<iframe src="#{url}" controll="true" frameborder=0 width=510 height=400 scrolling=no allowfullscreen=allowfullscreen></iframe>
   	}.html_safe
   end
+
+  def bot_request?
+    user_agent =  request.env['HTTP_USER_AGENT'].downcase
+    user_agent.index('googlebot')
+  end
 end

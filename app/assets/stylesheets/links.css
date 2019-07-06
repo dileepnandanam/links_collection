@@ -103,3 +103,10 @@ input.tag {
 iframe {
 	border: none !important;
 }
+.pagination a {
+	padding: 20px;
+	float: left;
+}
+.pagination {
+	display: inline !important;
+}

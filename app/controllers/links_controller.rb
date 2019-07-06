@@ -2,13 +2,14 @@ class LinksController < ApplicationController
   skip_before_action :verify_authenticity_token
   def index
     @link = Link.new
+    per_page = bot_request? ? 100 : 8
     if params[:q].present?
-      @links = Link.search(params[:q]).paginate(page: params[:page], per_page: 8)
+      @links = Link.search(params[:q]).paginate(page: params[:page], per_page: per_page)
       if params[:crawl].present?  
         Searcher.perform_later params[:q] 
       end
     else
-      @links = Link.normal.limit(8).paginate(per_page: 8, page: 1)
+      @links = Link.normal.limit(8).paginate(per_page: per_page, page: 1)
     end
   end
 
@@ -18,6 +19,8 @@ class LinksController < ApplicationController
       #if @links.blank? || @links.next_page.blank?
       if params[:crawl].present?  
         Searcher.perform_later params[:q] 
+      elsif params[:random].present?
+        @links = Link.normal.order(Arel.new('random()')).limit(8).paginate(per_page: 8, page: 1)
       end
     else
       @links = Link.normal.limit(8).paginate(per_page: 8, page: 1)
