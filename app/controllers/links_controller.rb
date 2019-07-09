@@ -23,7 +23,7 @@ class LinksController < ApplicationController
         @links = Link.normal.order(Arel.new('random()')).limit(8).paginate(per_page: 8, page: 1)
       end
     else
-      @links = Link.normal.limit(8).paginate(per_page: 8, page: 1)
+      @links = Link.normal.paginate(per_page: 8, page: 1)
     end
     render 'search', layout: false
   end
