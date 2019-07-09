@@ -76,6 +76,8 @@ $(document).on('turbolinks:load', function() {
 	}
 	$(document).on('keypress', 'input.tag', function(e){
 		if(e.which == 13) {
+			tag = $(this).val()
+			that = this
 			$.ajax({
 				url: $(this).data('url'),
 				method: 'PUT',
@@ -83,6 +85,7 @@ $(document).on('turbolinks:load', function() {
 				beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
 				success: function(e) {
 					$('input').val('')
+					$(that).closest('.link').find('.tags').append("<a class='tag' href='?q=" + tag + "' >" + tag + "</a>")
 				}
 			})
 		}
