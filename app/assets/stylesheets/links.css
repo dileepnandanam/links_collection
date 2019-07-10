@@ -110,3 +110,6 @@ iframe {
 .pagination {
 	display: inline !important;
 }
+.video-player {
+	height: 460px;
+}

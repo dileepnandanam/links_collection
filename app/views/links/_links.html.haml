@@ -6,7 +6,7 @@
     - if true || link.source_url.present?
       .preview
         -if link.url.include?('xnxx.com') || link.url.include?('xvideos.com')
-          = video_tag(link.source_url.to_s, name: 'media', controls: '', id: link.id)
+          = video_tag(link.source_url.to_s, name: 'media', controls: '', id: link.id, class: 'video-player')
         - elsif link.url.include? 'pornhub.com'
           .youtube-container
             %iframe{src: link.source_url.to_s, height: 315, width: 560}
