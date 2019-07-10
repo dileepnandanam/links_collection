@@ -5,7 +5,7 @@
     = link_to 'reload', retry_link_path(link), class: 'retry pull-right', remote: true, method: :put
     - if true || link.source_url.present?
       .preview
-        -if link.url.include? 'xnxx.com'
+        -if link.url.include? 'xnxx.com' || link.include? 'xvideos.com'
           = video_tag(link.source_url.to_s, name: 'media', controls: '', id: link.id)
         - elsif link.url.include? 'pornhub.com'
           .youtube-container
