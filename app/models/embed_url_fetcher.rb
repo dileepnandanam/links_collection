@@ -16,9 +16,26 @@ class EmbedUrlFetcher < ApplicationJob
     end
   end
 
-  def get_xnxx_data
+  def get_xvideos_data
     host = URI.parse(@link.url.chomp).host
     if host.include? 'xnxx.com'
+      html = Net::HTTP.get_response(URI.parse(@link.url)).response.body
+      if html.include?('Sorry, this URL is outdated')
+        @link.url = 'https://www.xvideos.com' + html.match(/Url : (.*) /)[1].split(' ').first
+        get_xvideos_data
+        return
+      end
+      name, tags = MassEntry.with_info(@link.url, html) if [name, tags].any?(&:blank?)
+      video_url = html.match(/setVideoUrlLow\('(.*)'\)/)[1]
+    else
+      return
+    end
+    @link.update_attributes(name: name, tags: tags, source_url: video_url)
+  end
+
+  def get_xnxx_data
+    host = URI.parse(@link.url.chomp).host
+    if host.include? 'xvideos.com'
       html = Net::HTTP.get_response(URI.parse(@link.url)).response.body
       if html.include?('Sorry, this URL is outdated')
         @link.url = 'https://www.xnxx.com' + html.match(/Url : (.*) /)[1].split(' ').first

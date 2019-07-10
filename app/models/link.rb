@@ -26,7 +26,11 @@ class Link < ApplicationRecord
   end
 
   def generate_source_url
-    EmbedUrlFetcher.perform_later(self.id)
+    if Rails.env.production?
+      EmbedUrlFetcher.perform_later(self.id)
+    else
+      EmbedUrlFetcher.new.perform(self.id)
+    end
   end
 
   def generate_source_url_now
