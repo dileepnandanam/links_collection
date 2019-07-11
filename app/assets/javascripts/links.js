@@ -121,13 +121,13 @@ $(document).on('turbolinks:load', function() {
 		$(this).closest('.link').hide('fast')
 	})
 
-	delete_mode = false
+	var delete_mode = false
 
 	$(document).on('keydown', function(e) {
-		//delete_mode = true
+		delete_mode = true
 	})
 	$(document).on('keyup', function(e) {
-		//delete_mode false
+		delete_mode false
 	})
 
 	$(document).on('ajax:success', '.delete-tag', function(e) {
