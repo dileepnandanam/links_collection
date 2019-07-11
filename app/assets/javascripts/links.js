@@ -122,6 +122,13 @@ $(document).on('turbolinks:load', function() {
 	})
 
 
+	$(document).on('keydown', function(e) {
+		delete_mode = true
+	})
+	$(document).on('keyup', function(e) {
+		delete_mode false
+	})
+
 	$(document).on('ajax:success', '.delete-tag', function(e) {
 		$(this).closest('.tag').hide()
 	})
