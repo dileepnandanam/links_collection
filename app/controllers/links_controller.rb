@@ -87,7 +87,9 @@ class LinksController < ApplicationController
 
   def untag
     link = Link.unscoped.find(params[:id])
-    link.update(tags: link.tags.gsub(params[:tag].strip, ''))
+    if current_user.admin?
+      link.update(tags: link.tags.gsub(params[:tag].strip, ''))
+    end
   end
 
   protected

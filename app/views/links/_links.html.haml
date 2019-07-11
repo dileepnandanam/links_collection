@@ -19,7 +19,8 @@
       - link.tags.to_s.split(' ').select(&:present?).uniq.each do |tag|
         = link_to root_path(q: tag), class: 'tag pull-left' do
           = tag
-          = link_to 'x', untag_link_path(link, tag: tag), class: 'delete-tag', method: :put
+          - if current_user.try :admin?
+            = link_to 'x', untag_link_path(link, tag: tag), class: 'delete-tag', method: :put
       %input.tag.pull-left{data: {url: tag_link_path(link)}, placeholder: 'enter tag'}
       
 - if links.next_page
