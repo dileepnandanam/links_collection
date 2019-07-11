@@ -113,4 +113,12 @@ $(document).on('turbolinks:load', function() {
 		}
 	}
 
+	$(document).on('ajax:success', '.toggle-visibility', function(e) {
+		$(this).closest('.admin-actions').replaceWith(e.detail[2].responseText)
+	})
+
+	$(document).on('ajax:success', '.delete-link', function(e) {
+		$(this).closest('.link').hide('fast')
+	})
+
 })
