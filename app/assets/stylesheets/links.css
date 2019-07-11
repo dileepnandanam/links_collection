@@ -113,3 +113,6 @@ iframe {
 .video-player {
 	height: 460px;
 }
+.delete-tag {
+	display: none;
+}

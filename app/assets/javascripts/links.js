@@ -1,4 +1,3 @@
-var delete_mode = false
 $(document).on('turbolinks:load', function() {
 	initMasonry = function() {
 		$('.links').masonry({
@@ -123,13 +122,14 @@ $(document).on('turbolinks:load', function() {
 	})
 
 	$(document).on('keydown', function(e) {
-		delete_mode = true
+		$('.delete-tag').show()
 	})
 	$(document).on('keyup', function(e) {
-		delete_mode false
+		$('.delete-tag').hide()
 	})
 
 	$(document).on('ajax:success', '.delete-tag', function(e) {
-		$(this).closest('.tag').hide()
+		$(this).prev().hide()
+		$(this).remove()
 	})
 })
