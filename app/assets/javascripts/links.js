@@ -121,4 +121,8 @@ $(document).on('turbolinks:load', function() {
 		$(this).closest('.link').hide('fast')
 	})
 
+
+	$(document).on('ajax:success', '.delete-tag', function(e) {
+		$(this).closest('.tag').hide()
+	})
 })
