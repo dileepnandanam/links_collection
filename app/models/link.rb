@@ -5,6 +5,7 @@ class Link < ApplicationRecord
 
   after_create :generate_source_url, unless: :lazy
 
+  default_scope -> {where(hidden: false)}
   scope :normal, -> {where("tags NOT LIKE '%#{'dik'.reverse}%'").order('created_at DESC')}
   def self.search(q)
     if match_stmt(q).blank?

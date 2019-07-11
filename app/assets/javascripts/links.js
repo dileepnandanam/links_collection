@@ -112,5 +112,25 @@ $(document).on('turbolinks:load', function() {
 				Rails.fire($($('video')[i]).closest('.link').find('.retry')[0], 'click')
 		}
 	}
-	//setTimeout(reloadVideo, 1000)
+
+	$(document).on('ajax:success', '.toggle-visibility', function(e) {
+		$(this).closest('.admin-actions').replaceWith(e.detail[2].responseText)
+	})
+
+	$(document).on('ajax:success', '.delete-link', function(e) {
+		$(this).closest('.link').hide('fast')
+	})
+
+	var delete_mode = false
+
+	$(document).on('keydown', function(e) {
+		delete_mode = true
+	})
+	$(document).on('keyup', function(e) {
+		delete_mode false
+	})
+
+	$(document).on('ajax:success', '.delete-tag', function(e) {
+		$(this).closest('.tag').hide()
+	})
 })

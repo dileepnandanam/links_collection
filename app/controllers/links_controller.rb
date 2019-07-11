@@ -28,6 +28,14 @@ class LinksController < ApplicationController
     render 'search', layout: false
   end
 
+  def hidden
+    if current_user.try :admin?
+      @links = Link.unscoped.where(hidden: true).paginate(per_page: 8, page: params[:page])
+    else
+      redirect_to root_path
+    end
+  end
+
   def create
     @link = Link.new(link_params)
     if @link.name.blank?
@@ -53,6 +61,33 @@ class LinksController < ApplicationController
   def desc
     TextRecord.where(name: 'meta_desc').first_or_create.update(value: params.permit(:value)[:value])
     render plain: params[:value]
+  end
+
+  def destroy
+    if current_user.admin?
+      Link.unscoped.find(params[:id]).delete
+    end
+  end
+
+  def hide
+    if current_user.admin?
+      @link = Link.find(params[:id])
+      @link.update(hidden: true)
+      render 'hide', layout: false
+    end
+  end
+
+  def unhide
+    if current_user.admin?
+      @link = Link.unscoped.find(params[:id])
+      @link.update(hidden: false)
+      render 'hide', layout: false
+    end
+  end
+
+  def untag
+    link = Link.unscoped.find(params[:id])
+    link.update(tags: link.tags.gsub(params[:tag].strip, ''))
   end
 
   protected

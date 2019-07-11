@@ -1,0 +1,7 @@
+.admin-actions.pull-left
+  - if current_user.try :admin?
+    - if link.hidden
+      = link_to "show", unhide_link_path(link), remote: true, class: 'toggle-visibility pull-left', method: :put
+    - else
+      = link_to "hide", hide_link_path(link), remote: true, class: 'toggle-visibility pull-left', method: :put
+    = link_to "delete", link_path(link), remote: true, class: 'delete-link pull-left', method: :delete
