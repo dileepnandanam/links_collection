@@ -1,3 +1,4 @@
+var delete_mode = false
 $(document).on('turbolinks:load', function() {
 	initMasonry = function() {
 		$('.links').masonry({
@@ -120,8 +121,6 @@ $(document).on('turbolinks:load', function() {
 	$(document).on('ajax:success', '.delete-link', function(e) {
 		$(this).closest('.link').hide('fast')
 	})
-
-	var delete_mode = false
 
 	$(document).on('keydown', function(e) {
 		delete_mode = true
