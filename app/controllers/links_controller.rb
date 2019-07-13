@@ -6,7 +6,7 @@ class LinksController < ApplicationController
     per_page = bot_request? ? 100 : 8
     if params[:q].present?
       @links = Link.search(params[:q], orientation).paginate(page: params[:page], per_page: per_page)
-      @count = Link.search_count params[:q]
+      @count = Link.search_count params[:q], orientation
       if params[:crawl].present?
         Searcher.perform_later params[:q] 
       end

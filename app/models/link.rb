@@ -8,28 +8,21 @@ class Link < ApplicationRecord
   default_scope -> {where(hidden: false)}
   scope :normal, -> {where("tags NOT LIKE '%#{'dik'.reverse}%'").order('created_at DESC')}
   scope :with_orientation, -> (orientation) {
-    orientation == 'straight' ? all : where("name ~* '#{orientation}' or url ~* '#{orientation}' or tags ~* '#{orientation}'")
+    orientation == 'straight' || orientation.blank? ? where("not(name ~* 'gay') and not(url ~* 'gay') and not(tags ~* 'gay')") : where("name ~* '#{orientation}' or url ~* '#{orientation}' or tags ~* '#{orientation}'")
   }
   def self.search(q, orientation = nil)
     if match_stmt(q).blank?
       Link.where('1 = 2')
     else
-      links = Link
-      if orientation.present? && orientation != 'straight'
-        links = Link.with_orientation(orientation)
-      end
-      links.select("#{Link.new.attributes.keys.join(', ')}, (#{match_stmt(q)}) as match_count")
+      Link.with_orientation(orientation)
+        .select("#{Link.new.attributes.keys.join(', ')}, (#{match_stmt(q)}) as match_count")
         .where("#{match_stmt(q)} > 0")
         .order('match_count, created_at DESC')
     end
   end
 
   def self.search_count(q, orientation = nil)
-    links = Link
-    if orientation.present? && orientation != 'straight'
-      links = Link.where("name ~= #{orientation} or url ~* #{orientation} or tags ~* #{orientation}")
-    end
-    links.where("#{match_stmt(q)} > 0").order('match_count, created_at DESC').count
+    Link.with_orientation(orientation).where("#{match_stmt(q)} > 0").order('match_count, created_at DESC').count
   end
 
   def self.match_stmt(q)
