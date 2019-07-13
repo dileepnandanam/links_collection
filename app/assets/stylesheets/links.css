@@ -140,6 +140,7 @@ video:focus {
 	border-radius: 5px;
 	border: 1px solid red;
 	color: red;
+	margin-top: 12px;
 }
 .new-link:hover {
 	background-color: white;
