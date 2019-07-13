@@ -1,29 +1,33 @@
 class LinksController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :set_orientation, only: [:index, :search]
   def index
     @link = Link.new
     per_page = bot_request? ? 100 : 8
     if params[:q].present?
-      @links = Link.search(params[:q]).paginate(page: params[:page], per_page: per_page)
-      if params[:crawl].present?  
+      @links = Link.search(params[:q], orientation).paginate(page: params[:page], per_page: per_page)
+      @count = Link.search_count params[:q]
+      if params[:crawl].present?
         Searcher.perform_later params[:q] 
       end
     else
-      @links = Link.normal.limit(8).paginate(per_page: per_page, page: 1)
+      @links = Link.normal.with_orientation(orientation).limit(8).paginate(per_page: per_page, page: 1)
+      @count = Link.normal.with_orientation(orientation).count
     end
   end
 
   def search
     if params[:q].present?
-      @links = Link.search(params[:q]).order('created_at DESC').paginate(page: params[:page], per_page: 8)
+      @links = Link.search(params[:q], orientation).order('created_at DESC').paginate(page: params[:page], per_page: 8)
+      @count = Link.search_count params[:q]
       #if @links.blank? || @links.next_page.blank?
       if params[:crawl].present?  
         Searcher.perform_later params[:q] 
       elsif params[:random].present?
-        @links = Link.normal.order(Arel.new('random()')).limit(8).paginate(per_page: 8, page: 1)
+        @links = Link.normal.with_orientation(orientation).order(Arel.new('random()')).limit(8).paginate(per_page: 8, page: 1)
       end
     else
-      @links = Link.normal.paginate(per_page: 8, page: params[:page])
+      @links = Link.normal.with_orientation(orientation).paginate(per_page: 8, page: params[:page])
     end
     render 'search', layout: false
   end
@@ -94,6 +98,15 @@ class LinksController < ApplicationController
 
   protected
 
+  def orientation
+    @orientation = cookies[:orientation]
+  end
+
+  def set_orientation
+    if params[:orientation].present?
+      cookies[:orientation] = params[:orientation]
+    end
+  end
   def link_params
     params.require(:link).permit(:name, :url, :tags)
   end

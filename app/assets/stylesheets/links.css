@@ -97,6 +97,10 @@ input.tag {
 	text-decoration: none;
 	background-image: linear-gradient(black,#232371);
 }
+.load-random img {
+	width: 20%;
+	height: auto;
+}
 .form-container {
 	display: none;
 }
@@ -113,6 +117,31 @@ iframe {
 .video-player {
 	height: 460px;
 }
+video:focus {
+
+	outline: none;
+}
 .delete-tag {
 	display: none;
+}
+.count {
+	padding: 12px;
+	font-size: 20px;
+	color: red;
+}
+.count:first-child {
+	display: block;
+}
+.count {
+	display: none;
+}
+.new-link {
+	padding: 12px;
+	border-radius: 5px;
+	border: 1px solid red;
+	color: red;
+}
+.new-link:hover {
+	background-color: white;
+	text-decoration: none;
 }
