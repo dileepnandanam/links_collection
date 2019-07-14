@@ -1,6 +1,6 @@
 - links.each do |link|
   .link.col-lg-6.col-md-12.col-12.pull-left
-    = link_to link.name, link.url.chomp, class: 'name', target: '_blank'
+    = link_to h(link.name), link.url.chomp, class: 'name', target: '_blank'
     = link_to URI.parse(link.url.chomp).host, link.url.chomp,  class: 'url pull-left', target: '_blank'
     = link_to 'reload', retry_link_path(link), class: 'retry pull-right', remote: true, method: :put
     = render partial: 'hide', locals: {link: link}

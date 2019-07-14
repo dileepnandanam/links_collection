@@ -21,7 +21,7 @@ class MassEntry
       name = Nokogiri::HTML(html).css('div.title-container').text.squish
       tags = Nokogiri::HTML(html).css('div.categoriesWrapper').css('a').map(&:text).join(' ').sub('+ Suggest', '')
     else
-      name = Nokogiri::HTML(html).css('title')[0].text
+      name = Nokogiri::HTML(html).css('title')[0].text.gsub('&period;', '.').gsub('&comma;', ',')
       tags = "new_from_#{url}"
     end
     return name, tags
