@@ -42,5 +42,6 @@ class MassEntry
       .gsub('&rsqb;', ']')
       .gsub('&lbrack;', '[')
       .gsub('&quest;', '?')
+      .gsub('&semi;', ';')
   end
 end
