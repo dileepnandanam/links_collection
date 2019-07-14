@@ -21,9 +21,26 @@ class MassEntry
       name = Nokogiri::HTML(html).css('div.title-container').text.squish
       tags = Nokogiri::HTML(html).css('div.categoriesWrapper').css('a').map(&:text).join(' ').sub('+ Suggest', '')
     else
-      name = Nokogiri::HTML(html).css('title')[0].text.gsub('&period;', '.').gsub('&comma;', ',')
+      name = Nokogiri::HTML(html).css('title')[0].text
+        
       tags = "new_from_#{url}"
     end
-    return name, tags
+    return escape_unescapable(name), tags
+  end
+
+  def self.escape_unescapable(str)
+    str.gsub('&period;', '.')
+      .gsub('&comma;', ',')
+      .gsub('&lpar;', '(')
+      .gsub('&rpar;', ')')
+      .gsub('&excl;', '!')
+      .gsub('&colon;', ':')
+      .gsub('&vert;', '|')
+      .gsub('&commat;', '@')
+      .gsub('&sol;', '/')
+      .gsub('&num;', '#')
+      .gsub('&rsqb;', ']')
+      .gsub('&lbrack;', '[')
+      .gsub('&quest;', '?')
   end
 end
