@@ -1,4 +1,7 @@
-.screen
-  = @script.split(' ').map{|e| handle_story_element(e)}.join(' ').html_safe
+.container
+  .screen
+    = @script.split(' ').map{|e| handle_story_element(e)}.join(' ').html_safe
+  .fabar
+    .mvbar
 .start
   >>

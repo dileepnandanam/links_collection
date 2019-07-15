@@ -1,12 +1,15 @@
+.container {
+	margin: 30px;
+}
 .screen {
 	overflow: auto;
-	margin: 30px;
-	width: 800px;
+	width: 770px;
 	height: 600px;
 	font-size: 30px;
 	background-image: linear-gradient(black, blue);
 	padding: 20px;
 	background-size: cover;
+	display: inline-block;
 }
 .start {
 	text-align: center;
@@ -30,4 +33,17 @@ img, video {
 span {
 	margin-left: 12px;
 	line-height: 20px;
+}
+.fabar {
+	display: inline-block;
+	width: 30px;
+	height: 600px;
+	position: relative;
+	margin-left: -4px;
+	background-color: brown;
+}
+.mvbar {
+	height: 10px;
+	width: 30px;
+	background-color: black;
 }

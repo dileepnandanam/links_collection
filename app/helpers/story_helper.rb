@@ -24,6 +24,10 @@ module StoryHelper
       %{
       	<br />
       }
+    elsif elem.start_with? 'mode::'
+      %{
+      	<span data-mode="#{elem.split('::').last}">mode</span>
+      }
     else
       %{
       	<span>#{elem}</span>
