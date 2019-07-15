@@ -59,6 +59,7 @@ $(document).on('turbolinks:load', function() {
 
 	$('.new-link').on('click', function() {
 		$('.form-container').show('fast')
+		$($('textarea')[1]).val(window.clipboardData.getData('Text'))
 	})
 
 	click_more_link = function() {

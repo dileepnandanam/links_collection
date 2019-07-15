@@ -43,7 +43,10 @@ class LinksController < ApplicationController
   def create
     @link = Link.new(link_params)
     if @link.name.blank?
-      MassEntry.process(@link.url.split(','))
+      @link.url.split(/[,\s\n]+/).select(&:present?).each do |url|
+        uri = URI.parse url
+        Link.create(url: uri.host.blank? ? "#{URI.parse(url).scheme}://#{URI.parse(url).host}#{url}" : url)
+      end
       render plain: 'link(s) created'
     elsif @link.save
       render plain: 'link created'
