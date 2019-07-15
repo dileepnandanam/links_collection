@@ -6,23 +6,25 @@
 	font-size: 30px;
 	background-image: linear-gradient(black, blue);
 	padding: 20px;
+	background-size: cover;
 }
 .start {
 	text-align: center;
+	padding: 12px;
 	vertical-align: middle;
 	width: 100px;
-	height: 40px;
+	border-radius: 6px;
 	background-color: red;
 	margin-top: 30px;
 }
-img {
+img, video {
 	width: 100%;
 	margin: auto;
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
 
-.screen img, iframe, span {
+.screen img, video, span {
 	display: none;
 }
 span {
