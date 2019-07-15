@@ -1,5 +1,5 @@
 class StoriesController < ApplicationController
   def show
-  	@script = "sss sss sss ssssss sss sss ssssss sss sss video:https://www.youtube.com/embed/P8wCXeE-cD4?start=320 ssssss sss sss ssssss sss sss ssssss sss sss ssssss sss sss last"
+  	@script = "sss sss wait::3 clrscr sss ssssss wait::3 clrscr sss sss  ssssss wait::3 clrscr sss sss  ssssss sss sss ssssss sss sss ssssss sss sss ssssss sss sss sss ssssss sss sss  ssssss sss sss clrscr ssssss sss sss ssssss sss sss ssssss sss sss ssssss sss sss sss ssssss sss sss  ssssss sss sss  ssssss sss sss ssssss sss sss ssssss sss sss ssssss sss sss sss ssssss sss  last image::https://sportshub.cbsistatic.com/i/r/2017/05/02/c9bb1b4b-3e08-45e6-abf4-42eb8fb8c5d8/thumbnail/770x433/3d81a23f35b02f41a7c85a96d3367637/golovkin-ggg-watching-boxing.jpg sss  ssssss sss sss  ssssss sss sss ssssss sss sss ssssss sss sss ssssss sss sss sss ssssss sss sss  ssssss sss sss  ssssss sss sss ssssss sss sss ssssss sss sss ssssss sss sss sss ssssss sss sss  ssssss sss sss  ssssss sss sss ssssss sss sss ssssss sss sss ssssss sss sss sss ssssss sss sss  ssssss sss sss  ssssss sss sss ssssss sss sss ssssss sss sss ssssss sss sss sss ssssss sss sss  ssssss sss sss  ssssss sss sss ssssss sss sss ssssss sss sss ssssss sss sss sss ssssss sss sss  ssssss sss sss  ssssss sss sss ssssss sss sss ssssss sss sss ssssss sss sss"
   end
 end

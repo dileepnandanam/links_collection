@@ -1,5 +1,4 @@
-.script{style: "display: none;"}
-  = @script.split(' ').map{|e| handle_story_element(e)}.join(' ').html_safe
 .screen
+  = @script.split(' ').map{|e| handle_story_element(e)}.join(' ').html_safe
 .start
   Start
