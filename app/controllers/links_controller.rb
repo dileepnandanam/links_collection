@@ -45,7 +45,9 @@ class LinksController < ApplicationController
     if @link.name.blank?
       @link.url.split(/[,\s\n]+/).select(&:present?).each do |url|
         uri = URI.parse url
-        Link.create(url: uri.host.blank? ? "#{URI.parse(url).scheme}://#{URI.parse(url).host}#{url}" : url)
+        if uri.host.present?
+          Link.create(url: uri.host.blank? ? "#{URI.parse(url).scheme}://#{URI.parse(url).host}#{url}" : url)
+        end
       end
       render plain: 'link(s) created'
     elsif @link.save
