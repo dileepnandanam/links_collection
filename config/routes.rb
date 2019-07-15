@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     put :unhide, on: :member
     get :hidden, on: :collection
     put :untag, on: :member
-  end  
+  end
+
+  resource :story
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

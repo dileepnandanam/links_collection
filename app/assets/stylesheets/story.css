@@ -1,0 +1,31 @@
+.screen {
+	margin: 30px;
+	width: 800px;
+	height: 600px;
+	font-size: 30px;
+	background-image: linear-gradient(black, blue);
+	padding: 20px;
+}
+.start {
+	text-align: center;
+	vertical-align: middle;
+	width: 100px;
+	height: 40px;
+	background-color: red;
+	margin-top: 30px;
+}
+img {
+	width: 80%;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+screen img, iframe, span {
+	display: none;
+}
+span {
+	margin-left: 12px;
+	line-height: 20px;
+	display: inline-block;
+}
