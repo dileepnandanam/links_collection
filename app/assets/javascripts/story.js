@@ -6,36 +6,31 @@ $(document).on('turbolinks:load', function() {
 		move()
 	})
 
-	var speeds = {
-		faster: 4,
-		fast: 10,
-		slow: 25,
-		veryslow: 35
+	var periods = {
+		faster: 100,
+		fast: 200,
+		slow: 500,
+		veryslow: 1000
 	}
-	var strengths = {
-		soft: 400,
-		medium: 200,
-		hard: 0
-	}
-	var direction = 1
-	var period = speeds['veryslow']
-	var disp = 30
-	var height = strengths['soft']
-	var max = 0
-	var min = 600
+	
+	var period = periods['veryslow']
+	$('.mvbar').addClass('soft')
 	var stop = false
 
 	move = function() {
 		if (!stop) {
-			if (height < max)
-				direction = 1
-			else if (height > min)
-				direction = -1
-			height += direction * disp
-			$('.mvbar').css('height', height, 'fast')
+			if($('.mvbar').hasClass('stop'))
+				$('.mvbar').removeClass('stop', parseInt(period / 2))
+			else
+				$('.mvbar').addClass('stop', parseInt(period / 2))
 		}
-		setTimeout(move, period)
+		setTimeout(move, period / 2)
 	}
+
+	hideInst = function() {
+		$('.inst').hide('slow')
+	}
+
 	show = function(i, elems) {
 		var wait_time = 200
 		var type = $(elems[i]).text()
@@ -50,14 +45,22 @@ $(document).on('turbolinks:load', function() {
 				mode = $(elems[i]).data('mode')
 				if(mode == 'fast' || mode == 'faster' || mode == 'slow' || mode == 'veryslow') {
 					stop = false
-					period = speeds[mode]
+					period = periods[mode]
 				}
 				else if(mode == 'hard' || mode == 'medium' || mode == 'soft') {
 					stop = false
-					max = strengths[mode]
+					$('.mvbar').removeClass('soft')
+					$('.mvbar').removeClass('medium')
+					$('.mvbar').removeClass('hard')
+					$('.mvbar').addClass(mode, 300)
 				}
 				else
 					stop = true
+			}
+			else if (type == 'inst') {
+				$('.inst').html($(elems[i]).data('inst'))
+				$('.inst').show('fast')
+				setTimeout(hideInst, 2500)
 			}
 			else
 			{

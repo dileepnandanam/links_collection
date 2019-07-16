@@ -10,6 +10,7 @@
 	padding: 20px;
 	background-size: cover;
 	display: inline-block;
+	position: relative;
 }
 .start {
 	text-align: center;
@@ -41,9 +42,35 @@ span {
 	position: relative;
 	margin-left: -4px;
 	background-color: brown;
+	overflow: hidden;
+	background-color: blue;
 }
 .mvbar {
 	height: 10px;
 	width: 30px;
 	background-color: black;
+	position: absolute;
+	background-color: black;
+}
+
+.soft {
+	height: 400px;
+}
+.medium {
+	height: 200px;
+}
+.hard {
+	height: 0px;
+}
+.stop {
+	height: 600px !important;
+}
+.inst {
+	font-size: 30px;
+	color: red;
+	text-align: right;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: 0px 32px 0px 0px;
 }

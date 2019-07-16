@@ -28,6 +28,10 @@ module StoryHelper
       %{
       	<span data-mode="#{elem.split('::').last}">mode</span>
       }
+    elsif elem.start_with?('inst::')
+      %{
+        <span data-inst="#{elem.split('::').last.gsub('_', ' ')}">inst</span>
+      }
     else
       %{
       	<span>#{elem}</span>
