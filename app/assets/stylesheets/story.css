@@ -1,9 +1,9 @@
-.container {
+.cont {
 	margin: 30px;
 }
 .screen {
 	overflow: auto;
-	width: 770px;
+	width: 65%;
 	height: 600px;
 	font-size: 30px;
 	background-image: linear-gradient(black, blue);
@@ -38,6 +38,10 @@ img, video {
 span {
 	margin-left: 12px;
 	line-height: 20px;
+}
+.input {
+	display: inline-block;
+	width: 30%;
 }
 .fabar {
 	display: inline-block;
@@ -78,3 +82,19 @@ span {
 	width: 100%;
 	padding: 0px 32px 0px 0px;
 }
+.script-input {
+	margin: 30px !important;
+	width: 80%;
+	height: 500px;
+}
+.script-link {
+	display: block;
+	margin: 12px;
+}
+.watermark {
+	color: #fac2;
+	position: absolute;
+	font-size: 58px;
+	top: 248px;
+	left: 20%;
+} 

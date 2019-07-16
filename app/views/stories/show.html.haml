@@ -1,8 +1,15 @@
-.container
+.cont
   .screen
+    .watermark
+      അശ്ലീലസാഹിത്യം
     = @script.gsub(/\n/, ' | ').split(' ').map{|e| handle_story_element(e)}.join(' ').html_safe
     .inst
   .fabar
     .mvbar
+  .input
+    = text_area_tag 'script', params[:script] ,class: 'script-input'
+    = link_to 'submit', '#', class: 'script-link'
 .start
   >>
+
+

@@ -14,7 +14,7 @@ $(document).on('turbolinks:load', function() {
 	}
 	
 	var period = periods['veryslow']
-	$('.mvbar').addClass('soft')
+	$('.mvbar').addClass('soft stop')
 	var stop = false
 
 	move = function() {
@@ -63,7 +63,7 @@ $(document).on('turbolinks:load', function() {
 				setTimeout(hideInst, 2500)
 			}
 			else if ($(elems[i]).data('type') == 'br')
-				$(elems[i]).hide()
+				$(elems[i]).show()
 			else
 			{
 				$(elems[i]).show('fade')
@@ -75,5 +75,13 @@ $(document).on('turbolinks:load', function() {
 		}
 	}
 
+	$('.script-link').on('click', function() {
+		window.location.replace('/story?script=' + encodeURI($('.script-input').val()))
+		window.location.replace()
+	})
 
+	$('.screen').children('span, img, video').css('display', 'none')
+		elems = $('.screen').find('span, video, img')
+		show(0, elems)
+		move()
 })

@@ -1,10 +1,5 @@
 class StoriesController < ApplicationController
   def show
-  	@script = %{
-
-  		p
-  		wait::4
-  		clrscr
-  	}
+  	@script = params[:script] || ''
   end
 end
