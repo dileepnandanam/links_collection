@@ -12,6 +12,10 @@
 	display: inline-block;
 	position: relative;
 }
+.screen h1 {
+	width: 100%;
+	text-align: center;
+}
 .start {
 	text-align: center;
 	padding: 12px;

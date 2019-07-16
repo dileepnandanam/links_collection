@@ -1,6 +1,6 @@
 .container
   .screen
-    = @script.split(' ').map{|e| handle_story_element(e)}.join(' ').html_safe
+    = @script.gsub(/\n/, ' | ').split(' ').map{|e| handle_story_element(e)}.join(' ').html_safe
     .inst
   .fabar
     .mvbar

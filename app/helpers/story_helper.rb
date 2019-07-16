@@ -22,7 +22,7 @@ module StoryHelper
       }
     elsif elem == '|'
       %{
-      	<br />
+      	<span data-type='br'><br /></span>
       }
     elsif elem.start_with? 'mode::'
       %{
@@ -31,6 +31,10 @@ module StoryHelper
     elsif elem.start_with?('inst::')
       %{
         <span data-inst="#{elem.split('::').last.gsub('_', ' ')}">inst</span>
+      }
+    elsif elem.start_with?('heading::')
+      %{
+        <span><h1>#{elem.split('::').last.gsub('_', ' ')}</h1></span>
       }
     else
       %{

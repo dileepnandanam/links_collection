@@ -62,6 +62,8 @@ $(document).on('turbolinks:load', function() {
 				$('.inst').show('fast')
 				setTimeout(hideInst, 2500)
 			}
+			else if ($(elems[i]).data('type') == 'br')
+				$(elems[i]).hide()
 			else
 			{
 				$(elems[i]).show('fade')
