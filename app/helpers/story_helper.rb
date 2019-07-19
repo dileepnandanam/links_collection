@@ -34,7 +34,7 @@ module StoryHelper
       }
     elsif elem.start_with?('heading::')
       %{
-        <span><h1>#{elem.split('::').last.gsub('_', ' ')}</h1></span>
+        <span><h1 style="color: #{elem.split('::')[1]}">#{elem.split('::').last.gsub('_', ' ')}</h1></span>
       }
     else
       %{

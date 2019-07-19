@@ -12,6 +12,6 @@ Rails.application.routes.draw do
     put :untag, on: :member
   end
 
-  resource :story
+  resources :stories
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

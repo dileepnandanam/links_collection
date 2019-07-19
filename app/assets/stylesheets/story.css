@@ -1,9 +1,13 @@
 .cont {
 	margin: 30px;
+	width: 60%;
+	float: left;
 }
+.screen::-webkit-scrollbar { width: 0 !important }
 .screen {
+	scroll-behavior: smooth;
 	overflow: auto;
-	width: 65%;
+	width: 95%;
 	height: 600px;
 	font-size: 30px;
 	background-image: linear-gradient(black, blue);
@@ -40,8 +44,19 @@ span {
 	line-height: 20px;
 }
 .input {
+	float: left;
 	display: inline-block;
-	width: 30%;
+	width: 32%;
+}
+.back {
+	clear: both;
+}
+.input form {
+	width: 100%;
+}
+.input textarea {
+	width: 100%;
+	height: 600px;
 }
 .fabar {
 	display: inline-block;
@@ -97,4 +112,7 @@ span {
 	font-size: 58px;
 	top: 248px;
 	left: 20%;
-} 
+}
+.current-elem {
+	display: none;
+}

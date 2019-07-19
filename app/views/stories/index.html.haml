@@ -1,0 +1,5 @@
+.links
+  - @stories.each do |s|
+    .link
+      = link_to s.text.split(/\s/).first(50).select{|w| !w.include?('::') && !w.include?('clrscr')}.join(' '), story_path(s)
+  = link_to 'create', new_story_path

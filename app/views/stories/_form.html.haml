@@ -1,0 +1,5 @@
+.input
+  = simple_form_for(@story) do |f|
+    = f.input :text
+    = f.submit
+    = f.hidden_field :current, value: (@story.current || 0), class: 'current'

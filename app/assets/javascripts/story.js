@@ -1,10 +1,5 @@
 $(document).on('turbolinks:load', function() {
-	$('.start').on('click', function() {
-		$('.screen').children('span, img, video').css('display', 'none')
-		elems = $('.screen').find('span, video, img')
-		show(0, elems)
-		move()
-	})
+	var i = parseInt($('.current-elem').text())
 
 	var periods = {
 		faster: 100,
@@ -31,7 +26,7 @@ $(document).on('turbolinks:load', function() {
 		$('.inst').hide('slow')
 	}
 
-	show = function(i, elems) {
+	show = function(elems) {
 		var wait_time = 200
 		var type = $(elems[i]).text()
 		if (i < elems.length) {
@@ -67,21 +62,27 @@ $(document).on('turbolinks:load', function() {
 			else
 			{
 				$(elems[i]).show('fade')
+				var current_i = i
+				$(elems[i]).on('click', function() {
+					$('.current').val(current_i)
+					$('form').submit()
+				})
 				if($(elems[i]).is('video'))
 					elems[i].play()
 			}
 			$('.screen').scrollTop($('.screen').prop('scrollHeight'))
-			setTimeout(function() { show(i + 1, elems)}, wait_time)
+			setTimeout(function() { show(elems)}, wait_time)
 		}
+		i += 1
 	}
 
-	$('.script-link').on('click', function() {
-		window.location.replace('/story?script=' + encodeURI($('.script-input').val()))
-		window.location.replace()
+	$('.back').on('click', function() {
+		$(elems[i]).hide()
+		i -= 1
 	})
 
 	$('.screen').children('span, img, video').css('display', 'none')
-		elems = $('.screen').find('span, video, img')
-		show(0, elems)
-		move()
+	elems = $('.screen').find('span, video, img')
+	show(elems)
+	move()
 })
