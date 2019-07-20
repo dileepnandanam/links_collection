@@ -52,7 +52,7 @@ img, video {
 	margin-bottom: 20px;
 }
 
-.screen img, video, span {
+.screen img, .screen video, .screen span {
 	display: none;
 }
 span {
