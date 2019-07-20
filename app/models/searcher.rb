@@ -1,11 +1,11 @@
 class Searcher < ApplicationJob
   def perform(query)
     urls = [
-      #"https://www.pornhub.com/video/search?search=#{query.split(' ').join('+')}",
-      #"https://www.youtube.com/results?search_query=#{query.split(' ').join('+')}",
-      #"https://www.xnxx.com/search/#{query.split(' ').join('+')}",
-      #"https://www.pornhub.com/video/search?search=#{query.split(' ').join('+')}",
-      #"https://www.xvideos.com/?k=#{query.split(' ').join('+')}",
+      "https://www.pornhub.com/video/search?search=#{query.split(' ').join('+')}",
+      "https://www.youtube.com/results?search_query=#{query.split(' ').join('+')}",
+      "https://www.xnxx.com/search/#{query.split(' ').join('+')}",
+      "https://www.pornhub.com/video/search?search=#{query.split(' ').join('+')}",
+      "https://www.xvideos.com/?k=#{query.split(' ').join('+')}",
       "https://xhamster.com/search?q=#{query.split(' ').join('+')}"
     ]
     urls.each{ |url| fetch_links(url) }
