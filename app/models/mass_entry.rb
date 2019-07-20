@@ -20,6 +20,9 @@ class MassEntry
     elsif url.include? 'pornhub.com'
       name = Nokogiri::HTML(html).css('div.title-container').text.squish
       tags = Nokogiri::HTML(html).css('div.categoriesWrapper').css('a').map(&:text).join(' ').sub('+ Suggest', '')
+    elsif url.include? 'xhamster.com'
+      name = Nokogiri::HTML(html).css('h1').text.squish
+      tags = Nokogiri::HTML(html).css('ul.categories-container').css('a').map(&:text).join(' ').sub('+ Suggest', '')
     else
       name = Nokogiri::HTML(html).css('title')[0].text
         

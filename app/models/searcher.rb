@@ -1,11 +1,12 @@
 class Searcher < ApplicationJob
   def perform(query)
     urls = [
-      "https://www.pornhub.com/video/search?search=#{query.split(' ').join('+')}",
-      "https://www.youtube.com/results?search_query=#{query.split(' ').join('+')}",
-      "https://www.xnxx.com/search/#{query.split(' ').join('+')}",
-      "https://www.pornhub.com/video/search?search=#{query.split(' ').join('+')}",
-      "https://www.xvideos.com/?k=#{query.split(' ').join('+')}"
+      #"https://www.pornhub.com/video/search?search=#{query.split(' ').join('+')}",
+      #"https://www.youtube.com/results?search_query=#{query.split(' ').join('+')}",
+      #"https://www.xnxx.com/search/#{query.split(' ').join('+')}",
+      #"https://www.pornhub.com/video/search?search=#{query.split(' ').join('+')}",
+      #"https://www.xvideos.com/?k=#{query.split(' ').join('+')}",
+      "https://xhamster.com/search?q=#{query.split(' ').join('+')}"
     ]
     urls.each{ |url| fetch_links(url) }
   end
@@ -17,6 +18,7 @@ class Searcher < ApplicationJob
     urls = fetch_youtube_urls(url) if host.include?('youtube')
     urls = fetch_pornhub_urls(url) if host.include?('pornhub')
     urls = fetch_xvideos_urls(url) if host.include?('xvideos')
+    urls = fetch_xhamster_urls(url) if host.include?('xhamster')
     urls.each do |u|
       uri = URI.parse(u)
       Link.create url: uri.host.blank? ? "#{URI.parse(url).scheme}://#{URI.parse(url).host}#{u}" : u
@@ -31,6 +33,18 @@ class Searcher < ApplicationJob
   def fetch_xnxx_urls(url)
     html = Nokogiri::HTML(Net::HTTP.get_response(URI.parse(url)).response.body)
     urls = html.css('div.thumb a').map{|link| "https://xnxx.com#{link['href']}"}
+    urls.map do |url|
+      resp = Net::HTTP.get_response(URI.parse(url)).response
+      case resp
+        when Net::HTTPSuccess     then url
+        when Net::HTTPRedirection then resp['location']
+      end
+    end
+  end
+
+  def fetch_xhamster_urls(url)
+    html = Nokogiri::HTML(Net::HTTP.get_response(URI.parse(url)).response.body)
+    urls = html.css('a.video-thumb__image-container').map{|link| link['href']}
     urls.map do |url|
       resp = Net::HTTP.get_response(URI.parse(url)).response
       case resp

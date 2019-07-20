@@ -5,6 +5,7 @@ class EmbedUrlFetcher < ApplicationJob
     get_pornhub_data
     get_youtube_url
     get_xvideos_data
+    get_xhamster_data
     @link.source_url
   end
 
@@ -28,6 +29,23 @@ class EmbedUrlFetcher < ApplicationJob
       end
       name, tags = MassEntry.with_info(@link.url, html) if [name, tags].any?(&:blank?)
       video_url = html.match(/setVideoUrlLow\('(.*)'\)/)[1]
+    else
+      return
+    end
+    @link.update_attributes(name: name, tags: tags, source_url: video_url)
+  end
+
+  def get_xhamster_data
+    host = URI.parse(@link.url.chomp).host
+    if host.include? 'xhamster.com'
+      html = Net::HTTP.get_response(URI.parse(@link.url)).response.body
+      if html.include?('Sorry, this URL is outdated')
+        @link.url = 'https://www.xhamster.com' + html.match(/Url : (.*) /)[1].split(' ').first
+        get_xhamster_data
+        return
+      end
+      name, tags = MassEntry.with_info(@link.url, html) if [name, tags].any?(&:blank?)
+      video_url = html.match(/embedUrl":"(.*)"/)[1][0..33]
     else
       return
     end
