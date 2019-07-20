@@ -6,15 +6,26 @@
 .screen::-webkit-scrollbar { width: 0 !important }
 .screen {
 	scroll-behavior: smooth;
-	overflow: auto;
+	overflow: hidden;
 	width: 95%;
 	height: 600px;
 	font-size: 30px;
 	background-image: linear-gradient(black, blue);
-	padding: 20px;
 	background-size: cover;
 	display: inline-block;
 	position: relative;
+}
+.background {
+	background-color: rgba(0,0,0,0.3);
+	height: 92%;
+	width: 100%;
+	position: fixed;
+}
+.story-text {
+	background: rgba(0,0,0,0.4);
+	padding: 20px;
+	position: absolute;
+	width: 100%;
 }
 .screen h1 {
 	width: 100%;
