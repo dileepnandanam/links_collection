@@ -7,7 +7,7 @@
 .screen {
 	scroll-behavior: smooth;
 	overflow: hidden;
-	width: 95%;
+	width: 100%;
 	height: 600px;
 	font-size: 30px;
 	background-image: linear-gradient(black, blue);
@@ -104,9 +104,12 @@ span {
 	color: red;
 	text-align: right;
 	position: absolute;
-	bottom: 0;
+	bottom: 0px;
 	width: 100%;
 	padding: 0px 32px 0px 0px;
+}
+.content {
+	float: right;
 }
 .script-input {
 	margin: 30px !important;

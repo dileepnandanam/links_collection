@@ -53,7 +53,8 @@ $(document).on('turbolinks:load', function() {
 					stop = true
 			}
 			else if (type == 'inst') {
-				$('.inst').html($(elems[i]).data('inst'))
+				$('.inst .content').html($(elems[i]).data('inst'))
+				$('.inst').css('top', $('.story-text').css('height'))
 				$('.inst').show('fast')
 				setTimeout(hideInst, 2500)
 			}
