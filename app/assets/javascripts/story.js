@@ -23,7 +23,7 @@ $(document).on('turbolinks:load', function() {
 	}
 
 	hideInst = function() {
-		$('.inst').hide('slow')
+		$('.inst').hide('fade')
 	}
 
 	show = function(elems) {
@@ -33,7 +33,7 @@ $(document).on('turbolinks:load', function() {
 			if (type == 'clrscr')
 				$('.screen').find('span, img, video').css('display', 'none')
 			else if (type == 'bg')
-				$('.screen').css('background-image', 'url(' + $(elems[i]).data('src') + ')')
+				$('.screen-cont').css('background-image', 'url(' + $(elems[i]).data('src') + ')')
 			else if (type == 'wait')
 				wait_time = parseInt($(elems[i]).data('wait'))
 			else if (type == 'mode') { 
@@ -54,8 +54,7 @@ $(document).on('turbolinks:load', function() {
 			}
 			else if (type == 'inst') {
 				$('.inst .content').html($(elems[i]).data('inst'))
-				$('.inst').css('top', $('.story-text').css('height'))
-				$('.inst').show('fast')
+				$('.inst').show('fade')
 				setTimeout(hideInst, 2500)
 			}
 			else if ($(elems[i]).data('type') == 'br')

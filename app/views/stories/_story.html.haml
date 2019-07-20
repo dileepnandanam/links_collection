@@ -2,15 +2,14 @@
   = @current || 0
 = link_to 'edit', edit_story_path(@story)
 .cont
-  .screen
-    .watermark
-      അശ്ലീലസാഹിത്യം
+  .screen-cont
+    .screen
+      .watermark
+        അശ്ലീലസാഹിത്യം
+      .story-text
+        = @story.text.gsub(/\n/, ' | ').split(' ').map{|e| handle_story_element(e)}.join(' ').html_safe
     .inst
       .content
-    .story-text
-      = @story.text.gsub(/\n/, ' | ').split(' ').map{|e| handle_story_element(e)}.join(' ').html_safe
-    
-  
   .fabar
     .mvbar
   %br

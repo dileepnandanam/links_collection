@@ -4,16 +4,21 @@
 	float: left;
 }
 .screen::-webkit-scrollbar { width: 0 !important }
+.screen-cont {
+	width: 95%;
+	height: 600px;
+	background-image: linear-gradient(black, blue);
+	background-size: cover;
+	display: inline-block;
+}
 .screen {
 	scroll-behavior: smooth;
 	overflow: hidden;
 	width: 100%;
-	height: 600px;
+	height: 92%;
 	font-size: 30px;
-	background-image: linear-gradient(black, blue);
-	background-size: cover;
-	display: inline-block;
 	position: relative;
+	float: left;
 }
 .background {
 	background-color: rgba(0,0,0,0.3);
@@ -101,10 +106,8 @@ span {
 }
 .inst {
 	font-size: 30px;
-	color: red;
+	color: yellow;
 	text-align: right;
-	position: absolute;
-	bottom: 0px;
 	width: 100%;
 	padding: 0px 32px 0px 0px;
 }
