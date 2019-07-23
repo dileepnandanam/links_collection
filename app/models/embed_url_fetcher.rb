@@ -72,7 +72,7 @@ class EmbedUrlFetcher < ApplicationJob
   def get_pornhub_data
     host = URI.parse(@link.url.chomp).host
     if host.include? 'pornhub.'
-      html = Net::HTTP.get_response(URI.parse(@link.url)).response.body
+      html = Net::HTTP.get_response(URI.parse(@link.url.sub('.org', '.com'))).response.body
       name, tags = MassEntry.with_info(@link.url, html) if [name, tags].any?(&:blank?)
     else
       return
