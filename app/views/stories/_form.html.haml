@@ -1,5 +1,9 @@
+%script{ type: "text/javascript", src: "http://www.google.com/jsapi" }
+= render partial: 'google_ipt'
 .input
   = simple_form_for(@story) do |f|
-    = f.input :text
+    = f.input :text, input_html: {id: 'language'}
     = f.submit
     = f.hidden_field :current, value: (params[:current] || @story.current || 0), class: 'current'
+    = link_to 'toggle transliteration', '#', class: 'toggle_t', data: { remote: true }
+    .controll#translControl
