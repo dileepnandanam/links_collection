@@ -11,7 +11,7 @@ class EmbedUrlFetcher < ApplicationJob
 
   def get_youtube_url
     host = URI.parse(@link.url.chomp).host
-    if host.include? 'youtube.com'
+    if host.include? 'youtube.'
       html = Net::HTTP.get_response(URI.parse(@link.url)).response.body
       name, tags = MassEntry.with_info(@link.url, html) if [name, tags].any?(&:blank?)
       @link.update_attributes(name: @link.name.present? ? @link.name : name, tags: (@link.tags.to_s + ' ' + tags).split(' ').uniq.join(' '), source_url: 'https://youtube.com/embed/' + @link.url.match(/v=(.*)/)[1])
@@ -20,7 +20,7 @@ class EmbedUrlFetcher < ApplicationJob
 
   def get_xvideos_data
     host = URI.parse(@link.url.chomp).host
-    if host.include? 'xvideos.com'
+    if host.include? 'xvideos.'
       html = Net::HTTP.get_response(URI.parse(@link.url)).response.body
       if html.include?('Sorry, this URL is outdated')
         @link.url = 'https://www.xvideos.com' + html.match(/Url : (.*) /)[1].split(' ').first
@@ -37,7 +37,7 @@ class EmbedUrlFetcher < ApplicationJob
 
   def get_xhamster_data
     host = URI.parse(@link.url.chomp).host
-    if host.include? 'xhamster.com'
+    if host.include? 'xhamster.'
       html = Net::HTTP.get_response(URI.parse(@link.url)).response.body
       if html.include?('Sorry, this URL is outdated')
         @link.url = 'https://www.xhamster.com' + html.match(/Url : (.*) /)[1].split(' ').first
@@ -54,7 +54,7 @@ class EmbedUrlFetcher < ApplicationJob
 
   def get_xnxx_data
     host = URI.parse(@link.url.chomp).host
-    if host.include? 'xnxx.com'
+    if host.include? 'xnxx.'
       html = Net::HTTP.get_response(URI.parse(@link.url)).response.body
       if html.include?('Sorry, this URL is outdated')
         @link.url = 'https://www.xnxx.com' + html.match(/Url : (.*) /)[1].split(' ').first
@@ -71,7 +71,7 @@ class EmbedUrlFetcher < ApplicationJob
 
   def get_pornhub_data
     host = URI.parse(@link.url.chomp).host
-    if host.include? 'pornhub.com'
+    if host.include? 'pornhub.'
       html = Net::HTTP.get_response(URI.parse(@link.url)).response.body
       name, tags = MassEntry.with_info(@link.url, html) if [name, tags].any?(&:blank?)
     else
