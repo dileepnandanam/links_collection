@@ -16,8 +16,9 @@ $(document).on('turbolinks:load', function() {
 		if (!stop) {
 			if($('.mvbar').hasClass('stop'))
 				$('.mvbar').removeClass('stop', parseInt(period / 2))
-			else
+			else {
 				$('.mvbar').addClass('stop', parseInt(period / 2))
+			}
 		}
 		setTimeout(move, period / 2)
 	}
@@ -49,8 +50,11 @@ $(document).on('turbolinks:load', function() {
 					$('.mvbar').removeClass('hard')
 					$('.mvbar').addClass(mode, 300)
 				}
-				else
+				else {
+
+					$('.mvbar').addClass('stop', 300)
 					stop = true
+				}
 			}
 			else if (type == 'inst') {
 				$('.inst .content').html($(elems[i]).data('inst'))

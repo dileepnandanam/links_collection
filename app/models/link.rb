@@ -3,13 +3,20 @@ class Link < ApplicationRecord
   validates :url, presence: true
   validates :url, uniqueness: true
 
+  before_validation :move_top
+
   after_create :generate_source_url, unless: :lazy
 
   default_scope -> {where(hidden: false)}
-  scope :normal, -> {where("tags NOT LIKE '%#{'dik'.reverse}%'").order('created_at DESC')}
+  scope :normal, -> {where("tags NOT LIKE '%#{'dik'.reverse}%'").order('updated_at DESC')}
   scope :with_orientation, -> (orientation) {
     orientation == 'straight' || orientation.blank? ? where("not(name ~* 'gay') and not(url ~* 'gay') and not(tags ~* 'gay')") : where("name ~* '#{orientation}' or url ~* '#{orientation}' or tags ~* '#{orientation}'")
   }
+
+  def move_top
+    Link.where(url: self.url).first.try(:touch)
+  end
+
   def self.search(q, orientation = nil)
     if match_stmt(q).blank?
       Link.where('1 = 2')

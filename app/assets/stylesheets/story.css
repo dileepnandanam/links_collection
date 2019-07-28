@@ -1,11 +1,12 @@
 .cont {
 	margin: 30px;
-	width: 60%;
+	width: 450px;
 	float: left;
+	height: 900px;
 }
 .screen::-webkit-scrollbar { width: 0 !important }
 .screen-cont {
-	width: 95%;
+	width: 92%;
 	height: 600px;
 	background-image: linear-gradient(black, blue);
 	background-size: cover;
