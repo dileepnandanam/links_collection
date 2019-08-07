@@ -17,14 +17,14 @@ class Link < ApplicationRecord
     Link.where(url: self.url).first.try(:touch)
   end
 
-  def self.search(q, orientation = nil)
+  def self.search(q, orientation = nil, order= 'DESC')
     if match_stmt(q).blank?
       Link.where('1 = 2')
     else
       Link.with_orientation(orientation)
         .select("#{Link.new.attributes.keys.join(', ')}, (#{match_stmt(q)}) as match_count")
         .where("#{match_stmt(q)} > 0")
-        .order('match_count, created_at DESC')
+        .order("match_count, created_at #{order}")
     end
   end
 

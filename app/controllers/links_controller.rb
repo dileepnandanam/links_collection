@@ -18,7 +18,7 @@ class LinksController < ApplicationController
 
   def search
     if params[:q].present?
-      @links = Link.search(params[:q], orientation).order('created_at DESC').paginate(page: params[:page], per_page: 8)
+      @links = Link.search(params[:q], orientation, params[:order]).paginate(page: params[:page], per_page: 8)
       @count = Link.search_count params[:q]
       #if @links.blank? || @links.next_page.blank?
       if params[:crawl].present?  
