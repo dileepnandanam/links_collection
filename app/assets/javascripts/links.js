@@ -114,7 +114,7 @@ $(document).on('turbolinks:load', function() {
 		}
 	}
 
-	$(document).on('ajax:success', '.toggle-visibility', function(e) {
+	$(document).on('ajax:success', '.toggle-visibility, .fav', function(e) {
 		$(this).closest('.admin-actions').replaceWith(e.detail[2].responseText)
 	})
 

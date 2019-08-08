@@ -21,7 +21,7 @@ class LinksController < ApplicationController
       @links = Link.search(params[:q], orientation, params[:order]).paginate(page: params[:page], per_page: 8)
       @count = Link.search_count params[:q]
       #if @links.blank? || @links.next_page.blank?
-      if params[:crawl].present?  
+      if params[:crawl].present?
         Searcher.perform_later params[:q] 
       elsif params[:random].present?
         @links = Link.normal.with_orientation(orientation).order(Arel.new('random()')).limit(8).paginate(per_page: 8, page: 1)
@@ -38,6 +38,19 @@ class LinksController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  def mark_fav
+    if current_user.admin?
+      @link = Link.unscoped.find(params[:id])
+      @link.update(favourite: !@link.favourite)
+      render 'hide', layout: false
+    end
+  end
+
+  def favourite
+    @links = Link.favourite.paginate(per_page: 8, page: params[:page])
+    @count = Link.favourite.count
   end
 
   def create

@@ -8,6 +8,7 @@ class Link < ApplicationRecord
   after_create :generate_source_url, unless: :lazy
 
   default_scope -> {where(hidden: false)}
+  scope :favourite, -> {where('favourite = true')}
   scope :normal, -> {where("tags NOT LIKE '%#{'dik'.reverse}%'").order('updated_at DESC')}
   scope :with_orientation, -> (orientation) {
     orientation == 'straight' || orientation.blank? ? where("not(name ~* 'gay') and not(url ~* 'gay') and not(tags ~* 'gay')") : where("name ~* '#{orientation}' or url ~* '#{orientation}' or tags ~* '#{orientation}'")

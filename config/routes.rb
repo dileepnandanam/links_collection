@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     put :unhide, on: :member
     get :hidden, on: :collection
     put :untag, on: :member
+    put :mark_fav, on: :member
+    get :favourite, on: :collection
   end
 
   resources :stories
