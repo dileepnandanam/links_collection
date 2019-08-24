@@ -20,7 +20,7 @@ class LinksController < ApplicationController
   def search
     if params[:q].present?
       @links = Link.search(params[:q], orientation, params[:order]).paginate(page: params[:page], per_page: 8)
-      @count = Link.search_count params[:q]
+      @count = Link.search_count params[:q], orientation
       #if @links.blank? || @links.next_page.blank?
       if params[:crawl].present?
         Searcher.perform_later params[:q] 
@@ -119,6 +119,7 @@ class LinksController < ApplicationController
 
   def orientation
     @orientation = cookies[:orientation]
+    @orientation
   end
 
   def set_orientation

@@ -19,9 +19,9 @@
       .search.white.pull-left
         = text_field_tag 'search', nil, placeholder: 'Search', data: {url: search_links_path(page: 1)}
       .orientation.pull-left
-        = link_to 'straight', root_path(orientation: 'straight')
-        = link_to 'lesbian', root_path(orientation: 'lesbian')
-        = link_to 'gay', root_path(orientation: 'gay')
+        = link_to 'straight', root_path(orientation: 'straight'), class: @orientation == 'straight' || @orientation.blank? ? 'current_orientation' : ''
+        = link_to 'lesbian', root_path(orientation: 'lesbian'), class: @orientation == 'lesbian' ? 'current_orientation' : ''
+        = link_to 'gay', root_path(orientation: 'gay'), class: @orientation == 'gay' ? 'current_orientation' : ''
     .common-bg.white
       - if flash[:notice].present?
         .flash

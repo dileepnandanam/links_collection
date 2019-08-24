@@ -11,7 +11,7 @@ class Link < ApplicationRecord
   scope :favourite, -> {where('favourite = true')}
   scope :normal, -> {where("COALESCE(tags, '') NOT LIKE '%#{'dik'.reverse}%'").order('updated_at DESC')}
   scope :with_orientation, -> (orientation) {
-    orientation == 'straight' || orientation.blank? ? where("not(COALESCE(name, '') LIKE '%gay%') and not(COALESCE(url, '') LIKE '%gay%') and not(COALESCE(tags, '')  LIKE '%ay%')") : where("name ~* '#{orientation}' or url ~* '#{orientation}' or tags ~* '#{orientation}'")
+    orientation == 'straight' || orientation.blank? ? where("not(COALESCE(name, '') LIKE '%gay%') and not(COALESCE(url, '') LIKE '%gay%') and not(COALESCE(tags, '')  LIKE '%gay%')") : where("name ~* '#{orientation}' or url ~* '#{orientation}' or tags ~* '#{orientation}'")
   }
 
   def move_top
@@ -19,24 +19,25 @@ class Link < ApplicationRecord
   end
 
   def self.search(q, orientation = nil, order= 'DESC')
-    if match_stmt(q).blank?
+    if match_stmt(q, '')[0].blank?
       Link.where('1 = 2')
     else
       Link.with_orientation(orientation)
-        .select("#{Link.new.attributes.keys.join(', ')}, (#{match_stmt(q)}) as match_count")
-        .where("#{match_stmt(q)} > 0")
-        .order("match_count, created_at #{order}")
+        .select("#{Link.new.attributes.keys.join(', ')}")
+        .where(['name', 'url', 'tags'].map{|att| "#{match_stmt(q, att)[0]} >= #{match_stmt(q, att)[1]}"}.join(' OR '))
+        .order("updated_at #{order}")
     end
   end
 
   def self.search_count(q, orientation = nil)
-    Link.with_orientation(orientation).where("#{match_stmt(q)} > 0").order('match_count, created_at DESC').count
+    Link.with_orientation(orientation).where(['name', 'url', 'tags'].map{|att| "#{match_stmt(q, att)[0]} >= #{match_stmt(q, att)[1]}"}.join(' OR ')).count
   end
 
-  def self.match_stmt(q)
+  def self.match_stmt(q, column)
     stop_words.each{|sw| q.gsub!(Regexp.new("[$\s]#{sw}[\s^]", 'i'), '')}
-    match_stmt_str = q.split(/[\s,:;\-\(\)\.\/]/).select{|w| w.length > 1}.map{|w| "(name LIKE '%#{w}%')::int + (url LIKE '%#{w}%')::int + (tags LIKE '%#{w}%')::int"}.join(' + ')
-    match_stmt_str.present? ? match_stmt_str : "id"
+    keys = q.split(/[\s,:;\-\(\)\.\/]/).select{|w| w.length > 1}
+    match_stmt_str = keys.map{|w| "COALESCE((LOWER(#{column}) LIKE '%#{w.downcase}%'), FALSE)::int"}.join(' + ')
+    match_stmt_str.present? ? [match_stmt_str, keys.count] : "id"
   end
 
   def self.stop_words
