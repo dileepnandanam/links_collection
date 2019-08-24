@@ -11,6 +11,7 @@ class LinksController < ApplicationController
         Searcher.perform_later params[:q] 
       end
     else
+
       @links = Link.normal.with_orientation(orientation).limit(8).paginate(per_page: per_page, page: 1)
       @count = Link.normal.with_orientation(orientation).count
     end

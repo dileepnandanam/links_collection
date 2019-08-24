@@ -12,9 +12,10 @@
           .youtube-container
             %iframe{src: link.source_url.to_s, height: 315, width: 560}
             
-        - elsif link.url.include? 'youtube.'
+        - else link.url.include? 'youtube.'
           .youtube-container
             = youtube_embed_code(link.source_url.to_s.split('&').first)
+
     .tags
       - link.tags.to_s.split(' ').select(&:present?).uniq.each do |tag|
         = link_to root_path(q: tag), class: 'tag pull-left' do

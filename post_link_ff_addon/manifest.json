@@ -16,6 +16,6 @@
     "<all_urls>"
   ],
   "browser_action": {
-    "default_title": "Save Link to X-links"
+    "default_title": "Save Link to CodeGasm"
   }
 }

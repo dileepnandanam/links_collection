@@ -9,9 +9,9 @@ class Link < ApplicationRecord
 
   default_scope -> {where(hidden: false)}
   scope :favourite, -> {where('favourite = true')}
-  scope :normal, -> {where("tags NOT LIKE '%#{'dik'.reverse}%'").order('updated_at DESC')}
+  scope :normal, -> {where("COALESCE(tags, '') NOT LIKE '%#{'dik'.reverse}%'").order('updated_at DESC')}
   scope :with_orientation, -> (orientation) {
-    orientation == 'straight' || orientation.blank? ? where("not(name ~* 'gay') and not(url ~* 'gay') and not(tags ~* 'gay')") : where("name ~* '#{orientation}' or url ~* '#{orientation}' or tags ~* '#{orientation}'")
+    orientation == 'straight' || orientation.blank? ? where("not(COALESCE(name, '') LIKE '%gay%') and not(COALESCE(url, '') LIKE '%gay%') and not(COALESCE(tags, '')  LIKE '%ay%')") : where("name ~* '#{orientation}' or url ~* '#{orientation}' or tags ~* '#{orientation}'")
   }
 
   def move_top
@@ -35,7 +35,7 @@ class Link < ApplicationRecord
 
   def self.match_stmt(q)
     stop_words.each{|sw| q.gsub!(Regexp.new("[$\s]#{sw}[\s^]", 'i'), '')}
-    match_stmt_str = q.split(/[\s,:;\-\(\)\.\/]/).select{|w| w.length > 1}.map{|w| "(name ~* '#{w}')::int + (url ~* '#{w}')::int + (tags ~* '#{w}')::int"}.join(' + ')
+    match_stmt_str = q.split(/[\s,:;\-\(\)\.\/]/).select{|w| w.length > 1}.map{|w| "(name LIKE '%#{w}%')::int + (url LIKE '%#{w}%')::int + (tags LIKE '%#{w}%')::int"}.join(' + ')
     match_stmt_str.present? ? match_stmt_str : "id"
   end
 
