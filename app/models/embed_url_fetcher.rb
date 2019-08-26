@@ -13,7 +13,7 @@ class EmbedUrlFetcher < ApplicationJob
     host = URI.parse(@link.url.chomp).host
     if host.include? 'youtube.'
       html = Net::HTTP.get_response(URI.parse(@link.url)).response.body
-      name, tags = MassEntry.with_info(@link.url, html) if [name, tags].any?(&:blank?)
+      name, tags = MassEntry.with_info(@link.url, html)
       @link.update_attributes(name: @link.name.present? ? @link.name : name, tags: (@link.tags.to_s + ' ' + tags).split(' ').uniq.join(' '), source_url: 'https://youtube.com/embed/' + @link.url.match(/v=(.*)/)[1])
     end
   end
@@ -27,7 +27,7 @@ class EmbedUrlFetcher < ApplicationJob
         get_xvideos_data
         return
       end
-      name, tags = MassEntry.with_info(@link.url, html) if [name, tags].any?(&:blank?)
+      name, tags = MassEntry.with_info(@link.url, html)
       video_url = html.match(/setVideoUrlLow\('(.*)'\)/)[1]
     else
       return
@@ -44,7 +44,7 @@ class EmbedUrlFetcher < ApplicationJob
         get_xhamster_data
         return
       end
-      name, tags = MassEntry.with_info(@link.url, html) if [name, tags].any?(&:blank?)
+      name, tags = MassEntry.with_info(@link.url, html)
       video_url = html.match(/embedUrl":"(.*)"/)[1][0..33]
     else
       return
@@ -61,7 +61,7 @@ class EmbedUrlFetcher < ApplicationJob
         get_xnxx_data
         return
       end
-      name, tags = MassEntry.with_info(@link.url, html) if [name, tags].any?(&:blank?)
+      name, tags = MassEntry.with_info(@link.url, html)
       video_url = html.match(/setVideoUrlLow\('(.*)'\)/)[1]
     else
       return
@@ -73,7 +73,7 @@ class EmbedUrlFetcher < ApplicationJob
     host = URI.parse(@link.url.chomp).host
     if host.include? 'pornhub.'
       html = Net::HTTP.get_response(URI.parse(@link.url.sub('.org', '.com'))).response.body
-      name, tags = MassEntry.with_info(@link.url, html) if [name, tags].any?(&:blank?)
+      name, tags = MassEntry.with_info(@link.url, html)
     else
       return
     end

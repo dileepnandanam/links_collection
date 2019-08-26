@@ -3,7 +3,7 @@ class LinksController < ApplicationController
   before_action :set_orientation, only: [:index, :search]
   def index
     @link = Link.new
-    per_page = bot_request? ? 100 : 8
+    per_page = bot_request? ? 400 : 8
     if params[:q].present?
       @links = Link.search(params[:q], orientation).paginate(page: params[:page], per_page: per_page)
       @count = Link.search_count params[:q], orientation
@@ -18,19 +18,23 @@ class LinksController < ApplicationController
   end
 
   def search
-    if params[:q].present?
-      @links = Link.search(params[:q], orientation, params[:order]).paginate(page: params[:page], per_page: 8)
-      @count = Link.search_count params[:q], orientation
-      #if @links.blank? || @links.next_page.blank?
-      if params[:crawl].present?
-        Searcher.perform_later params[:q] 
-      elsif params[:random].present?
-        @links = Link.normal.with_orientation(orientation).order(Arel.new('random()')).limit(8).paginate(per_page: 8, page: 1)
-      end
+    if request.format.html?
+      redirect_to root_path(q: params[:q])
     else
-      @links = Link.normal.with_orientation(orientation).paginate(per_page: 8, page: params[:page])
+      if params[:q].present?
+        @links = Link.search(params[:q], orientation, params[:order]).paginate(page: params[:page], per_page: 8)
+        @count = Link.search_count params[:q], orientation
+        #if @links.blank? || @links.next_page.blank?
+        if params[:crawl].present?
+          Searcher.perform_later params[:q] 
+        elsif params[:random].present?
+          @links = Link.normal.with_orientation(orientation).order(Arel.new('random()')).limit(8).paginate(per_page: 8, page: 1)
+        end
+      else
+        @links = Link.normal.with_orientation(orientation).paginate(per_page: 8, page: params[:page])
+      end
+      render 'search', layout: false
     end
-    render 'search', layout: false
   end
 
   def hidden
@@ -73,7 +77,7 @@ class LinksController < ApplicationController
 
   def tag
     link = Link.find(params[:id])
-    new_tagset = link.tags + ' ' + params[:value]
+    new_tagset = link.tags.to_s + ' ' + params[:value]
     link.update(tags: new_tagset)
   end
 

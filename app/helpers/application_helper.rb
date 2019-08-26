@@ -15,4 +15,16 @@ module ApplicationHelper
     user_agent =  request.env['HTTP_USER_AGENT'].downcase
     user_agent.index('googlebot')
   end
+
+  def intel_title
+    teaser = nil
+    teaser = "Home made #{params[:q]}" if params[:q].present?
+    [teaser.to_s, "#{@links.try(:first).try(:name) || 'codegasm '}"].join(' ')
+  end
+
+  def result_description
+    if bot_request?
+      "<h1 class='name'>Real Homemade #{params[:q]}</h1> <a class='name'> #{params[:q]} at its best</a>"
+    end
+  end
 end

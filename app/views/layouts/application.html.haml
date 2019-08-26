@@ -5,13 +5,14 @@
     %meta{ :name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
     %meta{ :name=>"google-site-verification", :content=>"RTn56zwPNTl1Q8QG8ENW3Ipd9aQd7znmDNaCRgcxVtc"}
     %meta{ :name=>"Description", :content=> ::TextRecord.where(name: 'meta_desc').first.value}
-    %title CodeGasm|video links collection
+    %title= "#{intel_title}| Rons Best Collection"
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = render partial: 'layouts/tracker'
   %body
+    = raw result_description
     .nav-bar
       = link_to '/', class: 'site-text' do
         %h2.pull-left.site-header
