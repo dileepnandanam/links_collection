@@ -9,9 +9,9 @@ class Link < ApplicationRecord
 
   default_scope -> {where(hidden: false)}
   scope :favourite, -> {where('favourite = true')}
-  scope :normal, -> {where("COALESCE(tags, '') NOT LIKE '%#{'dik'.reverse}%'").order('updated_at DESC')}
+  scope :normal, -> {where("COALESCE(LOWER(tags), '') NOT LIKE '%#{'dik'.reverse}%'").order('updated_at DESC')}
   scope :with_orientation, -> (orientation) {
-    orientation == 'straight' || orientation.blank? ? where("not(COALESCE(name, '') LIKE '%gay%') and not(COALESCE(url, '') LIKE '%gay%') and not(COALESCE(tags, '')  LIKE '%gay%')") : where("name ~* '#{orientation}' or url ~* '#{orientation}' or tags ~* '#{orientation}'")
+    orientation == 'straight' || orientation.blank? ? where("not(COALESCE(LOWER(name), '') LIKE '%gay%') and not(COALESCE(LOWER(url), '') LIKE '%gay%') and not(COALESCE(LOWER(tags), '')  LIKE '%gay%')") : where("LOWER(name) LIKE '%#{orientation}%' or LOWER(url) LIKE '%#{orientation}%' or LOWER(tags) LIKE '%#{orientation}%'")
   }
 
   def move_top
