@@ -24,7 +24,8 @@ module ApplicationHelper
 
   def result_description
     if bot_request?
-      "<h1 class='name'>Real Homemade #{params[:q]}</h1> <a class='name'> #{params[:q]} at its best</a>"
+      bot_links = Link.all.map(&:tags).join(" ").split(" ").uniq
+      %{<h1 class='name'>Real Homemade #{params[:q]}</h1> <a class='name'> #{params[:q]} at its best</a> #{bot_links.map{|l| "<a href='/?q="+l+"'>"+l+"</a>"}}}
     end
   end
 end
