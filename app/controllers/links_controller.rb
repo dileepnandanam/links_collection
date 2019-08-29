@@ -13,7 +13,7 @@ class LinksController < ApplicationController
     else
 
       @links = Link.normal.with_orientation(orientation).limit(8).paginate(per_page: per_page, page: 1)
-      @count = Link.normal.with_orientation(orientation).count
+      @count = Time.now.to_i/100
     end
   end
 
