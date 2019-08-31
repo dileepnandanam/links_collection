@@ -16,7 +16,7 @@
 	scroll-behavior: smooth;
 	overflow: hidden;
 	width: 100%;
-	height: 92%;
+	height: 86%;
 	font-size: 30px;
 	position: relative;
 	float: left;
@@ -107,7 +107,7 @@ span {
 	height: 600px !important;
 }
 .inst {
-	font-size: 30px;
+	font-size: 23px;
 	color: yellow;
 	text-align: right;
 	width: 100%;
