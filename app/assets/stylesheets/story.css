@@ -55,6 +55,7 @@ img, video {
 
 .screen img, .screen video, .screen span {
 	display: none;
+	font-size: 23px;
 }
 span {
 	margin-left: 12px;
