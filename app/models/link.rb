@@ -3,7 +3,6 @@ class Link < ApplicationRecord
   validates :url, presence: true
   validates :url, uniqueness: true
 
-  before_validation :move_top
 
   after_create :generate_source_url, unless: :lazy
 
@@ -14,8 +13,16 @@ class Link < ApplicationRecord
     orientation == 'straight' || orientation.blank? ? where("not(COALESCE(LOWER(name), '') LIKE '%gay%') and not(COALESCE(LOWER(url), '') LIKE '%gay%') and not(COALESCE(LOWER(tags), '')  LIKE '%gay%')") : where("LOWER(name) LIKE '%#{orientation}%' or LOWER(url) LIKE '%#{orientation}%' or LOWER(tags) LIKE '%#{orientation}%'")
   }
 
-  def move_top
-    Link.where(url: self.url).first.try(:touch)
+  def self.move_top(url)
+    existing = Link.where(url: url).first
+    if existing.present?
+      if existing.tags.to_s.include?('0')
+        existing.tags.match(/(0+)/)
+        existing.update(tags: existing.tags.gsub(/(0+)/, $1 + '0'))
+      else
+        existing.update(tags: existing.tags.to_s + ' 10')
+      end
+    end
   end
 
   def self.search(q, orientation = nil, order= 'DESC')

@@ -14,7 +14,7 @@ class EmbedUrlFetcher < ApplicationJob
     if host.include? 'youtube.'
       html = Net::HTTP.get_response(URI.parse(@link.url)).response.body
       name, tags = MassEntry.with_info(@link.url, html)
-      @link.update_attributes(name: @link.name.present? ? @link.name : name, tags: (@link.tags.to_s + ' ' + tags).split(' ').uniq.join(' '), source_url: 'https://youtube.com/embed/' + @link.url.match(/v=(.*)/)[1])
+      @link.update_attributes(name: @link.name.present? ? @link.name : name, tags: "#{@link.tags} #{tags}", source_url: 'https://youtube.com/embed/' + @link.url.match(/v=(.*)/)[1])
     end
   end
 
@@ -32,7 +32,7 @@ class EmbedUrlFetcher < ApplicationJob
     else
       return
     end
-    @link.update_attributes(name: name, tags: tags, source_url: video_url)
+    @link.update_attributes(name: name, tags: "#{@link.tags} #{tags}", source_url: video_url)
   end
 
   def get_xhamster_data
@@ -49,7 +49,7 @@ class EmbedUrlFetcher < ApplicationJob
     else
       return
     end
-    @link.update_attributes(name: name, tags: tags, source_url: video_url)
+    @link.update_attributes(name: name, tags: "#{@link.tags} #{tags}", source_url: video_url)
   end
 
   def get_xnxx_data
@@ -66,7 +66,7 @@ class EmbedUrlFetcher < ApplicationJob
     else
       return
     end
-    @link.update_attributes(name: name, tags: tags, source_url: video_url)
+    @link.update_attributes(name: name, tags: "#{@link.tags} #{tags}", source_url: video_url)
   end
 
   def get_pornhub_data
@@ -78,6 +78,6 @@ class EmbedUrlFetcher < ApplicationJob
       return
     end
     video_url = Nokogiri::HTML(html).css('meta[name="twitter:player"]').attr('content').value
-    @link.update_attributes(name: name, tags: tags, source_url: video_url)
+    @link.update_attributes(name: name, tags: "#{@link.tags} #{tags}", source_url: video_url)
   end
 end
