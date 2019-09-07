@@ -34,17 +34,21 @@
   margin-top: 13px;
 	display: inline-block;
 	line-height: normal;
-	background-image: linear-gradient(#232390, black);
   max-width: 200px;
-  overflow: hidden;
   text-overflow: ellipsis;
+  background: transparent;
+  border: 1px solid black;
+  color: black;
+  box-shadow: 6px 6px 17px black;
+  text-shadow: 0px 0px 12px yellow;
+}
+input.tag {
+  color: black;
+  background-color: white
+  width: 100px;
 }
 .tag:hover {
 	text-decoration: none;
-}
-input.tag {
-	width: 100px;
-	background-image: none;
 }
 .link {
 	margin-bottom: 20px;
@@ -117,9 +121,6 @@ iframe {
 .pagination {
 	display: inline !important;
 }
-.video-player {
-	height: 460px;
-}
 video:focus {
 
 	outline: none;
@@ -148,4 +149,29 @@ video:focus {
 .new-link:hover {
 	background-color: white;
 	text-decoration: none;
+}
+a.name {
+	color: black;
+	font-size: 32px;
+  text-shadow: 0px 0px 5px white;
+}
+a.name:hover {
+	color: yellow;
+	text-decoration: none;
+	text-shadow: 0px 0px 5px black;
+}
+.url {
+  color: #eceae3;
+  text-shadow: 0px 0px 21px black;
+}
+.url, .retry, .count, .new-link, .tag {
+	font-size: 22px;
+}
+.retry {
+  background-color: transparent;
+  padding: 6px;
+  border-radius: 12px 12px;
+  text-decoration: none;
+  color: black;
+  border: 2px solid black;
 }

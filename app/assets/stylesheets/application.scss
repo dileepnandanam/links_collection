@@ -36,7 +36,10 @@ a:hover {
 }
 body {
 	min-height: 100vh;
-    background-color: #3232a0;
+  background-image: url('https://wallpapercave.com/wp/BW05kLc.jpg');
+	background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
 }
 .nav-bar {
 	padding: 10px;
@@ -121,6 +124,7 @@ input[type='radio'] {
 .orientation a {
 	margin: 0px 12px 0px 12px;
 	color: red;
+	font-size: 21px;
 }
 .site-text, .site-text:hover {
 	color: black;
