@@ -44,7 +44,7 @@
 }
 input.tag {
   color: black;
-  background-color: white
+  background-color: white;
   width: 100px;
 }
 .tag:hover {
