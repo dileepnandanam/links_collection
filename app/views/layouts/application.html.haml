@@ -11,7 +11,7 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = render partial: 'layouts/tracker'
-  %body
+  %body{style: bg_style}
     = raw result_description
     .nav-bar
       = link_to '/', class: 'site-text' do

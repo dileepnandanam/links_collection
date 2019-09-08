@@ -28,4 +28,12 @@ module ApplicationHelper
       %{<h1 class='name'>Real Homemade #{params[:q]}</h1> <a class='name'> #{params[:q]} at its best</a> #{bot_links.map{|l| "<a class='tag' href='/?q="+l+"'>"+l+"</a>"}.join(' ')}}
     end
   end
+
+  def bg_style
+    if bot_request?
+      "background-color: yellow"
+    else
+      "background-image: url('https://wallpapercave.com/wp/BW05kLc.jpg');"
+    end
+  end
 end
