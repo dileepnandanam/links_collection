@@ -57,9 +57,6 @@
     	width: 94% !important;
     }
 }
-.search input {
-	border-radius: 5px;
-}
 .view-more-questions-container {
 	width: 100%;
 }
@@ -72,4 +69,8 @@
 .new-link {
 	margin-right: 12px;
 	float: right;
+}
+.search-field {
+  border-radius: 2px;
+  border: none;
 }
