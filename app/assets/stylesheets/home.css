@@ -57,6 +57,10 @@
     	width: 94% !important;
     }
 }
+.search input {
+  display: inline-block;
+  max-width: 56%;
+}
 .view-more-questions-container {
 	width: 100%;
 }
