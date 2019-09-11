@@ -66,7 +66,7 @@ class LinksController < ApplicationController
       @link.url.split(/[,\s\n]+/).select(&:present?).each do |url|
         uri = URI.parse url
         if uri.host.present?
-          link = Link.create(url: uri.host.blank? ? "#{URI.parse(url).scheme}://#{URI.parse(url).host}#{url}" : url)
+          link = Link.create(url: uri.host.blank? ? "#{URI.parse(url).scheme}://#{URI.parse(url).host}#{url}" : url, visitor_id: current_visitor.id)
           Link.move_top(link.url) unless link.valid?
         end
       end
