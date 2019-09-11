@@ -132,7 +132,7 @@ class LinksController < ApplicationController
   def lkjhgertyjnbvftyh
     render json: {
       date: Date.today,
-      queries: Query.where(created_at: (1.days.ago..Time.now)).group(:key).count.sort_by{|k, count| count}.reverse.to_h
+      queries: Hash[Query.where(created_at: (1.days.ago..Time.now)).group(:key).count.sort_by{|k, count| count.to_i}.reverse]
     }
   end
 
