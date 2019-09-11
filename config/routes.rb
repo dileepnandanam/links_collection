@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     put :untag, on: :member
     put :mark_fav, on: :member
     get :favourite, on: :collection
+    put :report, on: :member
   end
 
   resources :stories

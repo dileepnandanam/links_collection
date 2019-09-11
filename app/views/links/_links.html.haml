@@ -3,7 +3,8 @@
     = link_to link.url.chomp, class: 'name', target: '_blank' do
       %h2= h(link.name)
     = link_to URI.parse(link.url.chomp).host, link.url.chomp,  class: 'url pull-left', target: '_blank'
-    = link_to 'reload', retry_link_path(link), class: 'retry pull-right', remote: true, method: :put
+    = link_to 'reload', retry_link_path(link), class: 'link-action-user retry pull-right', remote: true, method: :put
+    = link_to 'REPORT', report_link_path(link), class: 'link-action-user report pull-right', remote: true, method: :put
     = render partial: 'hide', locals: {link: link}
     .clearfix
     - if true || link.source_url.present?
@@ -24,7 +25,8 @@
           = tag
           - if current_user.try :admin?
             = link_to 'x', untag_link_path(link, tag: tag), class: 'delete-tag', method: :put, remote: true
-      %input.tag.pull-left{data: {url: tag_link_path(link)}, placeholder: 'enter tag'}
+    .clearfix
+    %input.tag.pull-left{data: {url: tag_link_path(link)}, placeholder: 'enter tag'}
       
 - if links.next_page
   .more-links.load-random

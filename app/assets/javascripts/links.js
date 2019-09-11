@@ -96,6 +96,10 @@ $(document).on('turbolinks:load', function() {
 		$(this).siblings('.preview').find('video, iframe').prop('src', e.detail[2].responseText)
 	})
 
+	$(document).on('ajax:success', '.report', function(e) {
+		$(this).closest('.link').html('<h1 class="report-ack">Sorry for the bad experience. We will check the content in link and take necessary action. Help us keep this collection clean further. Thanks.</h1>')
+	})
+
 	$(document).on('ajax:success', '.load-random', function(e) {
 		$(this).replaceWith(e.detail[2].responseText)
 		//reloadMasonry()

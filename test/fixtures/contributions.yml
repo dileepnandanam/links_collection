@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contributable_type: MyString
+  contributable_id: 1
+  content: MyString
+
+two:
+  contributable_type: MyString
+  contributable_id: 1
+  content: MyString

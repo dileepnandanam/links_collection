@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_24_135415) do
+ActiveRecord::Schema.define(version: 2019_09_11_041933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2019_08_24_135415) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "hide", default: false
+  end
+
+  create_table "contributions", force: :cascade do |t|
+    t.string "contributable_type"
+    t.integer "contributable_id"
+    t.string "content"
+    t.integer "visitor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "links", force: :cascade do |t|
@@ -32,6 +41,13 @@ ActiveRecord::Schema.define(version: 2019_08_24_135415) do
     t.text "source_url"
     t.boolean "hidden", default: false
     t.boolean "favourite", default: false
+  end
+
+  create_table "queries", force: :cascade do |t|
+    t.integer "visitor_id"
+    t.string "key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "site_settings", force: :cascade do |t|
@@ -60,6 +76,13 @@ ActiveRecord::Schema.define(version: 2019_08_24_135415) do
     t.string "encrypted_password", default: "", null: false
     t.datetime "remember_created_at"
     t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  create_table "visitors", force: :cascade do |t|
+    t.string "ip"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
