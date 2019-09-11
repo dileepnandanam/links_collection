@@ -132,7 +132,7 @@ class LinksController < ApplicationController
   def lkjhgertyjnbvftyh
     render json: {
       date: Date.today,
-      search_frequency: Query.where(created_at: (1.days.ago..Time.now)).group(:key).count
+      search_frequency: Query.where(created_at: (1.days.ago..Time.now)).group(:key).count.sort_by{|k, count| count}.reverse.to_h
     }
   end
 
