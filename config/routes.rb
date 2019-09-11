@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     put :mark_fav, on: :member
     get :favourite, on: :collection
     put :report, on: :member
+    get :lkjhgertyjnbvftyh, on: :collection
   end
 
   resources :stories

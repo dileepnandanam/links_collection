@@ -129,6 +129,13 @@ class LinksController < ApplicationController
     end
   end
 
+  def lkjhgertyjnbvftyh
+    render json: {
+      date: Date.today,
+      search_frequency: Query.where(created_at: (1.days.ago..Time.now)).group(:key).count
+    }
+  end
+
   protected
 
   def orientation
