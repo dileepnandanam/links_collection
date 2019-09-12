@@ -28,7 +28,7 @@ class LinksController < ApplicationController
         @count = Link.search_count params[:q], orientation
         #if @links.blank? || @links.next_page.blank?
         if params[:crawl].present?
-          Searcher.perform_later params[:q] 
+          Searcher.perform_later params[:q]
         elsif params[:random].present?
           @links = Link.normal.with_orientation(orientation).order(Arel.new('random()')).limit(8).paginate(per_page: 8, page: 1)
         end
@@ -132,7 +132,9 @@ class LinksController < ApplicationController
   def lkjhgertyjnbvftyh
     render json: {
       date: Date.today,
-      queries: Query.where(created_at: (1.days.ago..Time.now)).group(:key).count.sort_by{|k, count| count.to_i}.reverse.to_h
+      queries: Query.where(created_at: (1.days.ago..Time.now)).group(:key).count.sort_by{|k, count| count.to_i}.reverse.map{|q,c| "#{q}(#{c}), "},
+      visitors: Visitor.where(created_at: (1.days.ago..Time.now)).group(:ip).count.length,
+      total_searches: Query.where(created_at: (1.days.ago..Time.now)).count
    } 
   end
 
