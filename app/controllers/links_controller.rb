@@ -132,6 +132,12 @@ class LinksController < ApplicationController
   def lkjhgertyjnbvftyh
     render json: {
       date: Date.today,
+      counts: {
+        gay: Link.search_count('gay', 'gay'),
+        lesbian: Link.search_count('lesb', 'lesb'),
+        total: Link.count,
+        uploaded_today: Link.where(updated_at: (1.days.ago..Time.now)).count
+      },
       visitors: Visitor.where(created_at: (1.days.ago..Time.now)).group(:ip).count.length,
       all_time_visitors: Visitor.group(:ip).count.length,
       total_searches: Query.where(created_at: (1.days.ago..Time.now)).count,
