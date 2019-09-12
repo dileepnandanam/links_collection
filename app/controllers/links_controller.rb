@@ -135,7 +135,8 @@ class LinksController < ApplicationController
       queries: Query.where(created_at: (1.days.ago..Time.now)).group(:key).count.sort_by{|k, count| count.to_i}.reverse.map{|q,c| "#{q}(#{c})"},
       visitors: Visitor.where(created_at: (1.days.ago..Time.now)).group(:ip).count.length,
       total_searches: Query.where(created_at: (1.days.ago..Time.now)).count,
-      top_search_counts_per_user: Query.where(created_at: (1.days.ago..Time.now)).joins(:visitor).group('visitors.ip').count.to_a.map(&:last).sort.reverse[0..10].join(', ')
+      top_search_counts_per_user: Query.where(created_at: (1.days.ago..Time.now)).joins(:visitor).group('visitors.ip').count.to_a.map(&:last).sort.reverse[0..10].join(', '),
+      flags: Contribution.where(created_at: (1.days.ago..Time.now), contributable_type: 'Flag').all.map{|c| Link.find(c.contributable_id).url}
    } 
   end
 
