@@ -8,10 +8,10 @@ class Searcher < ApplicationJob
       "https://www.xvideos.com/?k=#{query.split(' ').join('+')}",
       "https://xhamster.com/search?q=#{query.split(' ').join('+')}"
     ]
-    urls.each{ |url| fetch_links(url) }
+    urls.each{ |url| fetch_links(url, query) }
   end
 
-  def fetch_links(url)
+  def fetch_links(url, query)
     urls = Nokogiri::HTML(Net::HTTP.get_response(URI.parse(url)).response.body).css('a.linkVideoThumb').map{|link| link['href']} if URI.parse(url).host.include?('pornhub')
     host = URI.parse(url).host
     urls = fetch_xnxx_urls(url) if host.include?('xnxx')
@@ -21,7 +21,7 @@ class Searcher < ApplicationJob
     urls = fetch_xhamster_urls(url) if host.include?('xhamster')
     urls.each do |u|
       uri = URI.parse(u)
-      Link.create url: uri.host.blank? ? "#{URI.parse(url).scheme}://#{URI.parse(url).host}#{u}" : u
+      Link.create tags: query, url: uri.host.blank? ? "#{URI.parse(url).scheme}://#{URI.parse(url).host}#{u}" : u
     end
   end
 

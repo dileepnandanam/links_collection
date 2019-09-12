@@ -38,14 +38,26 @@ class EmbedUrlFetcher < ApplicationJob
   def get_xhamster_data
     host = URI.parse(@link.url.chomp).host
     if host.include? 'xhamster.'
-      html = Net::HTTP.get_response(URI.parse(@link.url)).response.body
+      response = Net::HTTP.get_response(URI.parse(@link.url))
+      html = response.response.body
       if html.include?('Sorry, this URL is outdated')
         @link.url = 'https://www.xhamster.com' + html.match(/Url : (.*) /)[1].split(' ').first
         get_xhamster_data
         return
+      else
+        case response
+        when Net::HTTPRedirection
+          @link.url = response['location']
+          get_xhamster_data
+          return
+        when Net::HTTPSuccess
+          html = response.response.body
+        else
+          return
+        end
       end
       name, tags = MassEntry.with_info(@link.url, html)
-      video_url = html.match(/embedUrl":"(.*)"/)[1][0..33]
+      video_url = html.match(/embedUrl":"(.*)"/)[1].split('","')[0].gsub('\\', '')
     else
       return
     end

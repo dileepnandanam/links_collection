@@ -6,7 +6,7 @@ class Link < ApplicationRecord
   belongs_to :visitor
 
 
-  after_create :generate_source_url, unless: :lazy
+  #after_create :generate_source_url, unless: :lazy
 
   default_scope -> {where(hidden: false)}
   scope :favourite, -> {where('favourite = true')}
