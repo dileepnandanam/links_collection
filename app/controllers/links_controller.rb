@@ -133,7 +133,9 @@ class LinksController < ApplicationController
     render json: {
       date: Date.today,
       visitors: Visitor.where(created_at: (1.days.ago..Time.now)).group(:ip).count.length,
+      all_time_visitors: Visitor.group(:ip).count.length,
       total_searches: Query.where(created_at: (1.days.ago..Time.now)).count,
+      all_time_total_searches: Query.count,
       top_search_counts_per_user: Query.where(created_at: (1.days.ago..Time.now)).joins(:visitor).group('visitors.ip').count.to_a.map(&:last).sort.reverse[0..10].join(', '),
       flags: Contribution.where(created_at: (1.days.ago..Time.now), contributable_type: 'Flag').all.map{|c| Link.find(c.contributable_id).url},
       new_tags: Contribution.where(created_at: (1.days.ago..Time.now), contributable_type: 'Tag').all.map{|c| "#{c.content} added to #{Link.find(c.contributable_id).name} #{Link.find(c.contributable_id).url}"},
