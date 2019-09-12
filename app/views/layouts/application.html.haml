@@ -5,7 +5,8 @@
     %meta{ :name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
     %meta{ :name=>"google-site-verification", :content=>"RTn56zwPNTl1Q8QG8ENW3Ipd9aQd7znmDNaCRgcxVtc"}
     %meta{ :name=>"Description", :content=> ::TextRecord.where(name: 'meta_desc').first.try(:value)}
-    %title= "#{intel_title}| Rons Best Collection"
+    %title= "#{intel_title}| Best Collection"
+    %link{rel: 'icon', href: asset_url('flavico.png')}
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
