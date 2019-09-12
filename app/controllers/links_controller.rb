@@ -132,9 +132,10 @@ class LinksController < ApplicationController
   def lkjhgertyjnbvftyh
     render json: {
       date: Date.today,
-      queries: Query.where(created_at: (1.days.ago..Time.now)).group(:key).count.sort_by{|k, count| count.to_i}.reverse.map{|q,c| "#{q}(#{c}), "},
+      queries: Query.where(created_at: (1.days.ago..Time.now)).group(:key).count.sort_by{|k, count| count.to_i}.reverse.map{|q,c| "#{q}(#{c})"},
       visitors: Visitor.where(created_at: (1.days.ago..Time.now)).group(:ip).count.length,
-      total_searches: Query.where(created_at: (1.days.ago..Time.now)).count
+      total_searches: Query.where(created_at: (1.days.ago..Time.now)).count,
+      top_search_counts_per_user: Query.where(created_at: (1.days.ago..Time.now)).joins(:visitor).group('visitors.ip').count.to_a[0..10].map(&:last).join(', ')
    } 
   end
 
