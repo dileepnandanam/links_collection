@@ -136,16 +136,18 @@ class LinksController < ApplicationController
         gay: Link.search_count('gay', 'gay'),
         lesbian: Link.search_count('lesb', 'lesb'),
         total: Link.count,
-        uploaded_today: Link.where(created_at: (1.days.ago..Time.now)).count
+        indexed_today: Link.where(created_at: (1.days.ago..Time.now)).count
       },
-      visitors: Visitor.where(created_at: (1.days.ago..Time.now)).group(:ip).count.length,
+      visitors_today: Visitor.where(created_at: (1.days.ago..Time.now)).group(:ip).count.length,
       all_time_visitors: Visitor.group(:ip).count.length,
       total_searches: Query.where(created_at: (1.days.ago..Time.now)).count,
       all_time_total_searches: Query.count,
-      top_search_counts_per_user: Query.where(created_at: (1.days.ago..Time.now)).joins(:visitor).group('visitors.ip').count.to_a.map(&:last).sort.reverse[0..10].join(', '),
+      top_search_counts_per_user: Query.where(created_at: (1.days.ago..Time.now)).joins(:visitor).group('visitors.ip').count.to_a.map(&:last).sort.reverse[0..30].join(', '),
       flags: Contribution.where(created_at: (1.days.ago..Time.now), contributable_type: 'Flag').all.map{|c| Link.find(c.contributable_id).url},
       new_tags: Contribution.where(created_at: (1.days.ago..Time.now), contributable_type: 'Tag').all.map{|c| "#{c.content} added to #{Link.find(c.contributable_id).name} #{Link.find(c.contributable_id).url}"},
-      queries: Query.where(created_at: (1.days.ago..Time.now)).group(:key).count.sort_by{|k, count| count.to_i}.reverse.map{|q,c| "#{q}(#{c})"}
+      queries: Query.where(created_at: (1.days.ago..Time.now)).group(:key).count.sort_by{|k, count| count.to_i}.reverse.map{|q,c| "#{q}(#{c})"},
+      all_time_top_queries: Query.group(:key).count.sort_by{|k, count| count.to_i}.reverse[0..30].map{|q,c| "#{q}(#{c})"}
+
    } 
   end
 
