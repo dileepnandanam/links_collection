@@ -1,0 +1,17 @@
+.comment-actions
+  - if post.is_a? Post
+    - upvote_link = upvote_group_post_path(post.group, post)
+    - downvote_link = downvote_group_post_path(post.group, post)
+  - else
+    - upvote_link = upvote_post_comment_path(post.post, post)
+    - downvote_link = downvote_post_comment_path(post.post, post)
+
+  = link_to "#{post.upvote_count} upvotes", upvote_link, remote: true, method: :put, class: 'cast-vote'
+  = link_to "#{post.downvote_count} downvotes", downvote_link, remote: true, method: :put, class: 'cast-vote'
+  = link_to (post.is_a?(Comment) ? 'Reply' : 'new comment'), new_post_comment_path(post.is_a?(Post) ? post : post.post, parent_id: (post.is_a?(Post) ? nil : post.id)), remote: true, class: 'new-comment-link comment-action pull-left'
+  - if post.is_a?(Post) && post.comments.count > 0
+    = link_to "show #{post.comments.count} comment#{post.comments.count > 1 ? 's' : ''}", post_comments_path(post), remote: true, class: 'expand-comment comment-action pull-left'
+  - if post.is_a?(Post)
+    = link_to 'share', "https://www.facebook.com/sharer/sharer.php?u=#{URI.encode post_url(post)}", class: 'share'
+  - if post.is_a? Comment
+    = link_to 'reply', new_post_comment_path(post.post, parent_id: post.id), remote: true, class: 'new-comment-link comment-action pull-left'

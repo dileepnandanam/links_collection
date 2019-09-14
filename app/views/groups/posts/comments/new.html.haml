@@ -1,0 +1,7 @@
+= simple_form_for([@group, @post, @comment], remote: true, html: {class: 'comment-form'}) do |f|
+  = f.input :text, label: 'Coment'
+  = render partial: 'users/imogees'
+  = f.hidden_field :parent_id, value: @parent_id
+  .clearfix
+  = f.submit 'post comment', class: 'btn-primary'
+  = link_to 'cancel', '#', remote: true, class: 'cancel-form'

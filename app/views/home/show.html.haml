@@ -1,0 +1,17 @@
+- if current_user.blank?
+  .main-description
+    Ask questions and answer questions to find friends who have similar view points.
+
+%h3
+  See what people are asking
+.search.pull-right
+  Search
+  = text_field_tag 'search', nil, data: {url: questions_path(page: 1)}
+.clearfix
+
+.questions#masonry-container
+  = render partial: 'questions'
+- if false
+  = render template: 'home/neibhourhood/neibhourhood'  
+%h1.h-desc
+  serious adult dating site for finding like-minded partners, adult chat, adult image shareing.

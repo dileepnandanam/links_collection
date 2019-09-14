@@ -1,0 +1,6 @@
+.posts
+  - posts.each do |p|
+    = render partial: 'groups/posts/post', locals: {post: p}
+.more-responses
+- if @posts.next_page
+  = link_to 'View more', @next_path, remote: true, class: 'view-more'

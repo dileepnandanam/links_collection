@@ -1,0 +1,49 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{ :name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
+    %meta{ :name=>"google-site-verification", :content=>"LbppSvRcx4L5w9qSvaMXR_UEv7SybzS4dVcqtkZFb6I"}
+    %meta{ :name=>"Description", :content=> "Starter tutorials for neive programmers"}
+    %title Starter tutorials for neive programmers
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body.network-body
+    .page.col-lg-12.col-sm-12.col-12.nopadding
+      - if params[:password] == 'ifuckinglovecoding'
+        .acc-switcher
+          - User.all.each do |u|
+            = link_to u.name, switch_user_path(u), class: 'question'
+      .network-nav-bar
+        - if current_user
+          
+          = link_to current_user.name || current_user.email, connections_users_path, class: 'pull-right my-connections' + (current_user.has_unread_chats ? ' has-new-chats' : '')
+          
+          = link_to current_user.notifications.unseen.count, notifications_user_path(current_user), class: 'pull-right notification_count pull-right', style: (current_user.notifications.unseen.count > 0 ? "background: red !important" : '')
+          
+          = link_to "Posts", '/posts', class: 'pull-right'
+          
+          = link_to "Dashboard", '/dashboard', class: 'pull-right'
+        
+          = link_to "Groups", groups_path, class: 'pull-right'
+        - else
+          
+          = link_to "Sign in", new_user_session_path, class: 'pull-right'
+          
+          = link_to "Sign up", new_user_registration_path, class: 'pull-right'
+        = link_to 'home', '/', class: 'pull-right'
+        .clearfix
+      .common-bg{class: "#{controller_name}-#{action_name}"}
+        - if flash[:notice].present?
+          .flash
+            = flash[:notice]
+        = yield
+
+    .preview.page.col-lg-9.col-sm-9.col-12.d-none.container
+      .float-right
+        .close-cancel
+          ❎
+      .clearfix
+      .col-lg-12.col-sm-q2.col-12.preview-body

@@ -1,0 +1,12 @@
+.chats-container
+  %h3
+    = "Chat with #{@user.name}"
+  .chat-thread{id: @user.id}
+    - @chats.each do |c|
+      = render partial: 'chats/chat', locals: {chat: c}
+  .chat-box
+    = simple_form_for Chat.new, remote: true do |f|
+      = f.input :text, label: false
+      = render partial: 'imogees'
+      = f.hidden_field :reciver_id, value: @user.id
+      = f.submit 'submit', class: 'btn-primary d-none'

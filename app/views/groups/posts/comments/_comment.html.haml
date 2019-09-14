@@ -1,0 +1,20 @@
+.comment.group-post{class: new ? 'latest-comment' : '', id: "comment_#{comment.id}"}
+  .pull-left.user-details
+    = image_tag comment.user.image.url(:thumb)
+    = comment.user.name
+  .post-actions.pull-right
+    - if comment.user == current_user
+      = link_to 'delete', group_post_comment_path(comment.post.group, comment.post, comment), remote: true, method: :delete, class: 'delete-post'
+  .clearfix
+  .post-body
+    = auto_link with_imogee(comment.text), html: {target: '_blank'}
+  .clearfix
+  = render partial: 'groups/posts/comment_actions', locals: {post: comment}
+  - if comment.children.count > 0
+    = link_to "show #{comment.children.count} reply#{comment.children.count > 1 ? 's' : ''}", post_comments_path(comment.post.group, comment.post, parent_id: comment.id), remote: true, class: 'expand-comment comment-action pull-left'
+  .clearfix
+  .new-comment
+  .comments-container{expand ? '' : 'd-none'}
+    .comments
+      - if expand
+        = render partial: 'groups/posts/comments', locals: {comments: comment.children.paginate(per_page: comment.children.count, page: 1)}

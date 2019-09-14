@@ -1,0 +1,3 @@
+.chat{ class: chat.sender_id == current_user.id ? 'float-right' : 'float-left' }
+  = with_imogee(auto_link(chat.text, html: {target: '_blank'}))
+.clearfix

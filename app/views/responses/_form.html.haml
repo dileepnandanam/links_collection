@@ -1,0 +1,6 @@
+= simple_form_for([@user, @response]) do |f|
+  = f.hidden_field :responce_user_id, value: @user.id
+  = f.fields_for :answers do |af|
+    = af.input :text, label: af.object.question.text
+    = af.hidden_field :question_id, value: af.object.question.id
+  = f.submit 'Request to connect', class: 'btn-primary'

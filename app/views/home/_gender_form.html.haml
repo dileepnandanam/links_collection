@@ -1,0 +1,3 @@
+= simple_form_for current_user, url: set_gender_path, html: {class: 'white gender_form'} do |f|
+  = f.label 'set your gender'
+  = f.collection_radio_buttons :gender, ['male', 'female', 'others'], :to_s, :to_s

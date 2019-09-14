@@ -1,0 +1,20 @@
+- @responses.each do |r|
+  .question
+    = render partial: 'users/user_details', locals: {user: r.responce_user}
+    .clearfix
+    .answers
+      - r.answers.joins(:question).each do |a|
+        .answer  
+          .question-text.pull-left.col-lg-5.col-sm-5.col-xs-12
+            = a.question.text
+          .answer-text.pull-right.col-lg-5.col-sm-5.col-xs-12
+            = a.text
+          .clearfix
+    .answer-action
+      - if r.accepted
+        = render partial: 'responses/accept', locals: {user: r.responce_user}
+      - else
+        = link_to 'Accept', accept_user_response_path(r.user, r), remote: true, class: 'accept-response', method: 'put'
+- if @responses.next_page
+  .more-responses
+    = link_to 'View more', responses_path(state: state, page: params[:page].present? ? params[:page].to_i + 1 : 2), remote: true, class: 'view-more'

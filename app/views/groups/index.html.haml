@@ -1,0 +1,20 @@
+.my-space.col-lg-4.col-sm-6.col-12.pull-left
+  .responses-container
+    %h3 My Groups
+    - @groups.each do |group|
+      = render partial: 'group', locals: {group: group, actions: true}
+    - @other_groups.each do |group|
+      = render partial: 'group', locals: {group: group, actions: false}
+  .new-question
+  .questions-actions
+    = link_to 'New Group', new_group_path, class: 'add-question', remote: true
+  .questions-container
+.my-space.col-lg-8.col-sm-6.col-12.pull-left
+  %h3
+    Find Groups
+  .search
+    Search
+    = text_field_tag 'search',nil, data: {url: search_groups_path(page: 1)}
+  .clearfix
+  .questions
+    = render partial: 'groups/groups', locals: {groups: Group.order('created_at DESC').paginate(page: 1, per_page: 5)}

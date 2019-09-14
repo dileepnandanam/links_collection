@@ -1,0 +1,5 @@
+.questions-container
+  .group-action
+    = link_to 'New post', new_post_path, remote: true, class: 'new-group-post'
+  .new-post
+  = render partial: 'groups/posts', locals: {posts: @posts}

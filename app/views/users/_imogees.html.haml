@@ -1,0 +1,4 @@
+.imogee-list
+  - LightImogee::Data.get_imogee_map.each do |imogee, name|
+    .imogee.pull-left{data: {imogee: imogee}}
+      = with_imogee imogee.dup

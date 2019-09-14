@@ -1,0 +1,25 @@
+.group-post.post
+  .post-actions.pull-right
+    - if post.user == current_user
+      = link_to 'delete', group_post_path(post.group, post), remote: true, method: :delete, class: 'delete-post'
+  .clearfix
+  .post-title
+    %h2= link_to post.title, group_post_path(post.group, post)
+  .post-body
+    = auto_link post.text, html: {target: '_blank'}
+    - if post.image.present?
+      = image_tag post.image.url(:original), class: 'post-image'
+  .clearfix
+  .pull-right.user-avathar= render partial: 'users/user_details', locals: {user: post.user}
+  .clearfix
+  = render partial: 'groups/posts/comment_actions', locals: {post: post}
+  .clearfix
+  .new-comment
+  .comments-container{class: params[:comment_id].present? ? '' : 'd-none'}
+    .comments
+      - if params[:comment_id]
+        - comment = post.comments.find(params[:comment_id])
+      - if comment
+        = render partial: 'posts/comments/comment', locals: {expand: true, new: false, comment: comment.parent || comment}
+  
+

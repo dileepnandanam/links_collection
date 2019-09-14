@@ -1,0 +1,15 @@
+.question
+  %h3
+    = link_to group.name, group_path(group)
+  %p
+    = group.description
+  - if actions
+    .question-actions
+      .pull-left
+        = link_to 'Edit', edit_group_path(group), remote: true, class: 'edit-question'
+      .pull-left
+        = link_to 'delete', group_path(group), method: 'delete', remote: true, class: 'delete-question'
+      .pull-left
+        = link_to 'dashboard', dashboard_group_path(group)
+      .clearfix
+  .question-edit-form-container

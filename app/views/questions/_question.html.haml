@@ -1,0 +1,10 @@
+.question{id: "sequence_#{question.id}"}
+  .question-text
+    = question.text
+  .question-actions
+    .pull-left
+      = link_to 'Edit', edit_question_path(question), remote: true, class: 'edit-question'
+    .pull-left
+      = link_to 'delete', question_path(question), method: 'delete', remote: true, class: 'delete-question'
+    .clearfix
+  .question-edit-form-container

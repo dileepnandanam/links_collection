@@ -1,0 +1,6 @@
+.questions
+  - @notifications.each do |notification|
+    = render partial: 'notification', locals: {notification: notification}
+  %h3 Old notifications
+  - @old.each do |notification|
+    = render partial: 'notification', locals: {notification: notification}

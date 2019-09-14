@@ -1,0 +1,8 @@
+%h1 Decide what your kid should not see in posts, chats and comments.
+= simple_form_for(current_user, html: { class: 'post-form' }) do |f|
+  = f.input :badwords, label: 'Enter coma seperated list of bad words to be filtered'
+  - f.object.pin = ''
+  = f.input :pin, value: '', type: 'password', label: '4 digit PIN number'
+  .clearfix
+  = f.submit :post, class: 'btn-primary'
+  = link_to 'cancel', '#', class: 'cancel-form', remote: true

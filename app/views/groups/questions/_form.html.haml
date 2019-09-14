@@ -1,0 +1,6 @@
+= simple_form_for [@group, @question], remote: true do |f|
+  = f.input :text, label: false
+  .clearfix
+  = f.submit 'Submit', class: 'btn-primary'
+  .clearfix
+  = link_to 'cancel', '#', class: 'cancel-form', remote: true

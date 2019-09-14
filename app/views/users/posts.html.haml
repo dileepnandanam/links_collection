@@ -1,0 +1,4 @@
+= link_to "Stop seeing posts from #{@user.name}", disconnect_user_path(@user), method: :put, class: 'unfollow'
+%h1= "#{@user.name}'s Posts"
+.questions-container
+  = render partial: 'posts/posts', locals: {posts: @posts}

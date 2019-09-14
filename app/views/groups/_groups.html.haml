@@ -1,0 +1,5 @@
+- groups.each do |g|
+  = render partial: 'groups/group', locals: {group: g, actions: false}
+.more-responses
+  - if groups.next_page
+    = link_to 'View more', search_groups_path(query: params[:query], page: (params[:page].present? ? params[:page].to_i + 1 : 2)), remote: true, class: 'view-more'

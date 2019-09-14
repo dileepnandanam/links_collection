@@ -1,0 +1,9 @@
+.questions-container
+  .search.pull-right
+    Search
+    = text_field_tag 'search',nil, data: {url: posts_path(page: 1)}
+  .clearfix
+  .group-action
+    = link_to 'New post', new_post_path, remote: true, class: 'new-group-post'
+  .new-post
+  = render partial: 'posts', locals: {posts: @posts}

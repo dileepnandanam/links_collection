@@ -1,0 +1,5 @@
+= simple_form_for([@group, @response]) do |f|
+  = f.fields_for :answers do |af|
+    = af.input :text, label: af.object.question.text
+    = af.hidden_field :question_id, value: af.object.question.id
+  = f.submit 'Request to join', class: 'btn-primary'

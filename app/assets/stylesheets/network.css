@@ -1,0 +1,80 @@
+.network-nav-bar {
+  display: flex;
+  background-color: #421f26;
+  color: white !important;
+  border-bottom: 4px solid #f9dc10;
+}
+.network-nav-bar .pull-right {
+  padding: 0.5% 2%;
+  margin: 1%;
+  background: transparent;
+  border-radius: 4px;
+  font-size: 20px;
+  color: white !important;
+  text-transform: capitalize;
+}
+.network-nav-bar .pull-right:hover {
+  text-shadow: 0px 0px 10px white, 0px 0px 10px white, 0px 0px 10px white;
+  text-decoration: none;
+}
+.network-nav-bar div {
+  margin-right: 20px;
+}
+.nopadding {
+  padding: 0px !important;
+}
+.network-body div {
+  color: black;
+  text-shadow: 0px, 0px, 10px black, 0px, 0px, 10px black, 0px, 0px, 10px black;
+}
+.network-body {
+  background-image: linear-gradient(180deg, violet, indigo, blue, green, yellow, orange, red);
+}
+.network-body .page {
+  background-color: rgba(255,255,255,0.5);
+  min-height: 100vh;
+}
+.network-body .question {
+  background-color: yellow;
+  margin-top: 0px;
+}
+.network-body .common-bg {
+  padding-top: 12px;
+  margin-top: 2vh;
+}
+.network-body a, .network-body a:hover {
+  color: black !important;
+}
+.new-question {
+  padding-top: 12px;
+}
+
+.network-body h1 {
+  font-size: 30px;
+  font-weight: bold;
+}
+.network-body h2 {
+  font-size: 26px;
+  font-weight: bold;
+}
+.network-body h3 {
+  font-size: 22px;
+  font-weight: bold;
+}
+.network-body h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+.network-body h4 {
+  font-size: 16px;
+  font-weight: bold;
+}
+.search {
+  margin-bottom: 12px;
+}
+.response-form {
+  max-width: 501px;
+  margin: auto;
+  display: block !important;
+  margin-bottom: 20px !important;
+}

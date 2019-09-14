@@ -1,0 +1,4 @@
+= link_to new_user_response_path(user) do
+  .pull-left.user-details
+    = image_tag user.image.url(:thumb)
+    = user.name.to_s.split(' ').first

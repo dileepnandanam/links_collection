@@ -1,0 +1,6 @@
+.question.response-form
+  .pull-left
+    = image_tag @user.image.url(:thumb)
+    = @user.name
+  .clearfix
+  = render partial: 'form'

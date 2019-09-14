@@ -1,0 +1,22 @@
+.background-fixed
+  .sun
+.background
+  .background-block.pull-left
+    = image_tag 'background.png'
+  - (connections.count/6).times do
+    .background-block.pull-left
+      = image_tag 'background.png'
+.homes
+  - connections.each do |c|
+    .yard.pull-left{data: {posts_url: user_posts_path(c)}}
+      .home
+        = render partial: 'home/neibhourhood/home', locals: {connection: c}
+      .wall
+        = render partial: 'home/neibhourhood/wall', locals: {connection: c}
+.street
+.car
+  = render partial: 'home/neibhourhood/car'
+.wall-expanded.d-none
+  .wall-close.pull-right
+    x
+  .posts-container

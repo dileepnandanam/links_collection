@@ -1,0 +1,9 @@
+.my-space
+  %h3
+    = @group.name
+  .questions-container
+    .group-action
+      = link_to 'New post', new_group_post_path(@group), remote: true, class: 'new-group-post'
+    .new-post
+    .posts
+      = render partial: 'groups/posts/posts', locals: {posts: @posts}

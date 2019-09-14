@@ -1,0 +1,15 @@
+= link_to 'view graphical representation of your neibhourhood', '#', class: 'view-neibhourhood d-none', remote: true
+.neibhourhood-container
+  %h3
+    Explore your neibhourhood
+  - if @connections.count <= 1
+    .message
+      You dont have any neibhours. Respond to questions or ask questions to get neibhours.
+  .world.col-lg-12.col-sm-12.col-xs-12
+    .neibhourhood.pull-left
+      = render partial: 'home/neibhourhood/neibhourhood', locals: {connections: @connections}
+      .move-controll.left.pull-left
+        = button_tag '<', class: 'btn-primary'
+      .move-controll.right.pull-left
+        = button_tag '>', class: 'btn-primary'
+    .clearfix

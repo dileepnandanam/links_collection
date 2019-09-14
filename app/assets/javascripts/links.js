@@ -16,7 +16,7 @@ $(document).on('turbolinks:load', function() {
 	//initMasonry()
 
 	search = function() {
-		query = $('.search input').val()
+		query = $('.video-search input').val()
 		$.ajax({
 			url: $(this).data('url'),
 			data: {

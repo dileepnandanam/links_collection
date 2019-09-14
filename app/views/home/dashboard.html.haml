@@ -1,0 +1,26 @@
+.my-space.my-responses.col-lg-8.col-sm-6.col-xs-12.pull-left
+  %h3
+    Responses
+  .response-filters
+    = link_to 'new responses', responses_path(state: 'new'), class: 'filter-response-link', remote: true
+    = link_to 'accepted responses', responses_path(state: 'accepted'), class: 'filter-response-link', remote: true
+  .responses-container
+    = render partial: 'responses', locals: {state: 'new'}
+
+.my-space.col-lg-4.col-sm-6.col-xs-12.pull-left
+  .accepted-responses
+    = render partial: 'accepted_responses'
+
+  %h3
+    My Questions
+  - if @questions.count == 0
+    .question.help-text
+      %p
+        You haven't created any questions. Ask something that seeks the viewpoint of the person you want to connect.
+  .questions-container.reorderable
+    - @questions.each do |question|
+      = render partial: 'questions/question', locals: {question: question}
+  .new-question
+  .questions-actions
+    = link_to 'Add question', new_question_path, class: 'add-question', remote: true
+    = link_to 'Preview', new_user_response_path(current_user)

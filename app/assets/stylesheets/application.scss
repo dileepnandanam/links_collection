@@ -41,6 +41,8 @@ body {
   background-size: cover;
 }
 .nav-bar {
+  position: absolute;
+  top: 0px;
 	padding: 10px;
 	background-color: black;
 	color: white;
@@ -53,19 +55,20 @@ body {
 .nav-bar h2 {
 	display: inline;
 }
-.search {
+.video-search {
 	display: inline;
 	margin-left: 30px;
 }
-.search input {
+.video-search input {
 	width: 60%;
 	padding: 6px;
 	font-weight: bold;
 }
-.search input:focus {
+.video-search input:focus {
     outline: none;
 }
 .common-bg {
+  margin-top: 8vh;
 	overflow: auto;
 	padding-top: 68px;
 }
@@ -141,4 +144,5 @@ input[type='radio'] {
 }
 #search {
   width: 33%;
+  display: inline-block;
 }

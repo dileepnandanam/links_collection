@@ -2,15 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "activerecord"
-gem "activemodel"
-gem "actionpack"
-gem "actionview"
-gem "actionmailer"
-gem "activejob"
-gem "activesupport"
-gem "railties"
-gem "sprockets-rails"
+gem 'rails', '~> 5.2.2'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -25,6 +17,8 @@ gem 'jquery-ui-rails'
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -38,7 +32,7 @@ gem 'turbolinks', '~> 5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-
+gem 'redis-rails'
 group :development, :test do
   gem "binding_of_caller"
   gem "better_errors"
@@ -53,16 +47,33 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :test do
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '>= 2.15'
+  gem 'selenium-webdriver'
+  # Easy installation and use of chromedriver to run system tests with Chrome
+  gem 'chromedriver-helper'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'rollbar'
+gem 'unicorn'
 gem 'pry'
 gem 'pg', '~> 0.20'
 gem "haml-rails"
+gem "paperclip"
+gem 'devise'
+gem "nested_form"
 gem 'simple_form'
 gem 'will_paginate', '~> 3.1.0'
+gem 'aws-sdk'
+gem 'font-awesome-rails'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'certified'
+gem 'Instamojo-rb'
+gem 'omniauth-facebook'
 gem 'rails_autolink'
 gem 'masonry-rails'
-gem 'devise'
-gem 'rails_stdout_logging'
+gem 'yui-compressor'
+gem 'light_imogee'
