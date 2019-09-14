@@ -1,7 +1,9 @@
 .connections {
 	max-height: 500px;
-    overflow: scroll;
-    margin-bottom: 15px;
+  overflow: scroll;
+  margin-bottom: 15px;
+  float: left;
+  display: inline-block;
 }
 .chat-thread {
 	background-color: #343534;
@@ -13,6 +15,8 @@
 }
 .chats {
 	padding: 0px !important;
+  display: inline-block;
+  float: right;
 }
 @media (min-width: 576px) {
 	.chats-container {
@@ -33,13 +37,13 @@
 	margin-bottom: none;
 }
 .unseen-count {
-	padding: 6px;
-    background-color: #082259;
-    border-radius: 50%;
-    margin: 5px 0px 0px 10px;
-    color: white;
-    min-width: 34px;
-    text-align: center;
+  width: 30px;
+  height: 30px;
+  color: white;
+  background-color: red;
+  padding: 2px;
+  border-radius: 15px;
+  padding: 4px 10px;
 }
 .full-width {
 	width: 100%;

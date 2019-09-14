@@ -10,23 +10,24 @@ class ResponsesController < ApplicationController
   end
 
   def create
-  	@response = Response.create response_params.merge(user_id: current_user.id)
+  	@response = Response.create response_params.merge(responce_user_id: current_user.id)
     flash[:notice] = "Requested to connect #{@response.user.name}"
     if @response.responce_user_id == @response.user_id
       @response.delete
     else
-      ResponseMailer.with(response_user: @response.responce_user, user: @response.user).new_response.deliver_later
+      #ResponseMailer.with(response_user: @response.responce_user, user: @response.user).new_response.deliver_later
     end
-    redirect_to root_path
+    redirect_to '/home'
   end
 
   def accept
     @response = current_user.responses.find(params[:id])
     @response.update(accepted: true)
-    Connection.create(user_id: @response.user_id, to_user_id: @response.responce_user_id)
-    Connection.create(to_user_id: @response.user_id, user_id: @response.responce_user_id)
+    to = Connection.create(user_id: @response.user_id, to_user_id: @response.responce_user_id)
+    from = Connection.create(to_user_id: @response.user_id, user_id: @response.responce_user_id)
+    Notifier.perform_now_or_later(@response.responce_user, 'create_personal', to)
     render 'accept', layout: false
-    ResponseMailer.with(user: current_user, response_user: @response.responce_user).response_accepted.deliver_later
+    #ResponseMailer.with(user: current_user, response_user: @response.responce_user).response_accepted.deliver_later
   end
 
   layout 'network'
@@ -34,6 +35,6 @@ class ResponsesController < ApplicationController
   protected
 
   def response_params
-    params.require(:response).permit(:responce_user_id, :answers_attributes => [:question_id, :text])
+    params.require(:response).permit(:user_id, :answers_attributes => [:question_id, :text])
   end
 end

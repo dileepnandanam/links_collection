@@ -98,6 +98,7 @@
 }
 .imogee {
   font-size: 4vw;
+  display: inline-block;
 }
 .question {
   background-color: #a1c317;

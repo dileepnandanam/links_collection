@@ -5,11 +5,11 @@
     - @connections.each do |u|
       = link_to user_path(u), class: 'select-connection', remote: true do
         .question{id: u.id}
-          .pull-left.full-width.user-details
+          .float-left.user-details
             = image_tag u.image.url(:thumb)
             = u.name
-            .unseen-count.pull-right{class: @unseen_counts[u.id].to_i > 0 ? '' : 'd-none'}
-              = @unseen_counts[u.id].to_i
+          .unseen-count.float-right{class: @unseen_counts[u.id].to_i > 0 ? '' : 'd-none'}
+            = @unseen_counts[u.id].to_i
           .clearfix
 .chats.col-lg-8.col-sm-8.col-xs-12.pull-left
   - if @user

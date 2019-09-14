@@ -8,6 +8,6 @@ class Response < ApplicationRecord
   after_create :notify
 
   def notify
-    Notifier.perform_now_or_later responce_user, 'create', self
+    Notifier.perform_now_or_later user, 'create', self
   end
 end

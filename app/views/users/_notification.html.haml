@@ -11,7 +11,7 @@
   - else
     - bindings = {'user' => link_to(target.user.name, posts_user_path(target.user)), 'url' => link_to(target.title, post_path(target)), 'group' => ''}
 - elsif target.is_a?(Connection)
-  - bindings = {'user1' => link_to(target.to_user.name, posts_user_path(target.to_user)), 'user2' => link_to(target.user.name, posts_user_path(target.user))}
+  - bindings = {'user1' => link_to(target.user.name, posts_user_path(target.to_user)), 'user2' => link_to(target.user.name, posts_user_path(target.user))}
 - elsif target.is_a?(Response)
   - bindings = {'user' => link_to(target.user.name, user_path(target.user)), 'url' => link_to('check', dashboard_path)}
 - elsif target.is_a?(Vote)
