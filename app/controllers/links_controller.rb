@@ -1,4 +1,5 @@
 class LinksController < ApplicationController
+  after_action :popup_seen
   skip_before_action :verify_authenticity_token
   before_action :set_orientation, only: [:index, :search]
   def index
@@ -152,6 +153,10 @@ class LinksController < ApplicationController
   end
 
   protected
+
+  def popup_seen
+    cookies[:popup_seen] = true
+  end
 
   def orientation
     @orientation = cookies[:orientation]

@@ -14,6 +14,12 @@
     = render partial: 'layouts/tracker'
   %body{style: bg_style}
     = raw result_description
+    - unless cookies[:popup_seen]
+      .popup
+        = link_to 'close', '#', class: 'btn btn-primary float-right', onclick: '$(this).closest(".popup").remove()'
+        .clearfix
+        The purpose of This sit is to Promote Our Absolutly FREE Adult dating platform to connect with like-minded partners.
+        = link_to 'Start by asking questions about others likes', '/dashboard'
     .nav-bar
       = link_to '/', class: 'site-text' do
         %h2.pull-left.site-header
