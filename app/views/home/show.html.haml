@@ -1,17 +1,15 @@
-- if current_user.blank?
-  .main-description
-    Ask questions and answer questions to find friends who have similar view points.
+- content_for :head do
+  %title
+    Date with Like-minded people
+%h1.name.description.black
+  serious adult dating site for finding like-minded partners, adult chat, adult image shareing.
 
-%h3
-  See what people are asking
 .search.pull-right
   Search
   = text_field_tag 'search', nil, data: {url: questions_path(page: 1)}
 .clearfix
 
-.questions#masonry-container
+.questions
   = render partial: 'questions'
 - if false
   = render template: 'home/neibhourhood/neibhourhood'  
-%h1.h-desc
-  serious adult dating site for finding like-minded partners, adult chat, adult image shareing.

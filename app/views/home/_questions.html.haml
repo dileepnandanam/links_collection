@@ -1,12 +1,14 @@
 - @questions.each do |q|
-  .question-wraper.col-lg-4.col-sm-6.col-12.pull-left
-    .question.question-preview
-      = render partial: 'users/user_details', locals: {user: q.user}
-      .clearfix
-      .question-text
-        = auto_link q.text, html: {target: '_blank'}
-      .answer-action
-        = link_to 'Connect', new_user_response_path(q.user)
+  .question-small
+    .user-details.float-left
+      .avathar= image_tag q.user.image.url(:thumb)
+    .question-small-body
+      %h3= link_to(q.user.name, user_path(q.user))
+      %p= auto_link q.text, html: {target: '_blank'}
+      = link_to new_user_response_path(q.user), class: 'connect-icon' do
+        = image_tag('https://miro.medium.com/max/1200/1*2hod4Lwb9wDrzSTLFVcpOg@2x.png', class: 'float-right connect-icon-img')
+    .clearfix
+
 .clearfix
 - if @questions.next_page
   .more-responses.more-questions.question-wraper.view-more-questions-container

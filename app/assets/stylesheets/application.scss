@@ -72,14 +72,10 @@ body {
 	overflow: auto;
 	padding-top: 68px;
 }
-.common-bg.home-show {
-	padding-right: 0px;
+.common-bg {
+	padding: 68px 1.5% 0 1.5%;
 }
-@media (min-width: 576px) {
-	.common-bg {
-		padding: 68px 1.5% 0 1.5%;
-	}
-}
+
 .btn-primary {
 	border-radius: 5px;
 }
