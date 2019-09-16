@@ -7,7 +7,7 @@ class Link < ApplicationRecord
 
 
   def comments
-    Comment.unscoped.where(kind: 'videoresponse').all
+    Comment.unscoped.where(kind: 'videoresponse', post_id: self.id).all
   end
   #after_create :generate_source_url, unless: :lazy
 
