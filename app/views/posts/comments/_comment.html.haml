@@ -4,14 +4,14 @@
     = comment.user.name
   .post-actions.pull-right
     - if comment.user == current_user
-      = link_to 'delete', post_comment_path(comment.post, comment), remote: true, method: :delete, class: 'delete-post'
+      = link_to 'delete', post_comment_path(comment.under, comment), remote: true, method: :delete, class: 'delete-post'
   .clearfix
   .post-body
     = auto_link with_imogee(comment.text), html: {target: '_blank'}
   .clearfix
   = render partial: 'posts/comment_actions', locals: {post: comment}
   - if comment.children.count > 0
-    = link_to "show #{comment.children.count} reply#{comment.children.count > 1 ? 's' : ''}", post_comments_path(comment.post, parent_id: comment.id), remote: true, class: 'expand-comment comment-action pull-left'
+    = link_to "show #{comment.children.count} reply#{comment.children.count > 1 ? 's' : ''}", post_comments_path(comment.under, parent_id: comment.id), remote: true, class: 'expand-comment comment-action pull-left'
   .clearfix
   .new-comment
   .comments-container{class: expand ? '' : 'd-none'}

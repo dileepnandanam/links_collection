@@ -4,6 +4,9 @@
 		max-width: 49.78% !important;
 	}
 }
+.comment-area, .comment-area div, .comment-area label, .comment-area a {
+  color: black;
+}
 .link {
 	display: inline-block;
 	padding: 1% !important;

@@ -13,15 +13,15 @@ class Posts::CommentsController < ApplicationController
 
   def index
     @post = Post.find(params[:post_id])
-    @comments = @post.comments.where(parent_id: params[:parent_id]).paginate(page: params[:page], per_page: 5)
+    @comments = @post.comments.for_post.where(parent_id: params[:parent_id]).paginate(page: params[:page], per_page: 5)
     @comments = FilterPost.filter(@comments,[:text], current_user.try(:badwords))
     render 'comments', layout: false
   end
 
   def create
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.create(comments_params.merge(user_id: current_user.id))
-    render 'comment', layout: false
+    @comment = @post.comments.for_post.create(comments_params.merge(user_id: current_user.id))
+    render 'posts/comments/comment', layout: false
   end
 
   def destroy

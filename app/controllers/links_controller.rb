@@ -12,8 +12,10 @@ class LinksController < ApplicationController
       if params[:crawl].present?
         Searcher.perform_later params[:q] 
       end
+    elsif params[:video_id].present?
+      @links = Link.where(hidden: false, id: params[:video_id]).paginate(per_page: 1, page: 1)
+      @count = 1
     else
-
       @links = Link.normal.with_orientation(orientation).limit(8).paginate(per_page: per_page, page: 1)
       @count = Time.now.to_i/3000
     end
@@ -38,6 +40,20 @@ class LinksController < ApplicationController
       end
       render 'search', layout: false
     end
+  end
+
+  def comments
+    @link = Link.unscoped.find(params[:id])
+    @comments = @link.comments
+    render 'comment_section', layout: false
+  end
+
+  def create_comment
+    comment_params = params.require(:comment).permit(:kind, :text)
+    link_id = params[:id]
+    @Link = Link.find(link_id)
+    @comment = @Link.comments.create(comment_params.merge(user_id: current_user.id, kind: 'videoresponse', post_id: link_id))
+    render 'posts/comments/comment', layout: false
   end
 
   def hidden

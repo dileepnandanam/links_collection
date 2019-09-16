@@ -17,6 +17,7 @@ class Notification < ApplicationRecord
   }.with_indifferent_access
 
   def generate_msg(obj, action, binds)
+    return nil if [obj, binds].any?(&:blank?)
     trans = Translations["#{obj.class.name}_#{action}".underscore]
     binds.each{|key, val| trans.gsub!("{#{key}}", val.to_s)}
     trans

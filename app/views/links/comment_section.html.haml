@@ -1,0 +1,15 @@
+.comment-area
+  = link_to 'hide', '#', remote: true, onclick: '$(this).closest(".comment-section").html("")', class: 'float-right'
+  .clearfix
+  - if current_user.present?
+    .new-comment
+      = simple_form_for Comment.new, url: create_comment_link_path, remote: true, html: {class: 'comment-form'} do |f|
+        = f.input :text, label: 'Add comment'
+        = f.hidden_field :kind, value: 'videoresponse'
+        = f.submit
+    = "#{@comments.count} comment(s)"
+    .comments-container
+      = render partial: 'posts/comments/comments', locals: {comments: @comments}
+  - else
+    = "#{@comments.count} comment(s)"
+    = link_to 'sign in or sign up to comment (no confirmation needed)', new_user_session_path, target: :blank, onclick: '$(this).closest(".comment-section").html("")' 

@@ -27,7 +27,9 @@
             = link_to 'x', untag_link_path(link, tag: tag), class: 'delete-tag', method: :put, remote: true
     .clearfix
     %input.tag.pull-left{data: {url: tag_link_path(link)}, placeholder: 'enter tag'}
-      
+    = link_to comments_link_path(link), remote: true, class: 'comment-icon connect-icon' do
+      = image_tag('https://image.flaticon.com/icons/svg/1380/1380338.svg', class: 'connect-icon-img comment-icon')
+    .comment-section
 - if links.next_page
   .more-links.load-random
     .loader

@@ -1,15 +1,15 @@
 .network-nav-bar {
-  display: flex;
   background-color: #421f26;
   border-bottom: 4px solid #f9dc10;
 }
 .network-nav-bar  a {
-  padding: 0.5% 2%;
+  display: inline-block;
+  padding: 0.3% 0%;
   margin: 1%;
   background: transparent;
   border-radius: 4px;
   font-size: 20px;
-  color: white;
+  color: white !important;
   text-transform: capitalize;
 }
 .network-nav-bar:hover {
@@ -25,9 +25,9 @@
 .nopadding {
   padding: 0px !important;
 }
-.network-body div {
-  color: black;
-  text-shadow: 0px, 0px, 10px black, 0px, 0px, 10px black, 0px, 0px, 10px black;
+.network-body div, .network-body a, .network-body label {
+  color: #000;
+  text-shadow: 0px 0px 30px white;
 }
 .network-body {
   background-image: linear-gradient(180deg, violet, indigo, blue, green, yellow, orange, red);
@@ -35,6 +35,9 @@
 .network-body .page {
   background-color: rgba(255,255,255,0.5);
   min-height: 100vh;
+}
+.network-body .post-body {
+  margin-left: 0px;
 }
 .network-body .question {
   background-color: yellow;
@@ -46,6 +49,7 @@
 }
 .network-body a:hover {
   color: yellow !important;
+  text-shadow: 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black;
 }
 .new-question {
   padding-top: 12px;
@@ -116,4 +120,19 @@
 }
 .connect-icon img {
   width: 40px;
+}
+.question-small-body a:hover {
+  color: blue !important;
+  text-decoration: none;
+}
+.question-small-body a {
+  color: black !important;
+  text-decoration: none;
+}
+.comment-area {
+  padding: 2%;
+  background-color: white;
+}
+.comment-area {
+  color: black;
 }

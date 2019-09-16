@@ -137,4 +137,8 @@ $(document).on('turbolinks:load', function() {
 		$(this).prev().hide()
 		$(this).remove()
 	})
+
+	$(document).on('ajax:success', '.comment-icon', function(e) {
+		$(this).siblings('.comment-section').html(e.detail[2].responseText)
+	})
 })

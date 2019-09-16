@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     get :favourite, on: :collection
     put :report, on: :member
     get :lkjhgertyjnbvftyh, on: :collection
+    get :comments, on: :member
+    post :create_comment, on: :member
   end
 
   resources :stories

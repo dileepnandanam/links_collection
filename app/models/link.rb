@@ -6,6 +6,9 @@ class Link < ApplicationRecord
   belongs_to :visitor, optional: true
 
 
+  def comments
+    Comment.unscoped.where(kind: 'videoresponse').all
+  end
   #after_create :generate_source_url, unless: :lazy
 
   default_scope -> {where(hidden: false)}

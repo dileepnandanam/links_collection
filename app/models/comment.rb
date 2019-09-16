@@ -1,11 +1,17 @@
 class Comment < ApplicationRecord
-  belongs_to :post
+  belongs_to :post, optional: true
+  def under
+    kind == 'videoresponse' ? Link.find(post_id) : post
+  end
   belongs_to :user
   has_many :votes
   belongs_to :parent, class_name: 'Comment', optional: true
   has_many :children, class_name: 'Comment', foreign_key: :parent_id
   validates :text, presence: true
   before_destroy :cancel_notifications
+
+  scope :for_post, -> { where(kind: 'postresponse') }
+  scope :for_video, -> { where(kind: 'videoresponse') }
   
   def cancel_notifications
     Notification.where(target_id: id, target_type: 'Comment').delete_all
@@ -22,7 +28,7 @@ class Comment < ApplicationRecord
       Notifier.perform_now_or_later user, 'create', self
     end
 
-    Notifier.perform_now_or_later post.user, 'create', self
+    Notifier.perform_now_or_later under.user, 'create', self if kind == 'postresponse'
 
     (post.comments.map(&:user) - [parent.try(:user)]).each do |commenter|
        Notifier.perform_now_or_later user, 'create', self unless commenter != self.user
