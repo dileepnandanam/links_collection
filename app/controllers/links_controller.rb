@@ -153,7 +153,9 @@ class LinksController < ApplicationController
         gay: Link.search_count('gay', 'gay'),
         lesbian: Link.search_count('lesb', 'lesb'),
         total: Link.count,
-        indexed_today: Link.where(created_at: (1.days.ago..Time.now)).count
+        indexed_today: Link.where(created_at: (1.days.ago..Time.now)).count,
+        signups: User.where(created_at: (1.days.ago..Time.now)).count,
+        all_time_signups: Users.count
       },
       visitors_today: Visitor.where(created_at: (1.days.ago..Time.now)).group(:ip).count.length,
       all_time_visitors: Visitor.group(:ip).count.length,
