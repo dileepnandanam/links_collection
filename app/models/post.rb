@@ -6,6 +6,10 @@ class Post < ApplicationRecord
   has_many :comments
   before_destroy :cancel_notifications
 
+  def under
+    self
+  end
+
   after_create :notify_connections
 
   default_scope -> {order('created_at DESC')}
