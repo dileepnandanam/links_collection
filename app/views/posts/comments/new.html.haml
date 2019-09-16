@@ -1,4 +1,5 @@
-= simple_form_for([@post, @comment], remote: true, html: {class: 'comment-form'}) do |f|
+- url = @post.is_a?(Post) ? post_comments_path(@post) : create_comment_link_path(@post)
+= simple_form_for(@comment, url: url, remote: true, html: {class: 'comment-form'}) do |f|
   = f.input :text, label: 'Coment'
   = render partial: 'users/imogees'
   = f.hidden_field :parent_id, value: @parent_id
