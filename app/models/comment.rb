@@ -30,7 +30,7 @@ class Comment < ApplicationRecord
 
     Notifier.perform_now_or_later under.user, 'create', self if kind == 'postresponse'
 
-    (post.comments.map(&:user) - [parent.try(:user)]).each do |commenter|
+    (under.comments.map(&:user) - [parent.try(:user)]).each do |commenter|
        Notifier.perform_now_or_later user, 'create', self unless commenter != self.user
     end
 
