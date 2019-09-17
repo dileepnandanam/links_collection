@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :to_new_app
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :current_visitor
   
@@ -55,5 +56,11 @@ class ApplicationController < ActionController::Base
 
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :image, :name, :pin, :gender])
+    end
+
+    def to_new_app
+      if Rails.env.production?
+        redirect_to request.url.replace('xlinks.herokuapp.com', 'faqfacebook.com') if request.host.include?('xlinks.herokuapp.com')
+      end
     end
 end
