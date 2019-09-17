@@ -33,7 +33,8 @@
           
           = link_to "Sign up", new_user_registration_path, class: 'pull-right'
         = link_to 'home', '/home', class: 'pull-right'
-        = link_to 'Update Profle', edit_user_path(current_user), class: 'pull-right'
+        - if current_user.present?
+          = link_to 'Update Profle', edit_user_path(current_user), class: 'pull-right'
         = link_to 'Porn', '/'
         .clearfix
       .common-bg{class: "#{controller_name}-#{action_name}"}
