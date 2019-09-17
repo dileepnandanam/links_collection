@@ -78,4 +78,5 @@ gem 'masonry-rails'
 gem 'yui-compressor'
 gem 'light_imogee'
 gem 'country_select', '~> 4.0'
+gem 'unicorn'
 
