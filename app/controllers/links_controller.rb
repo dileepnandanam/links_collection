@@ -158,7 +158,7 @@ class LinksController < ApplicationController
         all_time_signups: User.count
       },
       visitors_today: Visitor.where(created_at: (1.days.ago..Time.now)).group(:ip).count.length,
-      all_time_visitors: Visitor.group(:ip).count.length,
+      all_time_visitors: Visitor.count,
       total_searches: Query.where(created_at: (1.days.ago..Time.now)).count,
       all_time_total_searches: Query.count,
       top_search_counts_per_user: Query.where(created_at: (1.days.ago..Time.now)).joins(:visitor).group('visitors.ip').count.to_a.map(&:last).sort.reverse[0..30].join(', '),
