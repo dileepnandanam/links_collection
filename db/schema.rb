@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_16_004108) do
+ActiveRecord::Schema.define(version: 2019_09_17_003057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,6 +172,11 @@ ActiveRecord::Schema.define(version: 2019_09_16_004108) do
     t.text "badwords"
     t.string "pin"
     t.string "gender"
+    t.string "country", default: "India"
+    t.string "looking_for", default: "female"
+    t.string "orientation", default: "lesbian"
+    t.integer "age", default: 18
+    t.text "interests"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

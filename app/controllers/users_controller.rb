@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = current_user
   end
 
   def switch
@@ -34,13 +35,19 @@ class UsersController < ApplicationController
   end
 
   def update
-    if params[:user][:pin].to_s == current_user.pin.to_s
-      current_user.update(badwords: params[:user][:badwords])
-      flash[:notice] = 'Monitoring Updated'
-    else
-      flash[:notice] = 'Wrong PIN entered'
+    user_params = params.require(:user).permit(:image, :email, :gender, :orientation, :age, :country, :looking_for, :interests, :password, :password_confirmation, :current_password)
+    @user = current_user
+    if user_params[:current_password].blank?
+      user_params.delete :current_password
+      user_params.delete :password
+      user_params.delete :password_confirmation
     end
-    redirect_to root_path
+
+    if @user.update user_params
+      redirect_to '/home'
+    else
+      render 'edit'
+    end
   end
 
   def posts

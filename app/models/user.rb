@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  
+  attr_accessor :reset_password_token, :reset_password_sent_at, :password, :password_confirmation, :current_password
   has_many :connections
   has_many :questions
   has_many :responses

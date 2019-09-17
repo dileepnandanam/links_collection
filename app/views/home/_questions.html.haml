@@ -3,7 +3,7 @@
     .user-details.float-left
       .avathar= image_tag q.user.image.url(:thumb)
     .question-small-body
-      %h3= link_to(q.user.name, user_path(q.user))
+      %h3= link_to(q.user.name, user_posts_path(q.user))
       %p= auto_link q.text, html: {target: '_blank'}
       = link_to new_user_response_path(q.user), class: 'connect-icon' do
         = image_tag('https://miro.medium.com/max/1200/1*2hod4Lwb9wDrzSTLFVcpOg@2x.png', class: 'float-right connect-icon-img')

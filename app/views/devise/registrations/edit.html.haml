@@ -4,9 +4,13 @@
   = f.error_notification
   .form-inputs
     = f.input :email, required: true, autofocus: true
-    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-      %p
-        Currently waiting confirmation for: #{resource.unconfirmed_email}
+    = f.input :gender, collection: ['male', 'female', 'transgender']
+    = f.input :orientation, collection:['straight', 'gay', 'lesbian', 'bisexual']
+    = f.input :age, collection: (18..150)
+    = f.input :country
+    = f.input :looking_for, collection: ['male', 'female', 'other', 'lesbian', 'gay', 'bisexual', 'transgender']
+    = f.input :interests
+
     = f.input :password,                                     |
       hint: "leave it blank if you don't want to change it", |
       required: false,                                       |

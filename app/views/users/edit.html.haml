@@ -1,8 +1,19 @@
-%h1 Decide what your kid should not see in posts, chats and comments.
-= simple_form_for(current_user, html: { class: 'post-form' }) do |f|
-  = f.input :badwords, label: 'Enter coma seperated list of bad words to be filtered'
-  - f.object.pin = ''
-  = f.input :pin, value: '', type: 'password', label: '4 digit PIN number'
-  .clearfix
-  = f.submit :post, class: 'btn-primary'
-  = link_to 'cancel', '#', class: 'cancel-form', remote: true
+%h2
+  Edit Profile
+= simple_form_for(current_user, html: { method: :put }) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :email, required: true, autofocus: true
+    = f.input :gender, collection: ['male', 'female', 'transgender']
+    = f.input :orientation, collection:['straight', 'gay', 'lesbian', 'bisexual']
+    = f.input :age, collection: (18..150)
+    = f.input :country
+    = f.input :looking_for, collection: ['male', 'female', 'other', 'lesbian', 'gay', 'bisexual', 'transgender']
+    = f.input :interests
+    = f.input :image, label: 'Ptofile picture'
+
+    = f.input :password, hint: "leave it blank if you don't want to change it"
+    = f.input :password_confirmation
+    = f.input :current_password
+  .form-actions
+    = f.button :submit, "Save"

@@ -77,3 +77,5 @@ gem 'rails_autolink'
 gem 'masonry-rails'
 gem 'yui-compressor'
 gem 'light_imogee'
+gem 'country_select', '~> 4.0'
+
