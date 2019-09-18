@@ -34,7 +34,7 @@ module ApplicationHelper
   def intel_title
     teaser = nil
     teaser = "Home made #{params[:q]}" if params[:q].present?
-    [teaser.to_s, "#{@links.try(:first).try(:name) || 'LGBTQ '}"].join(' ')
+    [teaser.to_s, "#{@links.try(:first).try(:name) || 'gillet blade'}"].join(' ')
   end
 
   def result_description
