@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_action :to_new_app
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :current_visitor
   
