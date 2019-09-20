@@ -3,6 +3,9 @@
     .ad.pull-left
       = ad.body.html_safe
   .clearfix
+.featured-tags
+  - FeatureTag.all.each do |tag|
+    = link_to tag.name, "/?q=#{tag.tag}"
 = link_to '+ add link', '#', remote: true, class: 'new-link pull-right'
 .clearfix
 .form-container
