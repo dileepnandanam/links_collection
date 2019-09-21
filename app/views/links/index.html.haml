@@ -5,7 +5,7 @@
   .clearfix
 .featured-tags
   - FeatureTag.all.each do |tag|
-    = link_to tag.name, "/?q=#{tag.tag}", class: 'name'
+    = link_to tag.name, "/?q=#{tag.tag}&orientation=straight", class: 'name'
 = link_to '+ add link', '#', remote: true, class: 'new-link pull-right'
 .clearfix
 .form-container
