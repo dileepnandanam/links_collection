@@ -20,8 +20,10 @@
         .clearfix
         The purpose of This sit is to Promote Our Absolutly FREE Adult dating platform to connect with like-minded partners.
         = link_to 'Start by asking questions about others likes', '/home'
+    = link_to '/', class: 'home-link' do
+      = image_tag(asset_url('home.png'))
     .nav-bar
-      = link_to '/', class: 'site-text' do
+      = link_to '/', class: 'site-text name d-none' do
         %h2.pull-left.site-header
           X-Links Search Engine
       .video-search.white.pull-left.form-group
@@ -30,7 +32,7 @@
         = link_to 'straight', root_path(orientation: 'straight'), class: @orientation == 'straight' || @orientation.blank? ? 'current_orientation' : ''
         = link_to 'lesbian', root_path(orientation: 'lesbian'), class: @orientation == 'lesbian' ? 'current_orientation' : ''
         = link_to 'gay', root_path(orientation: 'gay'), class: @orientation == 'gay' ? 'current_orientation' : ''
-        = link_to 'Find Like-minded partners (new)', '/home'
+        = link_to 'Fuck Like-minded partner', '/home', class: 'network-link'
     .common-bg.white
       - if flash[:notice].present?
         .flash
