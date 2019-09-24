@@ -6,7 +6,7 @@ working_directory root_dir
 
 
 # Set unicorn options
-worker_processes 2
+worker_processes 1
 preload_app true
 timeout 30
 
