@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
       visitor = nil
       if cookies.permanent.signed[:visitor_id].present?
         visitor = Visitor.where(id: cookies.permanent.signed[:visitor_id]).first
+        visitor.update(last_seen: Time.now)
       end
 
       unless visitor

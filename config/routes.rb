@@ -12,10 +12,12 @@ Rails.application.routes.draw do
     put :mark_fav, on: :member
     get :favourite, on: :collection
     put :report, on: :member
-    get :lkjhgertyjnbvftyh, on: :collection
+    get :statistics, on: :collection
     get :comments, on: :member
     post :create_comment, on: :member
   end
+
+  get 'statistics', to: 'links#statistics'
 
   resources :stories
 
