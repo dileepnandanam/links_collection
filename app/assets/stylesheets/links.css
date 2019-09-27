@@ -129,6 +129,9 @@ video:focus {
 
 	outline: none;
 }
+.ad {
+  color: white;
+}
 .delete-tag {
 	display: none;
 }
