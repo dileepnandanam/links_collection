@@ -70,7 +70,7 @@ class Link < ApplicationRecord
 
   PREYS = ['kid', 'child', 'tween', 'baby', 'toddler', 'kwid', 'chyld', 'loli', 'shota', 'minor', 'miner', 'बचा', 'बाल', '萝莉', '儿童', '幼儿', '婴儿', '宝宝', 'Loli', 'lapsi', 'taapero', 'pikkulasten', 'vauva']
   def visible_tags
-    tag_line = tags.downcase
+    tag_line = tags.to_s.downcase
     if PREYS.any?{|word| tag_line.downcase.include?(word)}
       ['predatory content']
     else
