@@ -67,4 +67,14 @@ class Link < ApplicationRecord
   def generate_source_url_now
     EmbedUrlFetcher.new.perform(self.id)
   end
+
+  PREYS = ['kid', 'child', 'tween', 'baby', 'toddler', 'kwid', 'chyld', 'loli', 'shota', 'minor', 'miner', 'बचा', 'बाल', '萝莉', '儿童', '幼儿', '婴儿', '宝宝', 'Loli', 'lapsi', 'taapero', 'pikkulasten', 'vauva']
+  def visible_tags
+    tag_line = tags.downcase
+    if PREYS.any?{|word| tag_line.downcase.include?(word)}
+      ['predatory content']
+    else
+      tags.to_s.split(' ').map(&:strip).uniq.select{|tag| !tag.downcase.starts_with?('new_from') && !tag.starts_with?('10')}
+    end
+  end
 end

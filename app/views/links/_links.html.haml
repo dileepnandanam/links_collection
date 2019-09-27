@@ -20,7 +20,7 @@
             = youtube_embed_code(link.source_url.to_s.split('&').first)
 
     .tags
-      - link.tags.to_s.split(' ').select(&:present?).uniq.each do |tag|
+      - link.visible_tags.each do |tag|
         = link_to root_path(q: tag), class: 'tag pull-left' do
           = tag
           - if current_user.try :admin?
