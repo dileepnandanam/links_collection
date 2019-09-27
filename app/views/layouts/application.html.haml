@@ -14,7 +14,7 @@
     = render partial: 'layouts/tracker'
   %body{style: bg_style}
     = raw result_description
-    - unless cookies[:popup_seen]
+    - if false && cookies[:popup_seen]
       .popup
         = link_to 'close', '#', class: 'btn btn-primary float-right', onclick: '$(this).closest(".popup").remove()'
         .clearfix
