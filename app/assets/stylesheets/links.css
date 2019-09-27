@@ -130,7 +130,7 @@ video:focus {
 	outline: none;
 }
 .ad {
-  color: white;
+  color: white !important;
 }
 .delete-tag {
 	display: none;
