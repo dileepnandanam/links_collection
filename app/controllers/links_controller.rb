@@ -72,6 +72,16 @@ class LinksController < ApplicationController
     end
   end
 
+  def feature
+    featuring = Link.find(params[:id])
+    if featuring.present? && current_user.try(:admin?)
+      current = Link.where(featured: true).first
+      current.update(featured: false) if current.present?
+      featuring.update(featured: true)
+    end
+    render plain: 'ok'
+  end
+
   def favourite
     @links = Link.favourite.paginate(per_page: 8, page: params[:page])
     @count = Link.favourite.count

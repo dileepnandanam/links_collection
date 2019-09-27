@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_24_012433) do
+ActiveRecord::Schema.define(version: 2019_09_27_161311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 2019_09_24_012433) do
     t.boolean "hidden", default: false
     t.boolean "favourite", default: false
     t.integer "visitor_id"
+    t.boolean "featured"
   end
 
   create_table "notifications", force: :cascade do |t|

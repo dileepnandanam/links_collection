@@ -30,7 +30,7 @@
     = link_to comments_link_path(link), remote: true, class: 'comment-icon connect-icon' do
       = image_tag('https://image.flaticon.com/icons/svg/1380/1380338.svg', class: 'connect-icon-img comment-icon')
     .comment-section
-- if links.next_page
+- if !defined?(featured) && links.next_page
   .more-links.load-random
     .loader
       = image_tag(asset_path 'loader.gif')

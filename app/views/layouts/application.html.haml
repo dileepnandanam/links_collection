@@ -37,4 +37,6 @@
       - if flash[:notice].present?
         .flash
           = flash[:notice]
+      .featured-video{style: "background-image: url('https://ip.com/wp-content/uploads/2018/07/fireworks-1170x878.png'); background-size: cover; margin-bottom: 12px;"}
+        = render partial: 'links/links', locals: {links: Link.featured, featured: true}
       = yield

@@ -175,6 +175,9 @@ a.name:hover {
 .url, .retry, .count, .new-link, .tag {
 	font-size: 22px;
 }
+.retry {
+  color: blue !important;
+}
 .link-action-user {
   background-color: transparent;
   padding: 6px;

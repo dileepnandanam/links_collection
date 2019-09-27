@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'links#index'
   resources :links do
+    put :feature, on: :member
   	put :retry, on: :member
     get :search, on: :collection
     put :tag, on: :member

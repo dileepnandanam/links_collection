@@ -77,4 +77,8 @@ class Link < ApplicationRecord
       tags.to_s.split(' ').map(&:strip).uniq.select{|tag| !tag.downcase.starts_with?('new_from') && !tag.starts_with?('10')}
     end
   end
+
+  def self.featured
+    Link.where(featured: true)
+  end
 end
