@@ -5,6 +5,7 @@
     = link_to URI.parse(link.url.chomp).host, link.url.chomp,  class: 'url pull-left', target: '_blank'
     = link_to 'reload', retry_link_path(link), class: 'link-action-user retry pull-right', remote: true, method: :put
     = link_to 'REPORT', report_link_path(link), class: 'link-action-user report pull-right', remote: true, method: :put
+    = link_to 'feature', feature_link_path(link), remote: true, method: :put, class: 'link-action-user pull-right'
     = render partial: 'hide', locals: {link: link}
     .clearfix
     - if true || link.source_url.present?
