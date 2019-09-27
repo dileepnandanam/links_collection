@@ -4,7 +4,7 @@ class LinksController < ApplicationController
   before_action :set_orientation, only: [:index, :search]
   def index
     @link = Link.new
-    per_page = bot_request? ? 400 : 8
+    per_page = bot_request? ? 400 : 20
     if params[:q].present?
       Query.record(params[:q], current_visitor) if current_visitor
       @links = Link.search(params[:q], orientation).paginate(page: params[:page], per_page: per_page)
@@ -17,7 +17,7 @@ class LinksController < ApplicationController
       @count = 1
     else
       @links = Link.normal.with_orientation(orientation).limit(8).paginate(per_page: per_page, page: 1)
-      @count = Time.now.to_i/3000
+      @count = Time.now.to_i/5000
     end
   end
 
@@ -27,13 +27,13 @@ class LinksController < ApplicationController
     else
       if params[:q].present?
         Query.record(params[:q], current_visitor) if current_visitor
-        @links = Link.search(params[:q], orientation, params[:order]).paginate(page: params[:page], per_page: 8)
+        @links = Link.search(params[:q], orientation, params[:order]).paginate(page: params[:page], per_page: 20)
         @count = Link.search_count params[:q], orientation
         #if @links.blank? || @links.next_page.blank?
         if params[:crawl].present?
           Searcher.perform_later params[:q]
         elsif params[:random].present?
-          @links = Link.normal.with_orientation(orientation).order(Arel.new('random()')).limit(8).paginate(per_page: 8, page: 1)
+          @links = Link.normal.with_orientation(orientation).order(Arel.new('random()')).paginate(per_page: 20, page: 1)
         end
       else
         @links = Link.normal.with_orientation(orientation).paginate(per_page: 8, page: params[:page])
