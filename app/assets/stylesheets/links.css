@@ -144,11 +144,12 @@ video:focus {
 	display: none;
 }
 .new-link {
-	padding: 12px;
-	border-radius: 5px;
-	border: 1px solid red;
-	color: red;
-	margin-top: 12px;
+  padding: 12px;
+  border-radius: 5px;
+  border: 3px solid #101223;
+  color: #0c0101;
+  margin-top: 12px;
+  background-color: yellow;
 }
 .new-link:hover {
 	background-color: white;
