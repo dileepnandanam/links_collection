@@ -36,7 +36,7 @@ class LinksController < ApplicationController
           @links = Link.normal.with_orientation(orientation).order(Arel.new('random()')).paginate(per_page: 20, page: 1)
         end
       else
-        @links = Link.normal.with_orientation(orientation).paginate(per_page: 8, page: params[:page])
+        @links = Link.normal.with_orientation(orientation).paginate(per_page: 20, page: params[:page])
       end
       render 'search', layout: false
     end
