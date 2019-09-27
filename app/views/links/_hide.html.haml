@@ -9,3 +9,4 @@
       = link_to 'unfavourite', mark_fav_link_path(link), method: :put, remote: true, class: 'fav pull-left'
     - else
       = link_to 'favourite', mark_fav_link_path(link), method: :put, remote: true, class: 'fav pull-left'
+    = link_to 'feature', feature_link_path(link), remote: true, method: :put, class: 'link-action-user pull-right'
