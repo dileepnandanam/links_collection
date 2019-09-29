@@ -26,5 +26,5 @@ class AnonShare < ActiveRecord::Base
     self.new(JSON.parse(decrypted))
   end
 
-  KEY = '1'.reverse
+  KEY = '1AFCDE3EAA'
 end

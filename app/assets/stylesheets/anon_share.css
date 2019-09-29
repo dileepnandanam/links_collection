@@ -5,6 +5,9 @@
   background-color: yellow;
   overflow: auto;
 }
+.blank {
+  padding: 12px;
+}
 .anon-share h1 {
   color: red;
 }

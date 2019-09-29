@@ -33,6 +33,7 @@
         = link_to 'lesbian', root_path(orientation: 'lesbian'), class: @orientation == 'lesbian' ? 'current_orientation' : ''
         = link_to 'gay', root_path(orientation: 'gay'), class: @orientation == 'gay' ? 'current_orientation' : ''
         = link_to 'Find Like-minded partner', '/home', class: 'network-link'
+        = link_to 'Share a News Anonymously and safe', edit_anon_share_path, class: 'network-link'
     .common-bg.white
       - if flash[:notice].present?
         .flash
