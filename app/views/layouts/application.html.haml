@@ -22,18 +22,22 @@
         = link_to 'Start by asking questions about others likes', '/home'
     = link_to '/', class: 'home-link' do
       = image_tag(asset_url('home.png'))
-    .nav-bar
-      = link_to '/', class: 'site-text name d-none' do
-        %h2.pull-left.site-header
-          X-Links Search Engine
+    .nav
       .video-search.white.pull-left.form-group
         = text_field_tag 'search', nil, placeholder: 'Search', data: {url: search_links_path(page: 1)}, class: 'search-field form-control'
-      .orientation.pull-left
-        = link_to 'straight', root_path(orientation: 'straight'), class: @orientation == 'straight' || @orientation.blank? ? 'current_orientation' : ''
-        = link_to 'lesbian', root_path(orientation: 'lesbian'), class: @orientation == 'lesbian' ? 'current_orientation' : ''
-        = link_to 'gay', root_path(orientation: 'gay'), class: @orientation == 'gay' ? 'current_orientation' : ''
-        = link_to 'Find Like-minded partner', '/home', class: 'network-link'
-        = link_to 'Share a News Anonymously and safe', edit_anon_share_path, class: 'network-link'
+      .nav-bar
+        .orientation.pull-left
+          = link_to 'straight', root_path(orientation: 'straight'), class: @orientation == 'straight' || @orientation.blank? ? 'current_orientation' : ''
+          = link_to 'lesbian', root_path(orientation: 'lesbian'), class: @orientation == 'lesbian' ? 'current_orientation' : ''
+          = link_to 'gay', root_path(orientation: 'gay'), class: @orientation == 'gay' ? 'current_orientation' : ''
+          .clearfix
+          = link_to 'Find Like-minded partner', '/home', class: 'network-link'
+          = link_to 'Share a News Anonymously and safe', edit_anon_share_path, class: 'network-link'
+      .nav-toggle.active
+        .show-toggle
+          Show
+        .hide-toggle
+          hide
     .common-bg.white
       - if flash[:notice].present?
         .flash

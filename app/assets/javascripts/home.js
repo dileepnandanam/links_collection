@@ -33,4 +33,10 @@ $(document).on('turbolinks:load', function() {
 	$('.gender_form').find('input').on('change', function() {
 		$(this).closest('form').submit().remove()
 	})
+
+	$('.nav-toggle').on('click', function() {
+		$(this).toggleClass('active')
+		$('.nav-bar').toggleClass('d-none')
+	})
+	$('.common-bg').css('padding-top', $('.nav').css('height'))
 })

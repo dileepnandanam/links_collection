@@ -48,9 +48,14 @@ body {
   display: block;
   word-wrap: break-word;
 }
-.nav-bar {
+.nav {
+  z-index: 999999992147483647;
+  width: 100%;
   position: fixed;
   top: 0px;
+}
+.nav-bar {
+  width: 100%;
 	padding: 10px;
 	background-color: black;
 	color: white;
@@ -64,11 +69,14 @@ body {
 	display: inline;
 }
 .video-search {
+  padding: 10px;
+  margin: 0px !important;
 	display: inline;
-	margin-left: 30px;
+	width: 100% !important;
 }
 .video-search input {
-	width: 60%;
+	width: 85% !important;
+  margin: auto;
 	padding: 6px;
 	font-weight: bold;
 }
@@ -127,6 +135,7 @@ input[type='radio'] {
 	display: inline;
 }
 .orientation a {
+  padding: 3px;
 	margin: 0px 12px 0px 12px;
 	color: #fde204;
 	font-size: 21px;
@@ -180,11 +189,31 @@ input[type='radio'] {
   background-image: linear-gradient(45deg, black, #993434);
   display: inline-block;
   border-radius: 12px;
-  line-height: 14px;
+  line-height: 24px;
   text-decoration: none;
   color: white !important;
   border: 2px solid yellow;
+  margin: 12px 12px !important;
+}
+.nav-toggle, .nav-toggle div {
+  width: 100%;
+  font-size: 24px;
+  text-align: center;
+  color: yellow;
+  background-color: black;
 }
 .nav-bar a {
   display: inline-block;
+}
+.show-toggle {
+  display: block;
+}
+.hide-toggle {
+  display: none;
+}
+.active .hide-toggle {
+  display: block !important;
+}
+.active .show-toggle {
+  display: none !important;
 }
