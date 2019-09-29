@@ -72,10 +72,10 @@ body {
   padding: 10px;
   margin: 0px !important;
 	display: inline;
-	width: 100% !important;
+	width: 78% !important;
 }
 .video-search input {
-	width: 85% !important;
+	width: 100% !important;
   margin: auto;
 	padding: 6px;
 	font-weight: bold;
@@ -216,4 +216,13 @@ input[type='radio'] {
 }
 .active .show-toggle {
   display: none !important;
+}
+.home-link {
+  padding: 0px !important;
+  width: 20%;
+  max-width: 30px;
+  margin: 12px 3px 0px 12px;
+}
+.home-link img {
+  margin: 0px !important;
 }

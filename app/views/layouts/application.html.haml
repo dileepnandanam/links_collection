@@ -14,16 +14,10 @@
     = render partial: 'layouts/tracker'
   %body{style: bg_style}
     = raw result_description
-    - if false && cookies[:popup_seen]
-      .popup
-        = link_to 'close', '#', class: 'btn btn-primary float-right', onclick: '$(this).closest(".popup").remove()'
-        .clearfix
-        The purpose of This sit is to Promote Our Absolutly FREE Adult dating platform to connect with like-minded partners.
-        = link_to 'Start by asking questions about others likes', '/home'
-    = link_to '/', class: 'home-link' do
-      = image_tag(asset_url('home.png'))
     .nav
-      .video-search.white.pull-left.form-group
+      = link_to '/', class: 'home-link pull-left float-left' do
+        = image_tag(asset_url('home.png'))
+      .video-search.white.pull-left.float-left.form-group
         = text_field_tag 'search', nil, placeholder: 'Search', data: {url: search_links_path(page: 1)}, class: 'search-field form-control'
       .nav-bar
         .orientation.pull-left
