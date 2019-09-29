@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'links#index'
+  resource :anon_share
   resources :links do
     put :feature, on: :member
   	put :retry, on: :member

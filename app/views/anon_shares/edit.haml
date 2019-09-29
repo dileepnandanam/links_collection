@@ -1,0 +1,14 @@
+%h1
+  Prepare your post
+.question.response-form
+  = form_for @anon_share, url: anon_share_path do |f|
+    .form-group
+      Title
+      = f.text_field :title, class: 'form-control'
+    .form-group
+      Body
+      = f.text_area :text, class: 'form-control'
+    .form-group
+      Your name(if you want to share)
+      = f.text_field :user_name, class: 'form-control'
+    = f.submit

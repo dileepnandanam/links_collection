@@ -1,0 +1,7 @@
+.anon-share
+  %h1= @anon_share.title
+  = image_tag('https://image.flaticon.com/icons/svg/1380/1380338.svg')
+  %p= raw @anon_share.text
+  .float-left
+    = link_to 'Share', anon_share_url(says: params[:says]), class: 'anon-share-share-btn'
+  .float-right= @anon_share.user_name

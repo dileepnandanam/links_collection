@@ -1,0 +1,44 @@
+.anon-share {
+  border: 1px solid;
+  border-radius: 12px;
+  padding: 2%;
+  background-color: yellow;
+  overflow: auto;
+}
+.anon-share h1 {
+  color: red;
+}
+.anon-share p {
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+}
+.anon-share-share-btn {
+  margin-top: 16px;
+  display: inline-block;
+  padding: 6px;
+  border-radius: 10px;
+  background-color: red;
+  color: white;
+  font-size: 30px;
+}
+.anon-share-share-btn:hover {
+  text-decoration: none;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background-color: blue;
+  color: white;
+  font-size: 30px;
+  text-shadow: 0px 0px 0px !important;
+
+}
+.anon-share .float-right {
+  color: green;
+  font-size: 26px;
+}
+.quote {
+  font-size: 50px;
+}
+.anon-share img {
+  width: 36px;
+}
