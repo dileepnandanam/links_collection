@@ -218,10 +218,13 @@ input[type='radio'] {
   display: none !important;
 }
 .home-link {
-  padding: 0px !important;
+  padding: 4px !important;
   width: 20%;
-  max-width: 30px;
+  max-width: 35px;
   margin: 12px 3px 0px 12px;
+  height: 37px;
+  background-color: red;
+  border-radius: 5px;
 }
 .home-link img {
   margin: 0px !important;
