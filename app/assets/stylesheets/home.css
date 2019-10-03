@@ -1,3 +1,32 @@
+.network-link {
+	padding: 7px 11px !important;
+	text-shadow: 0px 0px 0px !important;
+}
+.orientation a, .orientation a:hover {
+  text-decoration: none;
+}
+.hide-toggle:hover {
+  cursor: pointer;
+}
+.featured-video .tag, .featured-video .retry, .featured-video .report {
+  border: 1px solid white;
+}
+.featured-video .tag {
+	color: white;
+}
+.featured-video h2 {
+	color: white;
+}
+.featured-video .retry {
+	color: white !important;
+}
+.home-link {
+	background-color: #eab0de !important;
+}
+.retry {
+	color: #524a10 !important;
+	border-color: 2px solid #524a10 !important;
+}
 .fb-sign-in {
 	color: white;
 	background: blue;

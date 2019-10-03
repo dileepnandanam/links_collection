@@ -15,8 +15,25 @@
   %body{style: bg_style}
     = raw result_description
     .nav
-      = link_to '/', class: 'home-link pull-left float-left' do
-        = image_tag(asset_url('home.png'))
+      .home-link
+        = link_to '/', class: 'home-link-a' do
+          %font{:color => "#FF0000"} f
+          %font{:color => "#FF6600"} a
+          %font{:color => "#FFCC00"} Q
+          %font{:color => "#FFff00"} f
+          %font{:color => "#99ff00"} a
+          %font{:color => "#33ff00"} c
+          %font{:color => "#00ff00"} e
+          %font{:color => "#00ff66"} b
+          %font{:color => "#00ffCC"} o
+          %font{:color => "#00ffff"} o
+          %font{:color => "#00CCff"} k
+          %font{:color => "#0066ff"} .
+          %font{:color => "#0000ff"} c
+          %font{:color => "#3300ff"} o
+          %font{:color => "#9900ff"} m
+
+
       .video-search.white.pull-left.float-left.form-group
         = text_field_tag 'search', nil, placeholder: 'Search', data: {url: search_links_path(page: 1)}, class: 'search-field form-control'
       .nav-bar

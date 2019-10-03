@@ -8,4 +8,7 @@
   .home-link {
     display: block !important;
   }
+  .common-bg {
+    padding-top: 218px;
+  }
 }

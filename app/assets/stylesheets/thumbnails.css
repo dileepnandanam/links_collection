@@ -1,0 +1,22 @@
+.thumbnail {
+  margin-top: 10px;
+  width: 100%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.youtube {
+  background-image: url('https://www.gyanblog.com/assets/img/2018/05/youtube_thumbnails.jpg');
+}
+.pornhub {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Pornhub-logo.svg/1200px-Pornhub-logo.svg.png');
+}
+.xnxx {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/XVideos_logo.svg/1024px-XVideos_logo.svg.png');
+}
+.xvideos {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/XVideos_logo.svg/1024px-XVideos_logo.svg.png');
+}
+.xhamster {
+  background-image: url('https://www.logosurfer.com/wp-content/uploads/2018/03/xhamster-logo_1.png');
+}
