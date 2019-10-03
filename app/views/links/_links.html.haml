@@ -8,7 +8,7 @@
     = render partial: 'hide', locals: {link: link}
     .clearfix
     - if true || link.source_url.present?
-      .preview
+      .preview{class: thumb_class(link.url)}
         -if link.url.include?('xnxx.') || link.url.include?('xvideos.')
           = video_tag(link.source_url.to_s, name: 'media', controls: '', id: link.id, class: 'video-player')
         - elsif link.url.include?('pornhub.') || link.url.include?('xhamster.')

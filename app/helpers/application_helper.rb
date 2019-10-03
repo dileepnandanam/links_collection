@@ -1,4 +1,11 @@
 module ApplicationHelper
+  def thumb_class(url)
+    url = url.start_with?('http') ? url.rstrip : "http://#{uri}".rstrip
+    uri = URI.parse(url.rstrip)
+    host = uri.host
+    subdomine = host.split('.')[-2]
+  end
+
   def display_for_bot
     user_agent =  request.env['HTTP_USER_AGENT'].downcase
     if user_agent.index('googlebot')
