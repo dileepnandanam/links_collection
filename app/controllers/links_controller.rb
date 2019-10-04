@@ -198,8 +198,15 @@ class LinksController < ApplicationController
   def set_orientation
     if params[:orientation].present?
       cookies[:orientation] = params[:orientation]
+    elsif params[:q].to_s.include?('gay')
+      cookies[:orientation] = 'gay'
+    elsif params[:q].to_s.include?('lesb')
+      cookies[:orientation] = 'lesbian'
+    elsif params[:q].include?('straight')
+      cookies[:orientation] = nil
     end
   end
+
   def link_params
     params.require(:link).permit(:name, :url, :tags)
   end

@@ -15,6 +15,8 @@
   %body{style: bg_style}
     = raw result_description
     .nav
+      .d-none
+        = cookies[:orientation]
       .home-link
         = link_to '/', class: 'home-link-a' do
           %font{:color => "#FF0000"} f
@@ -36,7 +38,7 @@
 
       .video-search.white.pull-left.float-left.form-group
         = text_field_tag 'search', nil, placeholder: 'Search', data: {url: search_links_path(page: 1)}, class: 'search-field form-control'
-      .nav-bar
+      .d-none
         .orientation.pull-left
           = link_to 'straight', root_path(orientation: 'straight'), class: @orientation == 'straight' || @orientation.blank? ? 'current_orientation' : ''
           = link_to 'lesbian', root_path(orientation: 'lesbian'), class: @orientation == 'lesbian' ? 'current_orientation' : ''
@@ -44,7 +46,7 @@
           .clearfix
           = link_to 'Find Like-minded partner', '/home', class: 'network-link'
           = link_to 'Share a News Anonymously and safe', edit_anon_share_path, class: 'network-link'
-      .nav-toggle.active
+      .nav-toggle.active.d-none
         .show-toggle
           Show
         .hide-toggle
