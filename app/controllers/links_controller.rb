@@ -161,8 +161,11 @@ class LinksController < ApplicationController
     render json: {
       date: Date.today,
       counts: {
-        gay: Link.search_count('gay', 'gay'),
-        lesbian: Link.search_count('lesb', 'lesb'),
+        youtube: Link.where("url like '%youtube%'").count,
+        xnxx: Link.where("url like '%xnxx%'").count,
+        pornhub: Link.where("url like '%pornhub%'").count,
+        xvideos: Link.where("url like '%xvideo%'").count,
+        xhamster: Link.where("url like '%xhamster%'").count,
         total: Link.count,
         indexed_today: Link.where(created_at: (1.days.ago..Time.now)).count,
         signups: User.where(created_at: (1.days.ago..Time.now)).count,
