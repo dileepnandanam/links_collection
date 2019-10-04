@@ -202,7 +202,7 @@ class LinksController < ApplicationController
       cookies[:orientation] = 'gay'
     elsif params[:q].to_s.include?('lesb')
       cookies[:orientation] = 'lesbian'
-    elsif params[:q].include?('straight')
+    elsif params[:q].to_s.include?('straight')
       cookies[:orientation] = nil
     end
   end
