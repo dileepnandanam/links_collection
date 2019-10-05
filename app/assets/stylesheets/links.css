@@ -11,17 +11,13 @@
 	display: inline-block;
 	padding: 1% !important;
 }
-.link.loading .preview{
+.link.loading .preview {
   background-image: url('https://forum.archlabslinux.com/uploads/default/original/2X/d/de328f51c9803fafa5e077aad1b174ffcb575e0b.gif');
 }
-.link.loading video, .link.loading iframe {
+.link.loading video, .link.loading iframe, .link.loading .tags {
   display: none;
 }
-.link.loading .name {
-  height: 45px;
-  background-color: rgba(9,9,9,0.4);
-}
-.link.loading .name h2, .link.loading a{
+.link.loading .name h2, .link.loading a {
   display: none;
 }
 .link-input {
