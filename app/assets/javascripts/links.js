@@ -1,4 +1,5 @@
 $(document).on('turbolinks:load', function() {
+	document.documentElement.scrollTop = 0
 	initMasonry = function() {
 		$('.links').masonry({
 			itemSelector: '.link, .load-random',
@@ -17,6 +18,8 @@ $(document).on('turbolinks:load', function() {
 
 	search = function() {
 		query = $('.video-search input').val()
+		$('.link').addClass('loading')
+		$('.featured-video').fadeOut('fast')
 		$.ajax({
 			url: $(this).data('url'),
 			data: {
@@ -27,6 +30,7 @@ $(document).on('turbolinks:load', function() {
 				//reinitMasonry()
 				//reloadVideo()
 				window.history.pushState(null, 'search for: ' + query, '?q=' + query)
+				$('.link').removeClass('loading')
 			}
 		})
 	}
@@ -74,6 +78,13 @@ $(document).on('turbolinks:load', function() {
 				click_more_link()
 			}
 		}
+
+		if(document.documentElement.scrollTop  > window.scroll_position)
+			$('.nav').fadeOut('slow')
+		else
+			$('.nav').fadeIn('slow')
+
+		window.scroll_position = document.documentElement.scrollTop
 	}
 	$(document).on('keypress', 'input.tag', function(e){
 		if(e.which == 13) {
