@@ -6,7 +6,10 @@ initMasonry = function() {
 	}
 $(document).on('turbolinks:load', function() {
 	
-	
+	$(document).on('click', 'a', function() {
+		$(this).addClass('clicked')
+		setTimeout(function() { $(elem).removeClass('clicked') }, 1000)
+	})
 
 	search = function() {
 		query = $('.search input').val()
