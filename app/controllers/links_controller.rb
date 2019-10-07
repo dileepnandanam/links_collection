@@ -173,7 +173,7 @@ class LinksController < ApplicationController
       },
       visitors_today: Visitor.where(created_at: (1.days.ago..Time.now)).count,
       uniq_ips_today: Visitor.where(created_at: (1.days.ago..Time.now)).group(:ip).select('ip').length,
-      current_ips_in_a_minute: Visitor.where(t[:created_at].in(1.minutes.ago..Time.now).or(t[:last_seen].in(1.minutes.ago..Time.now))).count('distinct ip'),
+      #current_ips_in_a_minute: Visitor.where(t[:created_at].in(1.minutes.ago..Time.now).or(t[:last_seen].in(1.minutes.ago..Time.now))).count('distinct ip'),
       uniq_ips_all_time: Visitor.group(:ip).select('ip').length,
       all_time_visitors: Visitor.count,
       total_searches: Query.where(created_at: (1.days.ago..Time.now)).count,
