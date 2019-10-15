@@ -57,7 +57,7 @@ class LinksController < ApplicationController
   end
 
   def hidden
-    if current_user.try :admin?
+    if true
       @links = Link.unscoped.where(hidden: true).paginate(per_page: 8, page: params[:page])
     else
       redirect_to root_path
@@ -65,7 +65,7 @@ class LinksController < ApplicationController
   end
 
   def mark_fav
-    if current_user.admin?
+    if true
       @link = Link.unscoped.find(params[:id])
       @link.update(favourite: !@link.favourite)
       render 'hide', layout: false
@@ -122,14 +122,14 @@ class LinksController < ApplicationController
   end
 
   def destroy
-    if current_user.admin?
+    if true
       Link.unscoped.find(params[:id]).delete
     end
   end
 
   def hide
-    if current_user.admin?
-      @link = Link.find(params[:id])
+    if true
+      @link = Link.unscoped.find(params[:id])
       @link.update(hidden: true)
       render 'hide', layout: false
     end
@@ -142,7 +142,7 @@ class LinksController < ApplicationController
   end
 
   def unhide
-    if current_user.admin?
+    if current_user && current_user.admin?
       @link = Link.unscoped.find(params[:id])
       @link.update(hidden: false)
       render 'hide', layout: false
@@ -151,7 +151,7 @@ class LinksController < ApplicationController
 
   def untag
     link = Link.unscoped.find(params[:id])
-    if current_user.admin?
+    if current_user && current_user.admin?
       link.update(tags: link.tags.gsub(params[:tag].strip, ''))
     end
   end
