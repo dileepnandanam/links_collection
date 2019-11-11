@@ -1,35 +1,38 @@
 - links.each do |link|
   .link.col-lg-6.col-md-12.col-12.pull-left
-    = link_to link.url.chomp, class: 'name', target: '_blank' do
+    = link_to class: 'name', target: '_blank' do
       %h2= h(link.name)
-    = link_to URI.parse(link.url.chomp).host, link.url.chomp,  class: 'url pull-left', target: '_blank'
-    = link_to 'reload', retry_link_path(link), class: 'link-action-user retry pull-right', remote: true, method: :put
-    = link_to 'REPORT', report_link_path(link), class: 'link-action-user report pull-right', remote: true, method: :put
-    = render partial: 'hide', locals: {link: link}
+    = link_to link.url, link, class: 'url pull-left', target: '_blank'
     .clearfix
-    - if true || link.source_url.present?
-      .preview.thumbnail{class: thumb_class(link.url)}
-        -if link.url.include?('xnxx.') || link.url.include?('xvideos.')
-          = video_tag(link.source_url.to_s, name: 'media', controls: '', id: link.id, class: 'video-player')
-        - elsif link.url.include?('pornhub.') || link.url.include?('xhamster.')
-          .youtube-container
-            %iframe{src: link.source_url.to_s, height: 315, width: 560}
-            
-        - else link.url.include? 'youtube.'
-          .youtube-container
-            = youtube_embed_code(link.source_url.to_s.split('&').first)
+    .preview.thumbnail{class: thumb_class(link.url)}
+      -if link.url.include?('xnxx.') || link.url.include?('xvideos.')
+        = video_tag(link.source_url.to_s, name: 'media', controls: '', id: link.id, class: 'video-player')
+      - elsif link.url.include?('pornhub.') || link.url.include?('xhamster.')
+        .youtube-container
+          %iframe{src: link.source_url.to_s, height: 315, width: 560}
+          
+      - elsif link.url.include? 'youtube.'
+        .youtube-container
+          = youtube_embed_code(link.source_url.to_s.split('&').first)
+      - else
+        = raw link.body
+  .clearfix
+  = link_to 'reload', retry_link_path(link), class: 'link-action-user retry pull-right', remote: true, method: :put
+  = link_to 'REPORT', report_link_path(link), class: 'link-action-user report pull-right', remote: true, method: :put
+  = render partial: 'hide', locals: {link: link}
 
-    .tags
-      - link.visible_tags.each do |tag|
-        = link_to root_path(q: tag), class: 'tag pull-left' do
-          = tag
-          - if true
-            = link_to 'x', untag_link_path(link, tag: tag), class: 'delete-tag', method: :put, remote: true
-    .clearfix
-    %input.tag.pull-left{data: {url: tag_link_path(link)}, placeholder: 'enter tag'}
-    = link_to comments_link_path(link), remote: true, class: 'comment-icon connect-icon' do
-      = image_tag('https://image.flaticon.com/icons/svg/1380/1380338.svg', class: 'connect-icon-img comment-icon')
-    .comment-section
+
+  .tags
+    - link.visible_tags.each do |tag|
+      = link_to root_path(q: tag), class: 'tag pull-left' do
+        = tag
+        - if true
+          = link_to 'x', untag_link_path(link, tag: tag), class: 'delete-tag', method: :put, remote: true
+  .clearfix
+  %input.tag.pull-left{data: {url: tag_link_path(link)}, placeholder: 'enter tag'}
+  = link_to comments_link_path(link), remote: true, class: 'comment-icon connect-icon' do
+    = image_tag('https://image.flaticon.com/icons/svg/1380/1380338.svg', class: 'connect-icon-img comment-icon')
+  .comment-section
 - if !defined?(featured) && links.next_page
   .more-links.load-random
     .loader

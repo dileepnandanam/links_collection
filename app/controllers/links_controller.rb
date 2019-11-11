@@ -4,7 +4,7 @@ class LinksController < ApplicationController
   before_action :set_orientation, only: [:index, :search]
   def index
     @link = Link.new
-    per_page = bot_request? ? 400 : 20
+    per_page = bot_request? ? 100 : 20
     if params[:q].present?
       Query.record(params[:q], current_visitor) if current_visitor
       @links = Link.search(params[:q], orientation).paginate(page: params[:page], per_page: per_page)
@@ -17,7 +17,7 @@ class LinksController < ApplicationController
       @count = 1
     else
       @links = Link.normal.with_orientation(orientation).limit(8).paginate(per_page: per_page, page: 1)
-      @count = Link.unscoped.count
+      @count = Link.normal.count
     end
   end
 
@@ -91,6 +91,7 @@ class LinksController < ApplicationController
     @link = Link.new(link_params)
     if @link.name.blank?
       @link.url.split(/[,\s\n]+/).select(&:present?).each do |url|
+        binding.pry
         uri = URI.parse url
         if uri.host.present?
           link = Link.create(url: uri.host.blank? ? "#{URI.parse(url).scheme}://#{URI.parse(url).host}#{url}" : url, visitor_id: current_visitor.id)
@@ -157,34 +158,7 @@ class LinksController < ApplicationController
   end
 
   def statistics
-    t = Visitor.arel_table
-    render json: {
-      date: Date.today,
-      counts: {
-        youtube: Link.where("url like '%youtube%'").count,
-        xnxx: Link.where("url like '%xnxx%'").count,
-        pornhub: Link.where("url like '%pornhub%'").count,
-        xvideos: Link.where("url like '%xvideo%'").count,
-        xhamster: Link.where("url like '%xhamster%'").count,
-        total: Link.count,
-        indexed_today: Link.where(created_at: (1.days.ago..Time.now)).count,
-        signups: User.where(created_at: (1.days.ago..Time.now)).count,
-        all_time_signups: User.count
-      },
-      visitors_today: Visitor.where(created_at: (1.days.ago..Time.now)).count,
-      uniq_ips_today: Visitor.where(created_at: (1.days.ago..Time.now)).group(:ip).select('ip').length,
-      #current_ips_in_a_minute: Visitor.where(t[:created_at].in(1.minutes.ago..Time.now).or(t[:last_seen].in(1.minutes.ago..Time.now))).count('distinct ip'),
-      uniq_ips_all_time: Visitor.group(:ip).select('ip').length,
-      all_time_visitors: Visitor.count,
-      total_searches: Query.where(created_at: (1.days.ago..Time.now)).count,
-      all_time_total_searches: Query.count,
-      top_search_counts_per_user: Query.where(created_at: (1.days.ago..Time.now)).group('visitor_id').count.to_a.map(&:last).sort.reverse[0..30].join(', '),
-      flags: Contribution.where(created_at: (1.days.ago..Time.now), contributable_type: 'Flag').all.map{|c| Link.find(c.contributable_id).url},
-      new_tags: Contribution.where(created_at: (1.days.ago..Time.now), contributable_type: 'Tag').all.map{|c| "#{c.content} added to #{Link.find(c.contributable_id).name} #{Link.find(c.contributable_id).url}"},
-      queries: Query.where(created_at: (1.days.ago..Time.now)).group(:key).count.sort_by{|k, count| count.to_i}.reverse.map{|q,c| "#{q}(#{c})"},
-      all_time_top_queries: Query.group(:key).count.sort_by{|k, count| count.to_i}.reverse[0..30].map{|q,c| "#{q}(#{c})"}
-
-   } 
+    render plain Visitor.group(:ip).select('ip').length 
   end
 
   protected
@@ -211,6 +185,6 @@ class LinksController < ApplicationController
   end
 
   def link_params
-    params.require(:link).permit(:name, :url, :tags)
+    params.require(:link).permit(:name, :url, :tags, :text, :body)
   end
 end

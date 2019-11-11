@@ -1,6 +1,7 @@
 module ApplicationHelper
   def thumb_class(url)
-    url = url.start_with?('http') ? url.rstrip : "http://#{uri}".rstrip
+    return
+    url = url.start_with?('http') ? url.rstrip : "http://#{url}".rstrip
     uri = URI.parse(url.rstrip)
     host = uri.host
     subdomine = host.split('.')[-2]

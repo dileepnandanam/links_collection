@@ -2,7 +2,15 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2'
+gem "activerecord"
+gem "activemodel"
+gem "actionpack"
+gem "actionview"
+gem "actionmailer"
+gem "activejob"
+gem "activesupport"
+gem "railties"
+gem "sprockets-rails"
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets

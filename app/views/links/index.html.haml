@@ -17,4 +17,4 @@
 .links
   = render template: 'links/search'
 - if bot_request?
-  = will_paginate @links, inner_window: 1000, outer_window: 1000, params: {q: params[:q]}
+  = will_paginate @links, per_page: 100
