@@ -1,11 +1,12 @@
 - if true
-  - if link.hidden
-    = link_to "show", unhide_link_path(link), remote: true, class: 'link-action-user retry toggle-visibility pull-left', method: :put
-  - else
-    = link_to "hide", hide_link_path(link), remote: true, class: 'link-action-user retry toggle-visibility pull-left', method: :put
-  = link_to "delete", link_path(link), remote: true, class: 'link-action-user retry delete-link pull-left', method: :delete
+  - if current_user && current_user.admin?
+    - if link.hidden  
+      = link_to "show", unhide_link_path(link), remote: true, class: 'link-action-user retry pull-right', method: :put
+    - else
+      = link_to "hide", hide_link_path(link), remote: true, class: 'link-action-user retry pull-right', method: :put
+    = link_to "delete", link_path(link), remote: true, class: 'link-action-user retry delete-link pull-left', method: :delete
   - if link.favourite?
-    = link_to 'unfavourite', mark_fav_link_path(link), method: :put, remote: true, class: 'link-action-user retry fav pull-left'
+    = link_to 'unfavourite', mark_fav_link_path(link), method: :put, remote: true, class: 'link-action-user retry pull-right'
   - else
-    = link_to 'favourite', mark_fav_link_path(link), method: :put, remote: true, class: 'link-action-user retry fav pull-left'
-  = link_to 'feature', feature_link_path(link), remote: true, method: :put, class: ' link-action-user retry fav link-action-user favpull-right'
+    = link_to 'favourite', mark_fav_link_path(link), method: :put, remote: true, class: 'link-action-user retry pull-right'
+  = link_to 'feature', feature_link_path(link), remote: true, method: :put, class: 'link-action-user retry pull-right'

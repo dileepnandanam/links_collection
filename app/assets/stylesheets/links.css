@@ -189,6 +189,8 @@ a.name:hover {
   color: black;
   border: 2px solid black;
   font-size: 22px;
+  display: inline-block;
+  margin-top: 5px;
 }
 .link-action-user:hover {
   text-decoration: none !important;

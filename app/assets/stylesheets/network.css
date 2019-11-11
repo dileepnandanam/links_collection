@@ -146,6 +146,14 @@
 .comment-area {
   color: black;
 }
-a {
-  padding: 12px;
+.text-result {
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid grey;
+  background-color: yellow;
+  font-size: 32px;
+  color: blue; 
+}
+.link a h2 {
+  color: black;
 }

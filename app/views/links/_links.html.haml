@@ -15,7 +15,8 @@
         .youtube-container
           = youtube_embed_code(link.source_url.to_s.split('&').first)
       - else
-        = raw link.body
+        .text-result
+          = raw link.body
   .clearfix
   = link_to 'reload', retry_link_path(link), class: 'link-action-user retry pull-right', remote: true, method: :put
   = link_to 'REPORT', report_link_path(link), class: 'link-action-user report pull-right', remote: true, method: :put
