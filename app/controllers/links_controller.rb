@@ -6,7 +6,6 @@ class LinksController < ApplicationController
     @link = Link.new
     per_page = bot_request? ? 100 : 20
     if params[:q].present?
-      Query.record(params[:q], current_visitor) if current_visitor
       @links = Link.search(params[:q], orientation).paginate(page: params[:page], per_page: per_page)
       @count = Link.search_count params[:q], orientation
       if params[:crawl].present?
@@ -26,7 +25,6 @@ class LinksController < ApplicationController
       redirect_to root_path(q: params[:q])
     else
       if params[:q].present?
-        Query.record(params[:q], current_visitor) if current_visitor
         @links = Link.search(params[:q], orientation, params[:order]).paginate(page: params[:page], per_page: 20)
         @count = Link.search_count params[:q], orientation
         #if @links.blank? || @links.next_page.blank?
@@ -94,7 +92,7 @@ class LinksController < ApplicationController
         binding.pry
         uri = URI.parse url
         if uri.host.present?
-          link = Link.create(url: uri.host.blank? ? "#{URI.parse(url).scheme}://#{URI.parse(url).host}#{url}" : url, visitor_id: current_visitor.id)
+          link = Link.create(url: uri.host.blank? ? "#{URI.parse(url).scheme}://#{URI.parse(url).host}#{url}" : url)
           Link.move_top(link.url) unless link.valid?
         end
       end
@@ -110,7 +108,6 @@ class LinksController < ApplicationController
     link = Link.find(params[:id])
     new_tagset = link.tags.to_s + ' ' + params[:value]
     link.update(tags: new_tagset)
-    current_visitor.contributions.create(contributable_type: 'Tag', contributable_id: params[:id], content: params[:value])
   end
 
   def retry
@@ -138,7 +135,6 @@ class LinksController < ApplicationController
 
   def report
       @link = Link.find(params[:id])
-      current_visitor.contributions.create(contributable_type: 'Flag', contributable_id: params[:id], content: 'Repting Video')
       render json: {message: 'report success'}
   end
 
