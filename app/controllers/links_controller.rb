@@ -20,6 +20,10 @@ class LinksController < ApplicationController
     end
   end
 
+  def show
+    @link = Link.find(params[:id])
+  end
+
   def search
     if request.format.html?
       redirect_to root_path(q: params[:q])
@@ -89,7 +93,7 @@ class LinksController < ApplicationController
   def create
     @link = Link.new link_params
     if @link.save
-      render plain: 'link created'
+      redirect_to links_path(video_id: @link.id)
     else
       render 'new', layout: false, status: 422
     end

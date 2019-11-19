@@ -1,8 +1,5 @@
-= simple_form_for @link, html: {class: 'form', remote: true} do |f|
+= simple_form_for @link, html: {class: 'form'} do |f|
   = f.input :name, require: false, html: {}, label: 'name your best stuff (eg. tomatos 100kg)'
-  = f.input :body, require: true 
-  
-
-
-  = f.input :url, html: {class: 'link-input'}, label: 'Url(seperate multiple links with new line)'
+  = f.input :body, require: true, label: 'description of stuff'
+  = f.input :url, html: {class: 'link-input'}, label: 'link to stuff'
   = f.submit 'submit', class: 'btn-btn primary'

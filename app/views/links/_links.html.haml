@@ -34,8 +34,9 @@
       .clearfix
     %input.tag.pull-left{data: {url: tag_link_path(link)}, placeholder: 'enter tag'}
     = link_to link_comments_path(link), remote: true, class: 'comment-icon connect-icon' do
-      = image_tag('https://image.flaticon.com/icons/svg/1380/1380338.svg', class: 'connect-icon-img comment-icon')
-    .comment-section
+      - if false
+        = image_tag('https://image.flaticon.com/icons/svg/1380/1380338.svg', class: 'connect-icon-img comment-icon')
+
 - if !defined?(featured) && links.next_page
   .more-links.load-random
     .loader
