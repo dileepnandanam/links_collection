@@ -1,4 +1,4 @@
-= simple_form_for([@group, @post, @comment], remote: true, html: {class: 'comment-form'}) do |f|
+= simple_form_for([@link, @comment], remote: true, html: {class: 'comment-form'}) do |f|
   = f.input :text, label: 'Coment'
   = render partial: 'users/imogees'
   = f.hidden_field :parent_id, value: @parent_id

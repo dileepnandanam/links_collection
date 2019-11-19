@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get :statistics, on: :collection
     get :comments, on: :member
     post :create_comment, on: :member
+    resources :comments, controller: 'links/comments'
   end
 
   get 'statistics', to: 'links#statistics'

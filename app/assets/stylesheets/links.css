@@ -62,9 +62,6 @@ input.tag {
 .tag:hover {
 	text-decoration: none;
 }
-.link {
-	margin-bottom: 20px;
-}
 .view-more {
 	display: none;
 }
@@ -205,7 +202,12 @@ a.name:hover {
   font-weight: 900;
   border: 2px solid black;
 }
-
+.link-action-user:active {
+  background-color: blue;
+}
+.link-display {
+  width: 40%;
+}
 .popup {
   position: absolute;
   top: 32%;

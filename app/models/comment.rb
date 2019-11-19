@@ -1,4 +1,5 @@
 class Comment < ApplicationRecord
+  attr_accessor :anonymous
   belongs_to :post, optional: true
   def under
     kind == 'videoresponse' ? Link.find(post_id) : post
@@ -20,6 +21,10 @@ class Comment < ApplicationRecord
   after_create :notify_connections
   
   def notify_connections
+    unless anonymous
+     return
+    end
+    binding.pry
     Connection.where(to_user_id: user_id).map(&:user).each do |user|
       Notifier.perform_now_or_later user, 'create', self
     end

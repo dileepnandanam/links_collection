@@ -1,8 +1,13 @@
 - links.each do |link|
   .link.col-lg-6.col-md-12.col-12.pull-left
-    = link_to class: 'name', target: '_blank' do
-      %h2= h(link.name)
-    = link_to link.url, link, class: 'url pull-left', target: '_blank'
+    - if link.name.present?
+      = link_to link.url, class: 'name', target: '_blank' do
+        %h2= h(link.name)
+    - if link.body.present?
+      .text-result
+        = raw link.body
+    - if link.url.present?
+      = link_to link.url, link.url, class: 'url pull-left', target: '_blank'
     .clearfix
     .preview.thumbnail{class: thumb_class(link.url)}
       -if link.url.include?('xnxx.') || link.url.include?('xvideos.')
@@ -14,26 +19,23 @@
       - elsif link.url.include? 'youtube.'
         .youtube-container
           = youtube_embed_code(link.source_url.to_s.split('&').first)
-      - else
-        .text-result
-          = raw link.body
-  .clearfix
-  = link_to 'reload', retry_link_path(link), class: 'link-action-user retry pull-right', remote: true, method: :put
-  = link_to 'REPORT', report_link_path(link), class: 'link-action-user report pull-right', remote: true, method: :put
-  = render partial: 'hide', locals: {link: link}
+    .clearfix
+    = link_to 'reload', retry_link_path(link), class: 'link-action-user retry pull-right', remote: true, method: :put
+    = link_to 'REPORT', report_link_path(link), class: 'link-action-user report pull-right', remote: true, method: :put
+    = render partial: 'hide', locals: {link: link}
 
 
-  .tags
-    - link.visible_tags.each do |tag|
-      = link_to root_path(q: tag), class: 'tag pull-left' do
-        = tag
-        - if true
-          = link_to 'x', untag_link_path(link, tag: tag), class: 'delete-tag', method: :put, remote: true
-  .clearfix
-  %input.tag.pull-left{data: {url: tag_link_path(link)}, placeholder: 'enter tag'}
-  = link_to comments_link_path(link), remote: true, class: 'comment-icon connect-icon' do
-    = image_tag('https://image.flaticon.com/icons/svg/1380/1380338.svg', class: 'connect-icon-img comment-icon')
-  .comment-section
+    .tags
+      - link.visible_tags.each do |tag|
+        = link_to root_path(q: tag), class: 'tag pull-left' do
+          = tag
+          - if true
+            = link_to 'x', untag_link_path(link, tag: tag), class: 'delete-tag', method: :put, remote: true
+      .clearfix
+    %input.tag.pull-left{data: {url: tag_link_path(link)}, placeholder: 'enter tag'}
+    = link_to link_comments_path(link), remote: true, class: 'comment-icon connect-icon' do
+      = image_tag('https://image.flaticon.com/icons/svg/1380/1380338.svg', class: 'connect-icon-img comment-icon')
+    .comment-section
 - if !defined?(featured) && links.next_page
   .more-links.load-random
     .loader

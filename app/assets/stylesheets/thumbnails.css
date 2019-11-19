@@ -4,6 +4,7 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  margin-bottom: 5px;
 }
 .youtube {
   background-image: url('https://www.gyanblog.com/assets/img/2018/05/youtube_thumbnails.jpg');

@@ -83,21 +83,12 @@ class LinksController < ApplicationController
   def favourite
     @links = Link.favourite.paginate(per_page: 8, page: params[:page])
     @count = Link.favourite.count
+    render plain: 'made to favourite list'
   end
 
   def create
-    @link = Link.new(link_params)
-    if @link.name.blank?
-      @link.url.split(/[,\s\n]+/).select(&:present?).each do |url|
-        binding.pry
-        uri = URI.parse url
-        if uri.host.present?
-          link = Link.create(url: uri.host.blank? ? "#{URI.parse(url).scheme}://#{URI.parse(url).host}#{url}" : url)
-          Link.move_top(link.url) unless link.valid?
-        end
-      end
-      render plain: 'link(s) created'
-    elsif @link.save
+    @link = Link.new link_params
+    if @link.save
       render plain: 'link created'
     else
       render 'new', layout: false, status: 422
@@ -121,7 +112,9 @@ class LinksController < ApplicationController
 
   def destroy
     if true
-      Link.unscoped.find(params[:id]).delete
+      @link = Link.unscoped.find(params[:id])
+      @link.update(hidden: true)
+      render 'hide', layout: false
     end
   end
 
@@ -154,7 +147,9 @@ class LinksController < ApplicationController
   end
 
   def statistics
-    render plain Visitor.group(:ip).select('ip').length 
+    render json: {
+      daily: Visitor.where(created_at: 1.days.ago..Time.now).count
+    } 
   end
 
   protected

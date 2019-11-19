@@ -1,15 +1,4 @@
 class Posts::CommentsController < ApplicationController
-  before_action :check_user, only: [:create, :upvote, :downvote, :destroy]
-  def new
-    @post = (params[:class_name]||'Post').camelize.constantize.find(params[:post_id])
-    @comment = Comment.new
-    @parent_id = params[:parent_id]
-    if current_user
-      render 'new', layout: false
-    else
-      render 'devise/sessions/new', layout: false
-    end
-  end
 
   def index
     @post = Post.find(params[:post_id])

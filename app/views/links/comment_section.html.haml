@@ -1,9 +1,9 @@
 .comment-area
   = link_to 'hide', '#', remote: true, onclick: '$(this).closest(".comment-section").html("")', class: 'float-right'
   .clearfix
-  - if current_user.present?
+  - if current_visitor.present?
     .new-comment
-      = simple_form_for Comment.new, url: create_comment_link_path, remote: true, html: {class: 'comment-form'} do |f|
+      = simple_form_for Comment.new, url: link_comments_path(@link), remote: true, html: {class: 'comment-form'} do |f|
         = f.input :text, label: 'Add comment'
         = f.hidden_field :kind, value: 'videoresponse'
         = f.submit

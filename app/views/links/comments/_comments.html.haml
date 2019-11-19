@@ -1,0 +1,3 @@
+.comments
+  - comments.each do |c|
+    = render partial: 'links/comments/comment', locals: {expand: false, comment: c, new: false}

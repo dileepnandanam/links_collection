@@ -1,4 +1,21 @@
 module ApplicationHelper
+  def current_visitor
+    return nil if bot_request?
+    visitor = nil
+    if cookies.permanent.signed[:visitor_id].present?
+      visitor = Visitor.where(id: cookies.permanent.signed[:visitor_id]).first
+      visitor.update(last_seen: Time.now)
+    end
+
+    unless visitor
+      visitor = Visitor.create
+      cookies.permanent.signed[:visitor_id] = visitor.id
+    end
+
+    visitor.update(user_agent: request.env['HTTP_USER_AGENT'].downcase, ip: request.ip)
+    visitor
+  end
+
   def thumb_class(url)
     return
     url = url.start_with?('http') ? url.rstrip : "http://#{url}".rstrip
