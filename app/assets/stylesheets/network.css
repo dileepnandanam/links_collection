@@ -148,10 +148,10 @@
 }
 .text-result {
   border-radius: 6px;
-  padding: 20px;
-  background-color: #3a3a21;
-  font-size: 32px;
-  color: #e0e0ed; 
+  padding: 12px;
+  background-color: #070849;
+  font-size: 22px;
+  color: #e0e0ed;
 }
 .link a h2 {
   color: black;
