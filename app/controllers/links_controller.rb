@@ -74,6 +74,13 @@ class LinksController < ApplicationController
     end
   end
 
+  def mark_nsfw
+    link = Link.find(params[:id])
+    link.update(nsfw: true) if link.nsfw
+    link.update(nsfw: false) if link.nsfw
+    render head: :ok
+  end
+
   def feature
     featuring = Link.find(params[:id])
     if featuring.present? && current_user.try(:admin?)
@@ -154,6 +161,12 @@ class LinksController < ApplicationController
     render json: {
       daily: Visitor.where(created_at: 1.days.ago..Time.now).count
     } 
+  end
+
+  def set_nsfw
+    link = Link.find(params[:id])
+    link.update(nsfw: !link.nsfw)
+    render plain: "OK"
   end
 
   protected

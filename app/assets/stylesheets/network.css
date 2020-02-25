@@ -149,9 +149,9 @@
 .text-result {
   border-radius: 6px;
   padding: 12px;
-  background-color: #070849;
+  background-color: white;
   font-size: 22px;
-  color: #e0e0ed;
+  color: black;
 }
 .link a h2 {
   color: black;

@@ -9,6 +9,7 @@
     = link_to 'reload', retry_link_path(link), class: 'link-action-user retry pull-right', remote: true, method: :put
     = link_to 'REPORT', report_link_path(link), class: 'link-action-user report pull-right', remote: true, method: :put
     = render partial: 'hide', locals: {link: link}
+    = link_to (link.nsfw ? "nsfw" : "safe"), set_nsfw_link_path(link), method: :put, id: "nsfw#{link.id}", class: 'nsfw-toggle link-action-user retry pull-right', remote: true
     .clearfix
     .preview.thumbnail{class: thumb_class(link.url)}
       -if link.url.include?('xnxx.') || link.url.include?('xvideos.')

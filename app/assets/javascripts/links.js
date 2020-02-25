@@ -152,4 +152,15 @@ $(document).on('turbolinks:load', function() {
 	$(document).on('ajax:success', '.comment-icon', function(e) {
 		$(this).siblings('.comment-section').html(e.detail[2].responseText)
 	})
+
+	$(document).on('ajax:success', '.nsfw-toggle', function(e) {
+    if($(this).text() == 'nsfw')
+      $(this).text('safe')
+    else
+      $(this).text('nsfw')
+
+    }
+  )
+
+	
 })
